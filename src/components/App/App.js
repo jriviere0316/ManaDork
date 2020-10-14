@@ -19,6 +19,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import EditDeck from '../EditDeck/EditDeck';
+import ViewDeck from '../ViewDeck/ViewDeck';
 
 import './App.css';
 
@@ -54,7 +56,20 @@ class App extends Component {
               path="/user"
               component={UserPage}
             />
+            <ProtectedRoute
+              // logged in shows UserPage else shows LoginPage
+              exact
+              path="/editdeck"
+              component={EditDeck}
+            />
+            <ProtectedRoute
+              // logged in shows UserPage else shows ViewDeck
+              exact
+              path="/viewdeck"
+              component={ViewDeck}
+            />
 
+            
             <ProtectedRoute
               // logged in shows InfoPage else shows LoginPage
               exact
