@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 // import {connect} from 'react-redux';
-const mtg = require('mtgsdk')
+import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
+
 
 
 class ViewDeck extends Component {
@@ -25,4 +27,4 @@ class ViewDeck extends Component {
 //   reduxStore
 // })
 
-export default ViewDeck;
+export default connect(mapStoreToProps)(ViewDeck);

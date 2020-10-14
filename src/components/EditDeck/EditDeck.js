@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 // import {connect} from 'react-redux';
-const mtg = require('mtgsdk')
-
+import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
+// const mtg = require('mtgsdk')
+// var scryfallSdk = require("scryfall-sdk")
 
 class EditDeck extends Component {
 
@@ -17,33 +19,44 @@ class EditDeck extends Component {
     // }
 
     handleSearchInput=(event)=>{
-        // console.log('event:', event.target.value);
+        console.log('event:', event.target.value);
           this.setState({
             cardSearchInput: event.target.value
-          })
+        })
       }
 
 
 
     test=()=>{
-        mtg.card.all({ name: `${this.state.cardSearchInput}`, pageSize: 1 })
-        .on('data', card => {
-            console.log(card)
-        this.setState({
-            recentCard: card
-        })
-        })
+        console.log('clicked!', this.state.cardSearchInput);
+        
+    this.props.dispatch({
+        type: 'FETCH_CARD',
+        payload: this.state.cardSearchInput
+    })
     }
 
+
+    saveAndNav=()=>{
+        console.log('in saveAndNav');
+        this.props.history.push('/viewdeck')
+    }
+
+    saveAndStay=()=>{
+        console.log('in saveAndStay');
+    }
+    
+
+
     render(){
-        // console.log('recentCard state:',this.state.recentCard);
+        console.log('recentCard state:',this.state.recentCard);
         return (
                 
                 <div >
 
                     <div>
 
-                        <h1>edit deck page</h1>
+                        <h1>EDIT DECK PAGE</h1>
                     </div>
                     
                     <div id="descriptionDiv">
@@ -58,22 +71,23 @@ class EditDeck extends Component {
                         <br/>
                         <textarea id="descriptionInput" placeholder="Deck Description"></textarea>
                         <br/>
-                        <button >Save</button>
-                        <button>Save and Continue Editing</button>
+                        <button onClick={this.saveAndNav}>Save</button>
+                        <button onClick={this.saveAndStay}>Save and Continue Editing</button>
                     </div>
                         
                     <br/>    
                     <div>
                         <form id="cardInputForm">
+                            <img src={this.state.recentCard.imageUrl} alt='Card Display'width='215px' height='300px'/>
+                            <br/>
                             <input placeholder="Card Name" onChange={this.handleSearchInput}></input>
                             <br/>
                             <input placeholder="Quantity"></input><br/>
                             <button onClick={this.test}> * Add To Deck * </button><br/>
                             <label htmlFor="isCmdrinput">Is this your commander?</label><br/>
                             <input type="checkbox" id="isCmdrinput" value="Commander"></input><br/>
-                            <button>Save</button>
-                            <button>Save and Continue Editing</button><br/>
-                            <button id="deleteDeckBtn">Delete Deck</button><br/>
+                            <button onClick={this.saveAndNav}>Save</button>
+                            <button onClick={this.saveAndStay}>Save and Continue Editing</button><br/>
                         </form>
                     </div>
                     
@@ -81,26 +95,27 @@ class EditDeck extends Component {
 
                     <div id="featuredCardDiv">
                         <div id="cardImg">
-                            <img src={this.state.recentCard.imageUrl} width='150px' height='250px'/>
+                            {/* <img src={this.state.recentCard.imageUrl} width='215px' height='320px'/> */}
                         </div>
                         <input placeholder="Select Featured Card"></input>
                         <br/>
-                        <button>Save</button>
-                        <button>Save and Continue Editing</button>
+                        <button onClick={this.saveAndNav}>Save</button>
+                        <button onClick={this.saveAndStay}>Save and Continue Editing</button>
                     </div>
 
 
-                    <div id="cardImg">
+                    {/* <div id="cardImg">
                         <img src={this.state.recentCard.imageUrl}>
                         </img>
-                    </div>
+                    </div> */}
 
 
                     <div id="listDisplay">
                         <h1>List Display</h1>
                         <textarea id="listDisplayTextArea">
 
-                        </textarea>
+                        </textarea><br/>
+                        <button id="deleteDeckBtn">Delete Deck</button>
 
                     </div>
 
@@ -115,4 +130,4 @@ class EditDeck extends Component {
 //   reduxStore
 // })
 
-export default EditDeck;
+export default connect(mapStoreToProps)(EditDeck);

@@ -6,11 +6,17 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class UserPage extends Component {
   
+  state ={
+    profile: {
+      defaultPic: 'https://iowaplaneswalker.files.wordpress.com/2017/09/cropped-planeswalker-symbol.png?w=200'
+    }
+  }
+
   createDeck=()=>{
     console.log('click');
     var txt;
     var deck = prompt("Please enter a deck name:", "My Awesome Deck");
-    if (deck == null || deck == "") {
+    if (deck === null || deck === "") {
       txt = "Canceled";
       alert(txt)
       return
@@ -26,12 +32,25 @@ class UserPage extends Component {
   //       recentCard: card
   //   })
   // })
-}
+  }
+  editProfile=()=>{
+  console.log('clicked');
+  this.props.history.push('/edituser')
+
+  }
+
+
+
   render() {
     return (
       <div>
-        <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
-        <p>Your ID is: {this.props.store.user.id}</p>
+        <img id='profilePic' height='130px' width='130px' src={this.state.profile.defaultPic}></img>
+          <div id='profileInfo'>
+            <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
+            <button onClick={this.editProfile}>Edit Profile</button>
+          </div>
+        {/* <p>Your ID is: {this.props.store.user.id}</p> */}
+        <hr/>
 
         <div id="mainDiv">
           <div id="userDiv">

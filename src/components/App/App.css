@@ -142,10 +142,10 @@ margin: auto;
   background-color: #00acb0;
   outline: solid black 2px;
   padding: 10px;
-  display: inline-block;
-  margin: 1%;
+  /* display: inline-block; */
+  margin: auto;
   text-align: center;
-  width: 90%;
+  width: 71%;
 }
 #descriptionInput{
   width: 95%;
@@ -161,6 +161,9 @@ margin: auto;
   outline: solid black 2px;
   padding: 10px;
   display: inline-block;
+  left: 13%;
+  position: relative;
+
   margin: 1%;
   text-align: center;
 }
@@ -171,6 +174,8 @@ margin: auto;
   padding: 10px;
   display: inline-block;
   margin: 1%;
+  position: relative;
+  left: 13%;
   text-align: center;
 }
 
@@ -181,12 +186,41 @@ margin: auto;
   display: inline-block;
   margin: 1%;
   text-align: center;
-  height: 640px;
-  right: 6.5%;
+  height: 660px;
+  right: 13%;
   top: 59%;
   position: absolute;
 }
 
 #listDisplayTextArea{
   height: 590px;
+}
+
+
+
+
+
+/* --------------------------------------------------------------------------------
+View Deck
+-------------------------------------------------------------------------------- */
+
+#profilePic{
+margin-left: 10px;}
+
+#profileInfo{
+display: inline-block;
+margin-left: 20px;}
+
+
+
+
+
+
+#editUserDiv{
+  background-color: #00acb0;
+  outline: solid black 2px;
+  padding: 10px;
+  margin: auto;
+  width: 300px;
+  text-align: center;
 }

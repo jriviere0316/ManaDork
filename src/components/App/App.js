@@ -21,7 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import EditDeck from '../EditDeck/EditDeck';
 import ViewDeck from '../ViewDeck/ViewDeck';
-
+import EditUser from '../EditUser/EditUser';
 import './App.css';
 
 class App extends Component {
@@ -59,6 +59,12 @@ class App extends Component {
             <ProtectedRoute
               // logged in shows UserPage else shows LoginPage
               exact
+              path="/edituser"
+              component={EditUser}
+            />
+            <ProtectedRoute
+              // logged in shows UserPage else shows LoginPage
+              exact
               path="/editdeck"
               component={EditDeck}
             />
@@ -89,6 +95,7 @@ class App extends Component {
               component={LoginPage}
               authRedirect="/user"
             />
+            
             <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
