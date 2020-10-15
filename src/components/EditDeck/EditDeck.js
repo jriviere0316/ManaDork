@@ -24,11 +24,12 @@ class EditDeck extends Component {
             cardSearchInput: event.target.value
         })
       }
+      
 
 
 
     test=()=>{
-        console.log('clicked!', this.state.cardSearchInput);
+        console.log('in test:', this.state.cardSearchInput);
         
     this.props.dispatch({
         type: 'FETCH_CARD',
@@ -50,6 +51,8 @@ class EditDeck extends Component {
 
     render(){
         console.log('recentCard state:',this.state.recentCard);
+        console.log('redux state of cards:', this.props.reduxStore.card);
+        console.log(this.props.reduxStore.card[0]);
         return (
                 
                 <div >
@@ -77,8 +80,9 @@ class EditDeck extends Component {
                         
                     <br/>    
                     <div>
+                        {/* <h1>{this.props.reduxStore.card}</h1> */}
                         <form id="cardInputForm">
-                            <img src={this.state.recentCard.imageUrl} alt='Card Display'width='215px' height='300px'/>
+                            <img src={this.props.reduxStore.card[0].image_uris.normal} alt='Card Display'width='215px' height='300px'/>
                             <br/>
                             <input placeholder="Card Name" onChange={this.handleSearchInput}></input>
                             <br/>
@@ -121,13 +125,17 @@ class EditDeck extends Component {
 
 
 
+                    
+
+
+
                 </div>
         );
     }
 }
 
-// const mapStateToProps = (reduxStore) => ({
-//   reduxStore
-// })
+const mapStateToProps = (reduxStore) => ({
+  reduxStore
+})
 
-export default connect(mapStoreToProps)(EditDeck);
+export default connect(mapStateToProps)(EditDeck);

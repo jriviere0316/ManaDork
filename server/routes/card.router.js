@@ -10,7 +10,6 @@ router.get('/:tacos', (req, res) => {
     axios({
       method: 'GET',
       url: `https://api.scryfall.com/cards/search?q=${req.params.tacos}`,
-      //limit: 20,
     
     }).then(response => {
         console.log('got back data', response.data);
