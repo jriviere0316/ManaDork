@@ -22,7 +22,21 @@ class UserPage extends Component {
       return
     } else {
       txt = deck;
-      this.props.history.push('/editdeck')
+      console.log(txt);
+      this.props.dispatch({
+        type: 'CREATE_DECK',
+        payload: {
+          deckname: txt,
+          ispublic: 'FALSE',
+          description: "",
+          decklist: '',
+          featured_card: '',
+          upvotes: 0,
+          comments: ''
+
+        },
+      });
+      // this.props.history.push('/editdeck')
     }
     document.getElementById("demo").innerHTML = txt;
   //   mtg.card.all({ name: `${this.state.cardSearchInput}`, pageSize: 1 })
