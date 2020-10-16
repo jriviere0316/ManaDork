@@ -4,9 +4,12 @@
   "private": true,
   "proxy": "http://localhost:5000",
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
     "cookie-session": "^2.0.0-beta.3",
+    "cross-fetch": "^3.0.6",
     "dotenv": "^4.0.0",
     "express": "^4.16.4",
     "mtgsdk": "^0.4.3",

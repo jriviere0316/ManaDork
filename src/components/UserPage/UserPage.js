@@ -20,14 +20,16 @@ class UserPage extends Component {
       txt = "Canceled";
       alert(txt)
       return
-    } else {
+    } 
+    else {
       txt = deck;
       console.log(txt);
       this.props.dispatch({
         type: 'CREATE_DECK',
         payload: {
+          userid: this.props.store.user.id,
           deckname: txt,
-          ispublic: 'FALSE',
+          ispublic: false,
           description: "",
           decklist: '',
           featured_card: '',
@@ -36,9 +38,9 @@ class UserPage extends Component {
 
         },
       });
-      // this.props.history.push('/editdeck')
+      this.props.history.push('/editdeck')
     }
-    document.getElementById("demo").innerHTML = txt;
+    // document.getElementById("demo").innerHTML = txt;
   //   mtg.card.all({ name: `${this.state.cardSearchInput}`, pageSize: 1 })
   //   .on('data', card => {
   //       console.log(card)
@@ -50,6 +52,11 @@ class UserPage extends Component {
   editProfile=()=>{
   console.log('clicked');
   this.props.history.push('/edituser')
+
+  }
+  editDeck=(deck)=>{
+    console.log('in edit deck with:', deck);
+    this.props.history.push('/editdeck')
 
   }
 
@@ -68,13 +75,25 @@ class UserPage extends Component {
 
         <div id="mainDiv">
           <div id="userDiv">
-          <h1>{this.props.store.user.username}'s Decks</h1>
-          <br/>
-          <button onClick={this.createDeck}>Create New Deck</button>
-          <br/>
-          <textarea></textarea>
-          <p id="demo"></p>
-
+            <h1>{this.props.store.user.username}'s Decks</h1>
+            <br/>
+            <button onClick={this.createDeck}>Create New Deck</button>
+            <hr/>
+            
+            
+              <>
+              {this.props.store.deck.map((deck) =>  
+                <div key={deck.id}>
+                    <p id="deckName" onClick={() => this.editDeck(deck)}>{deck.deckname}</p>
+                    {/* <img src={deck.featured_card} 
+                      style={{height:"20px", width: "20px"}}
+                    /> */}
+                    <button onClick={() => this.editDeck(deck)}>EDIT</button>
+                    <button onClick={() => this.delete(deck.id)}>DELETE</button>
+                </div>  
+              )}
+            </>          {/* <p id="demo"></p> */}
+            
           </div>
 
           <div id="userDiv">

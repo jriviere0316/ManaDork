@@ -1,4 +1,4 @@
-const deckReducer = (state = {}, action) => {
+const deckReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_DECK':
         return action.payload;
