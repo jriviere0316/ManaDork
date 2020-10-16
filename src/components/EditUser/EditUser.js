@@ -8,13 +8,39 @@ const mtg = require('mtgsdk')
 class EditUser extends Component {
 
     state = {
-       username: this.props.store.user.username,
-       img_url: this.props.store.user.img_url
+        id: this.props.store.user.id,
+        username: this.props.store.user.username,
+        img_url: this.props.store.user.img_url,
+        decks: this.props.store.user.decks,
+        img_url: this.props.store.user.img_url,
+        clearance: this.props.store.user.clearance,
+        friends: this.props.store.user.friends
     }
+
+    // handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     this.props.dispatch({
+    //         type: 'EDIT_USER',
+    //         payload: this.state
+    //     })
+    //     this.props.history.push('/info');
+    // }
    
     editUser=() =>{
         console.log('clicked save user changes');
-        // this.props.history.push('/user')
+        // event.preventDefault();
+        this.props.dispatch({
+            type: 'UPDATE_USER',
+            payload: this.state
+        })
+       this.navHome();
+    }
+    
+
+
+    navHome=()=>{
+        this.props.history.push('/user');
+
     }
     
     handleChange = (event, propertyName) => {
@@ -25,7 +51,7 @@ class EditUser extends Component {
     }
 
     render(){
-        // console.log('recentCard state:',this.state.recentCard);
+        console.log('recentCard state:',this.state);
         return (
                 
                 <div >
@@ -33,7 +59,7 @@ class EditUser extends Component {
 
                     <div id="editUserDiv">
                         <h1>EDIT USER PAGE</h1>
-                        <form>
+                        <form onSubmit={this.editUser}>
                             <input 
                             type="text"
                             placeholder="username" 
@@ -51,7 +77,7 @@ class EditUser extends Component {
                             </input> 
 
                             <br/>
-                            <button onClick={this.editUser}>Save Changes</button>
+                            <button type="submit">Save Changes</button>
                         </form>
                     </div>
                     
