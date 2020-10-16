@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import EditDeck from '../EditDeck/EditDeck';
 import ViewDeck from '../ViewDeck/ViewDeck';
 import EditUser from '../EditUser/EditUser';
+import Asyncinput from '../AsyncInput/AsyncInput';
 import './App.css';
 
 class App extends Component {
@@ -45,6 +46,13 @@ class App extends Component {
               path="/about"
               component={AboutPage}
             />
+            {/* Visiting localhost:3000/about will show the about page. */}
+            <Route
+              // shows AboutPage at all times (logged in or not)
+              exact
+              path="/asyncinput"
+              component={Asyncinput}
+            />
 
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -67,6 +75,12 @@ class App extends Component {
               exact
               path="/editdeck"
               component={EditDeck}
+            />
+             <ProtectedRoute
+              // logged in shows UserPage else shows LoginPage
+              exact
+              path="/asyncinput"
+              component={Asyncinput}
             />
             <ProtectedRoute
               // logged in shows UserPage else shows ViewDeck

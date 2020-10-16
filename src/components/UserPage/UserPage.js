@@ -8,7 +8,7 @@ class UserPage extends Component {
   
   state ={
     profile: {
-      defaultPic: 'https://iowaplaneswalker.files.wordpress.com/2017/09/cropped-planeswalker-symbol.png?w=200'
+      defaultPic: this.props.store.user.img_url
     }
   }
 

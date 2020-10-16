@@ -17,10 +17,6 @@ class EditUser extends Component {
     }
    
 
-
-
-    
-
     render(){
         // console.log('recentCard state:',this.state.recentCard);
         return (
@@ -30,9 +26,9 @@ class EditUser extends Component {
 
                     <div id="editUserDiv">
                         <h1>EDIT USER PAGE</h1>
-                        <input placeholder={this.props.store.user.username}></input>
+                        <input placeholder="username" value={this.props.store.user.username}></input>
                         <br/>
-                        <input placeholder='{this.props.store.user.imgUrl}'></input> 
+                        <input placeholder="image url" value={this.props.store.user.img_url}></input> 
                         <br/>
                         <button onClick={this.editUser}>Save Changes</button>
                     </div>
