@@ -16,7 +16,7 @@ class ViewDeck extends Component {
         return (
                 
             <div >
-                <h1>VIEWING: {this.props.reduxStore.selectedDeck.deckname}</h1>
+                <h1>Viewing {this.props.reduxStore.selectedDeck.deckname} from {this.props.reduxStore.user.username} </h1>
 
             </div>
         );
