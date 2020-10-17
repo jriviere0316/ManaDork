@@ -128,13 +128,17 @@ textarea{
   text-align: center;
 }
 
-
+#userDeckScroll{
+  width: 400px;
+  height: 200px;
+  overflow: auto;
+}
 
 #mainDiv{
-border-radius: 8px;
-width: 80%;
-height: 500px;
-margin: auto;
+  border-radius: 8px;
+  width: 80%;
+  height: 500px;
+  margin: auto;
 }
 
 
@@ -214,11 +218,6 @@ margin-left: 10px;}
 display: inline-block;
 margin-left: 20px;}
 
-
-
-
-
-
 #editUserDiv{
   background-color: #00acb0;
   outline: solid black 2px;
@@ -228,9 +227,17 @@ margin-left: 20px;}
   text-align: center;
 }
 
-
-
-
 #optionsDiv{
+  margin-right: 40px;
+  margin-top: 0;}
+
+#optionLi{
+  outline: solid black 1px;
+  list-style-type: none;
   background-color: #efefef;
+
+}
+
+#optionLi:hover{
+  background-color: chartreuse;
 }

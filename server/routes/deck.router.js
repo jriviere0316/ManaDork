@@ -32,7 +32,21 @@ router.get('/', (req, res) => {
         console.log('ERROR',error);
         res.sendStatus(500);
     })
-  });
+});
     
+
+// router.get('/:id', (req, res) => {
+//     console.log( 'in shelf GET with:', req.params.id)
+//     const query = `SELECT * FROM "deck" WHERE "id" = $1 ;`
+//     pool.query(query, [req.params.id])
+//     .then(results => {
+//         console.log('back from GET :id with: *',results.rows);
+//         res.send(results.rows);
+//     })
+//     .catch(error => {
+//         console.log('ERROR',error);
+//         res.sendStatus(500);
+//     })
+// });
 
 module.exports = router;

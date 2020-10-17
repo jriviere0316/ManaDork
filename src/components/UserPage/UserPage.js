@@ -52,12 +52,26 @@ class UserPage extends Component {
   editProfile=()=>{
   console.log('clicked');
   this.props.history.push('/edituser')
-
   }
+
   editDeck=(deck)=>{
     console.log('in edit deck with:', deck);
+    this.props.dispatch({
+      type: 'SET_SELECTEDDECK',
+      payload: deck
+    })
     this.props.history.push('/editdeck')
 
+  }
+
+  viewDeck=(deck)=>{
+    console.log('in view deck with:', deck);
+    this.props.history.push('/viewdeck')
+
+  }
+
+  deleteDeck=(deck)=>{
+    console.log('in delete deck with:', deck);
   }
 
 
@@ -81,18 +95,15 @@ class UserPage extends Component {
             <hr/>
             
             
-              <>
+            <div id="userDeckScroll">
               {this.props.store.deck.map((deck) =>  
                 <div key={deck.id}>
-                    <p id="deckName" onClick={() => this.editDeck(deck)}>{deck.deckname}</p>
-                    {/* <img src={deck.featured_card} 
-                      style={{height:"20px", width: "20px"}}
-                    /> */}
+                    <p id="deckName" onClick={() => this.viewDeck(deck)}>{deck.deckname}</p>
                     <button onClick={() => this.editDeck(deck)}>EDIT</button>
-                    <button onClick={() => this.delete(deck.id)}>DELETE</button>
+                    <button onClick={() => this.deleteDeck(deck.id)}>DELETE</button>
                 </div>  
               )}
-            </>          {/* <p id="demo"></p> */}
+            </div>          {/* <p id="demo"></p> */}
             
           </div>
 
