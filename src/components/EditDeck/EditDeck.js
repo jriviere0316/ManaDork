@@ -8,24 +8,24 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 class EditDeck extends Component {
 
     state = {
-        cardSearchInput: '',
+        cardSearchInput: [],
         recentCard: ''
     }
-    // test=()=>{
-    //     mtg.card.find(3)
-    //     .then(result => {
-    //         console.log(result.card.imageUrl) // "Black Lotus"
-    //     })
-    // }
+ 
 
     handleSearchInput=(event)=>{
         console.log('event:', event.target.value);
           this.setState({
             cardSearchInput: event.target.value
         })
+        if (this.state.cardSearchInput.length >= 2){
+            this.test();
+        }
       }
       
-
+      selectOption=()=>{
+          console.log('in selectOption');
+      }
 
 
     test=()=>{
@@ -53,6 +53,8 @@ class EditDeck extends Component {
         console.log('recentCard state:',this.state.recentCard);
         console.log('redux state of cards:', this.props.reduxStore.card);
         console.log(this.props.reduxStore.card[0]);
+
+         
         return (
                 
                 <div >
@@ -64,7 +66,6 @@ class EditDeck extends Component {
                     
                     <div id="descriptionDiv">
                     <form>
-
                         <input id="deckName" placeholder="Deck Name"></input>
                             <label htmlFor="isPublic">Public</label>
                             <input type="radio" name='publicstatus' id="isPublic" value="public"></input>
@@ -82,10 +83,18 @@ class EditDeck extends Component {
                     <div>
                         {/* <h1>{this.props.reduxStore.card}</h1> */}
                         <form id="cardInputForm">
-                            <img src={this.props.reduxStore.card[0].image_uris.normal} alt='Card Display'width='215px' height='300px'/>
+                            <img src={this.props.reduxStore.card[0].image_uris.normal} alt='Card Display' width='215px' height='300px'/>
                             <br/>
                             <input placeholder="Card Name" onChange={this.handleSearchInput}></input>
-                            <br/>
+                            
+                            <div id="optionsDiv">
+                                <ul id="cardOptions">
+                                    {this.props.reduxStore.card.map((option) =>  
+                                        <li key={option.id}>{option.name}</li>  
+                                    )}
+                                </ul>
+                            </div>
+
                             <input placeholder="Quantity"></input><br/>
                             <button onClick={this.test}> * Add To Deck * </button><br/>
                             <label htmlFor="isCmdrinput">Is this your commander?</label><br/>

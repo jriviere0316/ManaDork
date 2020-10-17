@@ -101,7 +101,7 @@ class UserPage extends Component {
           <textarea></textarea>
           </div>
         </div>
-<br/>
+        <br/>
 
 
         <LogOutButton className="log-in" />
