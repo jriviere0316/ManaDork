@@ -16,15 +16,15 @@ class ViewDeck extends Component {
         return (
                 
             <div >
-                <h1>VIEW DECK PAGE</h1>
+                <h1>VIEWING: {this.props.reduxStore.selectedDeck.deckname}</h1>
 
             </div>
         );
     }
 }
 
-// const mapStateToProps = (reduxStore) => ({
-//   reduxStore
-// })
+const mapStateToProps = (reduxStore) => ({
+reduxStore
+})
 
-export default connect(mapStoreToProps)(ViewDeck);
+export default connect(mapStateToProps)(ViewDeck);

@@ -55,13 +55,15 @@ class UserPage extends Component {
       payload: deck
     })
     this.props.history.push('/editdeck')
-
   }
 
   viewDeck=(deck)=>{
     console.log('in view deck with:', deck);
+    this.props.dispatch({
+      type: 'SET_SELECTEDDECK',
+      payload: deck
+    })
     this.props.history.push('/viewdeck')
-
   }
 
   deleteDeck=(deck)=>{

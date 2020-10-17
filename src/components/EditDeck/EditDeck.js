@@ -12,7 +12,8 @@ class EditDeck extends Component {
         featuredCard: '',
         recentCard: '',
         hoverCard: '',
-        selectedCard: ''
+        selectedCard: '',
+        isPublic: this.props.reduxStore.selectedDeck.ispublic
     }
  
 
@@ -63,6 +64,11 @@ class EditDeck extends Component {
         })
     }
 
+
+    handleRadio() {
+        console.log('in handle radio');
+        }
+
     render(){
         console.log('recentCard state:',this.state.recentCard);
         console.log('redux state of cards:', this.props.reduxStore.card);
@@ -70,6 +76,7 @@ class EditDeck extends Component {
         console.log('selected deck:', this.props.reduxStore.selectedDeck);
         console.log('hoverCard:', this.state.hoverCard);
         console.log('selectedCard:', this.state.selectedCard.name, this.state.selectedCard);
+        console.log(this.state.isPublic);
         return (
                 
             <div>
@@ -80,23 +87,40 @@ class EditDeck extends Component {
                 </div>
                 
                 <div id="descriptionDiv">
-                
-
-
+            
                     <input id="deckName" placeholder="Deck Name" defaultValue={this.props.reduxStore.selectedDeck.deckname}></input>
                 
+                {this.state.isPublic === false ?
+                    <>
+                        <form onChange={this.handleRadio} >       
+                            <label htmlFor="isPublic" >Public</label>
+                            <input type="radio" name='publicstatus' id="isPublic" value="true" ></input>
+                            <label htmlFor="isPrivate">Private</label>
+                            <input type="radio" name='publicstatus' id="isPublic" value="false" defaultChecked  ></input>
+                        </form>
+                    </>
+                    :
+                    <>
+                        <form onChange={this.handleRadio} >       
+                            <label htmlFor="isPublic" >Public</label>
+                            <input type="radio" name='publicstatus' id="isPublic" value="true" defaultChecked></input>
+                            <label htmlFor="isPrivate">Private</label>
+                            <input type="radio" name='publicstatus' id="isPublic" value="false"></input>
+                        </form>
+                    </>
+                            
                 
-                        <form value={this.props.reduxStore.selectedDeck.ispublic}>       
-                        <label htmlFor="isPublic" >Public</label>
-                        <input type="radio" name='publicstatus' id="isPublic" value="public"></input>
-                        <label htmlFor="isPrivate">Private</label>
-                        <input type="radio" name='publicstatus' id="isPrivate" value="private"></input>
-                    </form>
-                    <br/>
-                    <textarea id="descriptionInput" placeholder="Deck Description" defaultValue={this.props.reduxStore.selectedDeck.description}></textarea>
-                    <br/>
-                    <button onClick={this.saveAndNav}>Save</button>
-                    <button onClick={this.saveAndStay}>Save and Continue Editing</button>
+                
+                }
+                   
+
+                <br/>
+
+                <textarea id="descriptionInput" placeholder="Deck Description" defaultValue={this.props.reduxStore.selectedDeck.description}></textarea>
+                <br/>
+
+                <button onClick={this.saveAndNav}>Save</button>
+                <button onClick={this.saveAndStay}>Save and Continue Editing</button>
                 </div>
                     
                 <br/>    
