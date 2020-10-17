@@ -129,6 +129,8 @@ textarea{
 }
 
 #userDeckScroll{
+  background-color: white;
+  border-radius: 2px;
   width: 400px;
   height: 200px;
   overflow: auto;
@@ -183,6 +185,15 @@ textarea{
   text-align: center;
 }
 
+#cardImg{
+padding: 20%;
+padding-top: 0;
+
+margin-left: -150px;
+margin-right: -150px;
+/* whyyyyyyyyyyyy margin whyyyyyyyyy^^ */
+}
+
 #listDisplay{
   background-color: #00acb0;
   outline: solid black 2px;
@@ -229,15 +240,24 @@ margin-left: 20px;}
 
 #optionsDiv{
   margin-right: 40px;
-  margin-top: 0;}
+  margin-top: 0px;}
 
 #optionLi{
+  padding-left: 10px;
+  padding-right: 10px;
   outline: solid black 1px;
   list-style-type: none;
   background-color: #efefef;
 
 }
 
+#cardOptions{
+  margin-top: 0;
+}
+#cardSearchInput{
+  width: 305px;
+  margin-bottom: 0 ;
+}
 #optionLi:hover{
   background-color: chartreuse;
 }

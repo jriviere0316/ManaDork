@@ -35,18 +35,15 @@ router.get('/', (req, res) => {
 });
     
 
-// router.get('/:id', (req, res) => {
-//     console.log( 'in shelf GET with:', req.params.id)
-//     const query = `SELECT * FROM "deck" WHERE "id" = $1 ;`
-//     pool.query(query, [req.params.id])
-//     .then(results => {
-//         console.log('back from GET :id with: *',results.rows);
-//         res.send(results.rows);
-//     })
-//     .catch(error => {
-//         console.log('ERROR',error);
-//         res.sendStatus(500);
-//     })
-// });
+router.delete('/:id', (req, res) => {
+    console.log( 'in delete router:', req.params.id)
+    const query = `DELETE FROM "deck" WHERE "id"=$1;`
+    pool.query(query, [req.params.id])
+    .then(() => 
+        res.sendStatus(200))
+    .catch(error => {
+        console.log('ERROR:', error);
+    })
+  });
 
 module.exports = router;

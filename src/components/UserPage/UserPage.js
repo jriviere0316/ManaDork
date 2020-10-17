@@ -38,16 +38,10 @@ class UserPage extends Component {
 
         },
       });
-      this.props.history.push('/editdeck')
+
     }
-    // document.getElementById("demo").innerHTML = txt;
-  //   mtg.card.all({ name: `${this.state.cardSearchInput}`, pageSize: 1 })
-  //   .on('data', card => {
-  //       console.log(card)
-  //   this.setState({
-  //       recentCard: card
-  //   })
-  // })
+    // this.props.history.push('/editdeck')   //NEED TO REFERENCE NEWLY CREATED DECK 
+
   }
   editProfile=()=>{
   console.log('clicked');
@@ -72,6 +66,10 @@ class UserPage extends Component {
 
   deleteDeck=(deck)=>{
     console.log('in delete deck with:', deck);
+    this.props.dispatch({
+      type: 'DELETE_DECK',
+      payload: deck
+    })
   }
 
 
@@ -115,7 +113,7 @@ class UserPage extends Component {
         <br/>
 
 
-        <LogOutButton className="log-in" />
+        {/* <LogOutButton className="log-in" /> */}
       </div>
     );
   }

@@ -16,6 +16,9 @@ yield axios({
 yield put ({
     type: 'GET_DECK'
 })
+// yield put ({
+//     type: 'SET_SELECTEDDECK'
+// })
 }
 
 function* getDeck(action){
@@ -31,10 +34,23 @@ function* getDeck(action){
     })
 }
 
+function* deleteDeck(action) {
+    console.log('in delete deck saga with:', action);
+    yield axios ({
+        method: 'DELETE',
+        url: `/api/DECK/${action.payload}`,
+        data: action.payload
+    })
+    yield put({
+    type: 'GET_DECK'
+    })
+}
+
 
 function* deckSaga() {
   yield takeLatest('CREATE_DECK', createDeck);
   yield takeLatest('GET_DECK', getDeck);
+  yield takeLatest('DELETE_DECK', deleteDeck);
 
 }
 
