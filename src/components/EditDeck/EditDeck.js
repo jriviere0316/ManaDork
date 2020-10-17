@@ -72,11 +72,11 @@ class EditDeck extends Component {
         console.log('selectedCard:', this.state.selectedCard.name, this.state.selectedCard);
         return (
                 
-            <div >
+            <div>
 
                 <div>
 
-                    <h1>EDIT DECK PAGE</h1>
+                    <h1 id="editDeckHeader">Editing: {this.props.reduxStore.selectedDeck.deckname}</h1>
                 </div>
                 
                 <div id="descriptionDiv">

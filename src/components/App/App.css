@@ -114,6 +114,10 @@ input {
 h1{
   margin: 0%;
 }
+
+#editDeckHeader{
+text-align: center;
+}
 textarea{
   width: 400px;
   height: 200px;
@@ -156,10 +160,12 @@ textarea{
 #descriptionInput{
   width: 95%;
 }
-#deckName{
+/* #deckName{
   width: 40%;
 }
-
+#upvotes{
+  width: 40%;
+} */
 
 
 #cardInputForm{
@@ -243,19 +249,19 @@ margin-left: 20px;}
   margin-top: 0px;}
 
 #optionLi{
-  padding-left: 10px;
-  padding-right: 10px;
+  width: 305px;
+
+  /* padding-left: 10px;
+  padding-right: 10px; */
   outline: solid black 1px;
   list-style-type: none;
   background-color: #efefef;
-
 }
-
 #cardOptions{
   margin-top: 0;
 }
 #cardSearchInput{
-  width: 305px;
+  width: 300px;
   margin-bottom: 0 ;
 }
 #optionLi:hover{

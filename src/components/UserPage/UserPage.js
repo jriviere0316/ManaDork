@@ -66,11 +66,20 @@ class UserPage extends Component {
 
   deleteDeck=(deck)=>{
     console.log('in delete deck with:', deck);
-    this.props.dispatch({
-      type: 'DELETE_DECK',
-      payload: deck
-    })
+    var r = window.confirm(`Are you sure you want to permanenently delete this deck?`)
+    if (r === true){
+        this.props.dispatch({
+        type: 'DELETE_DECK',
+        payload: deck
+        })
+      } else {
+      return;
+    }
   }
+    
+   
+    
+  
 
 
 
@@ -96,9 +105,13 @@ class UserPage extends Component {
             <div id="userDeckScroll">
               {this.props.store.deck.map((deck) =>  
                 <div key={deck.id}>
-                    <p id="deckName" onClick={() => this.viewDeck(deck)}>{deck.deckname}</p>
-                    <button onClick={() => this.editDeck(deck)}>EDIT</button>
-                    <button onClick={() => this.deleteDeck(deck.id)}>DELETE</button>
+
+                  <h4 id="deckName" onClick={() => this.viewDeck(deck)}>{deck.deckname}</h4>
+                  <h5 id="upvotes">Upvotes: {deck.upvotes}</h5>
+                  <button onClick={() => this.editDeck(deck)}>EDIT</button>
+                  <button onClick={() => this.deleteDeck(deck.id)}>DELETE</button>
+                  <hr/>
+
                 </div>  
               )}
             </div>          {/* <p id="demo"></p> */}
