@@ -21,17 +21,21 @@ yield put ({
 // })
 }
 
-function* getDeck(action){
-    console.log('in get items with:', action);
-    let response = yield axios ({
-        method: 'GET',
-        url: `/api/deck`
-    })
-    console.log('back from GET with:', response.data);
-    yield put({
-        type: 'SET_DECK',
-        payload: response.data
-    })
+function* getDeck(){
+    // console.log('in get decks with:', );
+    try {
+        const config = {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        };
+        console.log('config is:', config);
+        const response = yield axios.get('api/deck', config);
+        
+        console.log('back from GET with:', response.data);
+        yield put({ type: 'SET_DECK', payload: response.data});
+    }catch (error){
+        console.log('GET deck request failed,', error);
+    }
 }
 
 function* deleteDeck(action) {

@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const axios = require('axios');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 require('dotenv').config();
 
 const router = express.Router();
@@ -21,10 +22,19 @@ router.post('/', (req, res, next) => {//LEFT OFF HERE*********** req.body.userid
       
 });
 
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
+    console.log('req.user:', req.user);
     console.log( 'in shelf GET')
-    const query = `SELECT * FROM deck;`
-    pool.query(query)
+
+    // let queryText, queryParams;
+    // if (req.user.clearance === 1){
+        
+    // }
+    const query = `SELECT * FROM deck WHERE "userid" = $1;`
+    const queryParams = [req.user.id]
+    
+    
+    pool.query(query, queryParams)
     .then(results => {
         res.send(results.rows);
     })

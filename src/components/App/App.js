@@ -23,12 +23,13 @@ import EditDeck from '../EditDeck/EditDeck';
 import ViewDeck from '../ViewDeck/ViewDeck';
 import EditUser from '../EditUser/EditUser';
 import Asyncinput from '../AsyncInput/AsyncInput';
+// import mapStateToProps from 
 import './App.css';
 
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
-    this.props.dispatch({type: 'GET_DECK'});
+    this.props.dispatch({ type: 'GET_DECK' });
   }
 
   render() {
@@ -139,5 +140,8 @@ class App extends Component {
     );
   }
 }
+const mapStateToProps = (reduxStore) => ({
+  reduxStore
+})
 
-export default connect()(App);
+export default connect(mapStateToProps)(App);
