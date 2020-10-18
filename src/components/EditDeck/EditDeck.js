@@ -58,10 +58,19 @@ class EditDeck extends Component {
     }
 
     updateSearchImage=(option)=>{
+
         console.log('in updateSearchImage with:', option.name);
-        this.setState({
-            hoverCard: option.image_uris.normal
-        })
+            if(option.image_uris === undefined){
+                this.setState({
+                    hoverCard: `https://s3.thingpic.com/images/Kz/uF3amfCnYFLBggjUNr1sPRKi.jpeg`
+            })
+        }else{
+            this.setState({
+                hoverCard: option.image_uris.normal
+                
+
+            })
+        }
     }
 
 
