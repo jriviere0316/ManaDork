@@ -140,6 +140,18 @@ textarea{
   overflow: auto;
 }
 
+#viewDeckTable{
+  outline: 1px solid black;
+  text-align: center;
+  background-color: white;
+  border-radius: 2px;
+  width: 60%;
+  margin: auto;
+  margin-top: 20px;
+  height: 400px;
+  overflow: auto;
+}
+
 #mainDiv{
   border-radius: 8px;
   width: 80%;

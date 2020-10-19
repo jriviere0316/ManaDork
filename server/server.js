@@ -13,6 +13,7 @@ const userRouter = require('./routes/user.router');
 const deckRouter = require('./routes/deck.router');
 const cardRouter = require('./routes/card.router');
 const queryRouter = require('./routes/card.router');
+const listRouter = require('./routes/list.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -29,7 +30,8 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/deck', deckRouter);
 app.use('/api/card', cardRouter);
-app.use('./api/query', queryRouter);
+// app.use('./api/query', queryRouter);
+app.use('/api/list', listRouter);
 
 
 // Serve static files

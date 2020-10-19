@@ -28,6 +28,153 @@ class ViewDeck extends Component {
                     <img src={this.props.reduxStore.selectedDeck.featured_card} width="200px" height="280"/>
                 </div>            
 
+                <div id="viewDeckTable">   
+                    <table >
+                        <thead>
+                            <tr>
+                                <th>Quantity</th>
+                                <th>Card Name</th>
+                                <th></th>
+
+                                <th>Buttons</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 x</td>
+                                <td>Yarok</td>
+                                <td>Commander</td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>12 x</td>
+                                <td>Island</td>
+                                <td></td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        {/* ////////////////////////////////////////////////////// */}
+                        <tbody>
+                            <tr>
+                                <td>12 x</td>
+                                <td>Forest</td>
+                                <td></td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>12 x</td>
+                                <td>Swamp</td>
+                                <td></td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Yarok</td>
+                                <td>Commander</td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Yarok</td>
+                                <td>Commander</td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Yarok</td>
+                                <td>Commander</td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Yarok</td>
+                                <td>Commander</td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Yarok</td>
+                                <td>Commander</td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Yarok</td>
+                                <td>Commander</td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Yarok</td>
+                                <td>Commander</td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Yarok</td>
+                                <td>Commander</td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Yarok</td>
+                                <td>Commander</td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Yarok</td>
+                                <td>Commander</td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Yarok</td>
+                                <td>Commander</td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Yarok</td>
+                                <td>Commander</td>
+                                <td><button>-</button><button>+</button></td>
+                            </tr>
+                        </tbody>
+                        {/* ////////////////////////////////////////////////////// */}
+
+                    </table>
+                </div>
+
+
+
                     <h5 id="upvotes">Upvotes: {this.props.reduxStore.selectedDeck.upvotes}</h5>
                     <button onClick={() => this.editDeck(this.props.reduxStore.selectedDeck)}>EDIT</button>      
                     <hr/>

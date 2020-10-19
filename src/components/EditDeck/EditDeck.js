@@ -13,6 +13,7 @@ class EditDeck extends Component {
         recentCard: '',
         hoverCard: '',
         selectedCard: '',
+        qtyInput: 1,
         isPublic: this.props.reduxStore.selectedDeck.ispublic
     }
  
@@ -25,7 +26,15 @@ class EditDeck extends Component {
         if (this.state.cardSearchInput.length >= 2){
             this.test();
         }
-      }
+    }
+
+    handleQtyInput=(event)=>{
+        console.log('qty event:', event.target.value);
+
+        this.setState({
+            qtyInput: event.target.value
+        })
+    }
       
 
     test=()=>{
@@ -36,7 +45,25 @@ class EditDeck extends Component {
         payload: this.state.cardSearchInput
     })
     }
+    
+    addToDeck=()=>{
+        console.log('in add to deck');
+        this.props.dispatch({
+            type: 'ADD_LISTITEM',
+            payload: {
+                name: this.state.selectedCard.name,
+                quantity: this.state.qtyInput,
+                is_cmdr: 'false',
+                is_featured: 'false',
+                api_data: this.state.selectedCard,
+                deckid: this.props.reduxStore.selectedDeck.id,
+                comboid: ''
+                
+            }
+            //"card_item" ("id", "name", "quantity", "is_cmdr", "is_featured", "api_data", "deckid", "comboid")
+        })
 
+    }
 
     saveAndNav=()=>{
         console.log('in saveAndNav');
@@ -62,13 +89,11 @@ class EditDeck extends Component {
         console.log('in updateSearchImage with:', option.name);
             if(option.image_uris === undefined){
                 this.setState({
-                    hoverCard: `https://s3.thingpic.com/images/Kz/uF3amfCnYFLBggjUNr1sPRKi.jpeg`
+                hoverCard: `https://s3.thingpic.com/images/Kz/uF3amfCnYFLBggjUNr1sPRKi.jpeg`
             })
-        }else{
-            this.setState({
+            }else{
+                this.setState({
                 hoverCard: option.image_uris.normal
-                
-
             })
         }
     }
@@ -86,6 +111,7 @@ class EditDeck extends Component {
         console.log('hoverCard:', this.state.hoverCard);
         console.log('selectedCard:', this.state.selectedCard.name, this.state.selectedCard);
         console.log(this.state.isPublic);
+        console.log('qtyInput:', this.state.qtyInput);
         return (
                 
             <div>
@@ -167,8 +193,8 @@ class EditDeck extends Component {
 
                         
 
-                        <input type="number" placeholder="Quantity" defaultValue="1"></input><br/>
-                        <button onClick={this.test}> * Add To Deck * </button><br/>
+                        <input type="number" placeholder="Quantity" defaultValue="1" defaultValue={this.state.qtyInput} onChange={this.handleQtyInput}></input><br/>
+                        <button onClick={this.addToDeck}> * Add To Deck * </button><br/>
                         <label htmlFor="isCmdrinput">Is this your commander?</label><br/>
                         <input type="checkbox" id="isCmdrinput" value="Commander"></input><br/>
                         <button onClick={this.saveAndNav}>Save</button>

@@ -109,7 +109,7 @@ export default function Asynchronous() {
         return () => {
         active = false;
     };
-  }, [loading]);
+  }, [open, options]);
 
   React.useEffect(() => {
     if (!open) {
