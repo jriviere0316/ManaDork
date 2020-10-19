@@ -10,6 +10,16 @@ class ViewDeck extends Component {
     state = {
         
     }
+
+    componentDidMount() {
+        // this.props.dispatch({ type: 'FETCH_USER' });
+        // this.props.dispatch({ type: 'GET_DECK' });
+        this.props.dispatch({ 
+            type: 'GET_LIST', 
+            payload: this.props.reduxStore.selectedDeck.id
+        });
+        
+    }
     editDeck=(deck)=>{
         console.log('in edit deck with:', deck);
         // this.props.dispatch({
@@ -17,9 +27,28 @@ class ViewDeck extends Component {
         //   payload: deck
         // })
         this.props.history.push('/editdeck')
-      }
+    }
+
+
+    qtyDown=()=>{
+        console.log('clicked -');
+    }
+    
+    qtyUp=()=>{
+        console.log('clicked +');
+
+    }
+
+    deleteCard=()=>{
+        console.log('clicked delete');
+
+    }
+
+
     render(){
         // console.log('recentCard state:',this.state.recentCard);
+        const includedCards = this.props.reduxStore.cardList.filter(card => card.deckid === this.props.reduxStore.selectedDeck.id);
+        console.log('includedCards:', includedCards);
         return (
                 
             <div >
@@ -34,142 +63,37 @@ class ViewDeck extends Component {
                             <tr>
                                 <th>Quantity</th>
                                 <th>Card Name</th>
-                                <th></th>
+                                <th>isCMDR?</th>
+                                <th>EDIT QTY</th>
+                                <th>DELETE</th>
 
-                                <th>Buttons</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            {/* <tr>
                                 <td>1 x</td>
                                 <td>Yarok</td>
                                 <td>Commander</td>
                                 <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>12 x</td>
-                                <td>Island</td>
-                                <td></td>
-                                <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        {/* ////////////////////////////////////////////////////// */}
-                        <tbody>
-                            <tr>
-                                <td>12 x</td>
-                                <td>Forest</td>
-                                <td></td>
-                                <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>12 x</td>
-                                <td>Swamp</td>
-                                <td></td>
-                                <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Yarok</td>
-                                <td>Commander</td>
-                                <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Yarok</td>
-                                <td>Commander</td>
-                                <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Yarok</td>
-                                <td>Commander</td>
-                                <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Yarok</td>
-                                <td>Commander</td>
-                                <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Yarok</td>
-                                <td>Commander</td>
-                                <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Yarok</td>
-                                <td>Commander</td>
-                                <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Yarok</td>
-                                <td>Commander</td>
-                                <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Yarok</td>
-                                <td>Commander</td>
-                                <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Yarok</td>
-                                <td>Commander</td>
-                                <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Yarok</td>
-                                <td>Commander</td>
-                                <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Yarok</td>
-                                <td>Commander</td>
-                                <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Yarok</td>
-                                <td>Commander</td>
-                                <td><button>-</button><button>+</button></td>
-                            </tr>
-                        </tbody>
-                        {/* ////////////////////////////////////////////////////// */}
+                                <td><button>DELETE</button></td>
+                            </tr> */}
+                            
+                            
+                            {includedCards.map((card) =>  
+                            <tr key={card.id}>
+                                <td>x {card.quantity}</td>
+                                <td>{card.name}</td>
+                                
+                                <td>{card.is_cmdr}</td>
 
+                                <td><button onClick={this.qtyDown}>-</button><button onClick={this.qtyUp}>+</button></td>
+                                <td><button onClick={this.deleteCard}>DELETE</button></td>  
+                            </tr>
+                            )}
+
+                        </tbody>
+                        {/* ////////////////////////////////////////////////////// */}
+                        
                     </table>
                 </div>
 

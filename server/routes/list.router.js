@@ -25,12 +25,12 @@ router.post('/', (req, res, next) => {//LEFT OFF HERE*********** req.body.userid
 
 router.get('/',  (req, res) => {
     console.log('req.user:', req.user);
-    console.log( 'in shelf GET')
-    const query = `SELECT * FROM "card_item" WHERE "deckid" =$1;`
-    const queryParams = [req.user.id]
+    console.log( 'in list GET with req.body:', req)
+    const query = `SELECT * FROM "card_item"  ;`
+    // const queryParams = [req.body.deckid]
     
     
-    pool.query(query, queryParams)
+    pool.query(query)
     .then(results => {
         res.send(results.rows);
     })

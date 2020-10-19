@@ -22,22 +22,19 @@ yield put ({
 
 
 
-function* getList(){
-    // console.log('in get decks with:', );
-    try {
-        const config = {
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
-        };
-        console.log('config is:', config);
-        const response = yield axios.get('api/list', config);
-        
-        console.log('back from list GET with:', response.data);
-        yield put({ type: 'SET_LIST', payload: response.data});
-    }catch (error){
-        console.log('GET deck request failed,', error);
-    }
-}
+function* getList(action) {
+    console.log('**********in fetchList Saga with:', action.payload);
+    let response = yield axios({
+        method: 'GET',
+        url: `/api/list/`,
+        data: action.payload
+})
+    console.log('back from GET with:', response.data);
+    yield put({
+        type: 'SET_LIST',
+        payload: response.data
+    })
+  }
 
 // function* deleteDeck(action) {
 //     console.log('in delete deck saga with:', action);
