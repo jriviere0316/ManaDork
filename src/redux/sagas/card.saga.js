@@ -16,6 +16,8 @@ function* fetchCard(action) {
   })
 }
 
+
+
 function* cardSaga() {
   yield takeLatest('FETCH_CARD', fetchCard);
 }

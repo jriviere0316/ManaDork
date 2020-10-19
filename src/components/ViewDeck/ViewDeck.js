@@ -1,3 +1,4 @@
+import { card } from 'mtgsdk';
 import React, {Component} from 'react';
 // import {connect} from 'react-redux';
 import { connect } from 'react-redux';
@@ -8,7 +9,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 class ViewDeck extends Component {
 
     state = {
-        
+        hoverCard: '' 
     }
 
     componentDidMount() {
@@ -31,7 +32,17 @@ class ViewDeck extends Component {
 
     cardDisplay=(card)=>{
         console.log('hovering on', card.name, card, card.api_data);
-       var o= JSON.parse(card.api_data)
+       var parsedData= JSON.parse(card.api_data)
+       console.log(parsedData.image_uris.normal);
+       this.setState({
+           hoverCard: parsedData.image_uris.normal
+       })
+    }
+    removeDisplay=(card)=>{
+        // console.log('left:', card.name, card, card.api_data);
+        this.setState({
+            hoverCard: ''
+        })
     }
     qtyDown=(card)=>{
         console.log('clicked -', card.name, card);
@@ -42,9 +53,12 @@ class ViewDeck extends Component {
 
     }
 
-    deleteCard=()=>{
-        console.log('clicked delete');
-
+    deleteCard=(card)=>{
+        console.log('clicked delete on:', card.name);
+        this.props.dispatch({
+            type: 'DELETE_LISTITEM',
+            payload: card
+        })
     }
 
 
@@ -59,8 +73,12 @@ class ViewDeck extends Component {
                 <div >
                     <img src={this.props.reduxStore.selectedDeck.featured_card} width="200px" height="280"/>
                 </div>            
+                <img src={this.state.hoverCard} width="200px" height="280"/> 
 
                 <div id="viewDeckTable">   
+
+                
+
                     <table >
                         <thead>
                             <tr>
@@ -81,16 +99,18 @@ class ViewDeck extends Component {
                                 <td><button>DELETE</button></td>
                             </tr> */}
                             
-                            
+
+
+
                             {includedCards.map((card) =>  
                             <tr key={card.id}>
                                 <td>x {card.quantity}</td>
-                                <td onMouseOver={()=>this.cardDisplay(card)}>{card.name}</td>
+                                <td onMouseOver={()=>this.cardDisplay(card)} onMouseLeave={()=>this.removeDisplay(card)}>{card.name}</td>
                                 
                                 <td>{card.is_cmdr}</td>
 
                                 <td><button onClick={()=>this.qtyDown(card)}>-</button><button onClick={()=>this.qtyUp(card)}>+</button></td>
-                                <td><button onClick={this.deleteCard}>DELETE</button></td>  
+                                <td><button onClick={()=>this.deleteCard(card)}>DELETE</button></td>  
                             </tr>
                             )}
 

@@ -41,15 +41,15 @@ router.get('/',  (req, res) => {
 });
     
 
-// router.delete('/:id', (req, res) => {
-//     console.log( 'in delete router:', req.params.id)
-//     const query = `DELETE FROM "deck" WHERE "id"=$1;`
-//     pool.query(query, [req.params.id])
-//     .then(() => 
-//         res.sendStatus(200))
-//     .catch(error => {
-//         console.log('ERROR:', error);
-//     })
-// });
-
+router.delete('/:id', (req, res) => {
+    console.log( 'in delete list router:', req.body.id)
+    const query = `DELETE FROM "card_item" WHERE "id"=$1;`
+    pool.query(query, [req.body.id])
+    .then(() => 
+        res.sendStatus(200))
+    .catch(error => {
+        console.log('ERROR:', error);
+    })
+});
+ 
 module.exports = router;

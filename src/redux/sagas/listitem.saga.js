@@ -34,8 +34,18 @@ function* getList(action) {
         type: 'SET_LIST',
         payload: response.data
     })
+}
+function* deleteListItem(action){
+    console.log('in delete card with:', action);
+    let response = yield axios ({
+      method: 'DELETE',
+      url: `api/list/${action.payload.id}`,
+      data: action.payload
+    })
+    yield put({
+      type: 'GET_LIST'
+      })
   }
-
 // function* deleteDeck(action) {
 //     console.log('in delete deck saga with:', action);
 //     yield axios ({
@@ -52,6 +62,8 @@ function* getList(action) {
 function* listSaga() {
   yield takeLatest('ADD_LISTITEM', createListItem);
   yield takeLatest('GET_LIST', getList);
+  yield takeLatest('DELETE_LISTITEM', deleteListItem);
+
 
 }
 

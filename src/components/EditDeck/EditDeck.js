@@ -62,6 +62,18 @@ class EditDeck extends Component {
             }
             //"card_item" ("id", "name", "quantity", "is_cmdr", "is_featured", "api_data", "deckid", "comboid")
         })
+        this.setState({
+         ...this.state,
+         cardSearchInput: [],
+         featuredCard: '',
+         recentCard: '',
+         hoverCard: '',
+         selectedCard: '',
+         qtyInput: 1,
+        })
+        // this.props.dispatch({
+        //     type: 'UNSET_CARD'
+        // })
 
     }
 
@@ -169,8 +181,8 @@ class EditDeck extends Component {
                             </>
                             :
                             <>
-                                <img src={this.props.reduxStore.card[0].image_uris.normal} 
-                                alt='Card Display' width='215px' height='300px'/>
+                                {/* <img src={this.props.reduxStore.card[0].image_uris.normal} 
+                                alt='Card Display' width='215px' height='300px'/> */}
                             </>
                         }
                         
@@ -193,7 +205,7 @@ class EditDeck extends Component {
 
                         
 
-                        <input type="number" placeholder="Quantity" defaultValue="1" defaultValue={this.state.qtyInput} onChange={this.handleQtyInput}></input><br/>
+                        <input type="number" placeholder="Quantity" defaultValue="1" value={this.state.qtyInput} onChange={this.handleQtyInput}></input><br/>
                         <button onClick={this.addToDeck}> * Add To Deck * </button><br/>
                         <label htmlFor="isCmdrinput">Is this your commander?</label><br/>
                         <input type="checkbox" id="isCmdrinput" value="Commander"></input><br/>
