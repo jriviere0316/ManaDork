@@ -7,7 +7,13 @@ import React from 'react';
 
 const InfoPage = () => (
   <div>
-    <h1>How To Play</h1>
+    <h1>A turn in a Magic game consists of five phases, in this order:</h1>
+
+<p>Beginning phase</p>
+<p>Pre-combat main phase</p>
+<p>Combat phase</p>
+<p>Post-combat main phase</p>
+<p>Ending phase</p>
   </div>
 );
 

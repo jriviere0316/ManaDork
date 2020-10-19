@@ -12,6 +12,13 @@ class UserPage extends Component {
     }
   }
 
+  componentDidMount() {
+    // this.props.dispatch({ type: 'FETCH_USER' });
+    this.props.dispatch({ type: 'GET_DECK' });
+    // this.props.dispatch({ type: 'GET_LIST' });
+
+    
+  }
   createDeck=()=>{
     console.log('click');
     var txt;

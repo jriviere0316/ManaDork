@@ -29,13 +29,16 @@ class ViewDeck extends Component {
         this.props.history.push('/editdeck')
     }
 
-
-    qtyDown=()=>{
-        console.log('clicked -');
+    cardDisplay=(card)=>{
+        console.log('hovering on', card.name, card, card.api_data);
+       var o= JSON.parse(card.api_data)
+    }
+    qtyDown=(card)=>{
+        console.log('clicked -', card.name, card);
     }
     
-    qtyUp=()=>{
-        console.log('clicked +');
+    qtyUp=(card)=>{
+        console.log('clicked + on: ', card.name, card);
 
     }
 
@@ -82,11 +85,11 @@ class ViewDeck extends Component {
                             {includedCards.map((card) =>  
                             <tr key={card.id}>
                                 <td>x {card.quantity}</td>
-                                <td>{card.name}</td>
+                                <td onMouseOver={()=>this.cardDisplay(card)}>{card.name}</td>
                                 
                                 <td>{card.is_cmdr}</td>
 
-                                <td><button onClick={this.qtyDown}>-</button><button onClick={this.qtyUp}>+</button></td>
+                                <td><button onClick={()=>this.qtyDown(card)}>-</button><button onClick={()=>this.qtyUp(card)}>+</button></td>
                                 <td><button onClick={this.deleteCard}>DELETE</button></td>  
                             </tr>
                             )}
