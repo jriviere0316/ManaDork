@@ -11,12 +11,42 @@ class EditDeck extends Component {
         cardSearchInput: [],
         featuredCard: '',
         recentCard: '',
-        hoverCard: '',
+        hoverCard: 'https://i.stack.imgur.com/Vkq2a.png',
         selectedCard: '',
         qtyInput: 1,
         isPublic: this.props.reduxStore.selectedDeck.ispublic
     }
- 
+    componentDidMount() {
+        // this.props.dispatch({ type: 'FETCH_USER' });
+        // this.props.dispatch({ type: 'GET_DECK' });
+        this.props.dispatch({ 
+            type: 'GET_LIST', 
+            payload: this.props.reduxStore.selectedDeck.id
+        });
+    }
+
+    cardDisplay=(card)=>{
+        console.log('hovering on', card.name, card, card.api_data);
+       var parsedData= JSON.parse(card.api_data)
+    //    console.log(parsedData.image_uris.normal);
+
+
+       if(parsedData.image_uris === undefined){
+        this.setState({
+        hoverCard: `https://s3.thingpic.com/images/Kz/uF3amfCnYFLBggjUNr1sPRKi.jpeg`
+        })
+        }else{
+            this.setState({
+                hoverCard: parsedData.image_uris.normal
+            })
+        }
+    }
+    removeDisplay=(card)=>{
+        // console.log('left:', card.name, card, card.api_data);
+        this.setState({
+            hoverCard: 'https://i.stack.imgur.com/Vkq2a.png'
+        })
+    }
 
     handleSearchInput=(event)=>{
         console.log('event:', event.target.value);
@@ -67,7 +97,7 @@ class EditDeck extends Component {
          cardSearchInput: [],
          featuredCard: '',
          recentCard: '',
-         hoverCard: '',
+         hoverCard: 'https://i.stack.imgur.com/Vkq2a.png',
          selectedCard: '',
          qtyInput: 1,
         })
@@ -109,6 +139,42 @@ class EditDeck extends Component {
             })
         }
     }
+    removeDisplay=(option)=>{
+        // console.log('left:', card.name, card, card.api_data);
+        this.setState({
+            hoverCard: 'https://i.stack.imgur.com/Vkq2a.png'
+        })
+    }
+
+    qtyDown=(card)=>{
+        console.log('clicked -', card.name, card.quantity, card);
+        console.log('this cards qty is:', card.quantity);
+        let qtyLess = card.quantity -= 1;
+        console.log(qtyLess);
+        this.props.dispatch({
+            type: 'EDIT_LISTITEM',
+            payload: card
+        })
+    }
+    
+    qtyUp=(card)=>{
+        console.log('clicked + on: ', card.name, card);
+        console.log('this cards qty is:', card.quantity);
+        let qtyMore = card.quantity += 1;
+        console.log(qtyMore);
+        this.props.dispatch({
+            type: 'EDIT_LISTITEM',
+            payload: card
+        })
+    }
+
+    deleteCard=(card)=>{
+        console.log('clicked delete on:', card.name);
+        this.props.dispatch({
+            type: 'DELETE_LISTITEM',
+            payload: card
+        })
+    }
 
 
     handleRadio() {
@@ -124,6 +190,9 @@ class EditDeck extends Component {
         console.log('selectedCard:', this.state.selectedCard.name, this.state.selectedCard);
         console.log(this.state.isPublic);
         console.log('qtyInput:', this.state.qtyInput);
+
+        const includedCards = this.props.reduxStore.cardList.filter(card => card.deckid === this.props.reduxStore.selectedDeck.id);
+
         return (
                 
             <div>
@@ -170,7 +239,41 @@ class EditDeck extends Component {
                 <button onClick={this.saveAndStay}>Save and Continue Editing</button>
                 </div>
                     
-                <br/>    
+                <br/> 
+
+                <div id="editDeckView">
+                    <table >
+                        <thead>
+                            <tr>
+                                {/* <th>Hovercard</th> */}
+                                <th>Quantity</th>
+                                <th>Card Name</th>
+                                <th>isCMDR?</th>
+                                <th>isFeatured?</th>
+                                <th>EDIT QTY</th>
+                                <th>DELETE</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {includedCards.map((card) =>  
+                            <tr key={card.id}>
+                                {/* <td>hoverCard</td> */}
+                                <td>x {card.quantity}</td>
+                                <td onMouseOver={()=>this.cardDisplay(card)} onMouseLeave={()=>this.removeDisplay(card)}>{card.name}</td>
+                                
+                                <td>{card.is_cmdr}</td>
+                                <td>{card.is_featured}</td>
+                                <td><button onClick={()=>this.qtyDown(card)}>-</button><button onClick={()=>this.qtyUp(card)}>+</button></td>
+                                <td><button onClick={()=>this.deleteCard(card)}>DELETE</button></td>  
+                            </tr>
+                            )}
+
+                        </tbody>
+                    </table>
+                </div>
+                <br/>   
                 <div>
                     {/* <h1>{this.props.reduxStore.card}</h1> */}
                     <form id="cardInputForm">
@@ -195,7 +298,7 @@ class EditDeck extends Component {
                             <div id="optionsDiv">
                                 <ul id="cardOptions">
                                     {this.props.reduxStore.card.map((option) =>  
-                                        <li key={option.id} value={option} id="optionLi" onMouseOver={()=>this.updateSearchImage(option)} onClick={()=>this.selectOption(option)}>{option.name}</li>  
+                                        <li key={option.id} value={option} id="optionLi" onMouseOver={()=>this.updateSearchImage(option) } onMouseLeave={()=>this.removeDisplay(option)}onClick={()=>this.selectOption(option)}>{option.name}</li>  
                                     )}
                                 </ul>
                             </div>:
@@ -209,13 +312,14 @@ class EditDeck extends Component {
                         <button onClick={this.addToDeck}> * Add To Deck * </button><br/>
                         {/* <label htmlFor="isCmdrinput">Is this your commander?</label><br/>
                         <input type="checkbox" id="isCmdrinput" value="Commander"></input><br/> */}
-                        <button onClick={this.saveAndNav}>Save</button>
-                        <button onClick={this.saveAndStay}>Save and Continue Editing</button><br/>
+                        <button onClick={this.saveAndNav}>Save and View Deck</button>
+                        {/* <button onClick={this.saveAndStay}>Save and Continue Editing</button><br/> */}
                     </form>
                 </div>
                 
                 <br/>
 
+                <br/>
                 <div id="featuredCardDiv">
                     <div id="cardImg">
                         <img src={this.props.reduxStore.selectedDeck.featured_card} width='50%' height='50%'/>
@@ -227,20 +331,6 @@ class EditDeck extends Component {
                 </div>
 
 
-                {/* <div id="cardImg">
-                    <img src={this.state.recentCard.imageUrl}>
-                    </img>
-                </div> */}
-
-
-                {/* <div id="listDisplay">
-                    <h1>List Display</h1>
-                    <textarea id="listDisplayTextArea">
-
-                    </textarea><br/>
-                    <button id="deleteDeckBtn">Delete Deck</button>
-
-                </div> */}
 
 
 

@@ -9,7 +9,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 class ViewDeck extends Component {
 
     state = {
-        hoverCard: '', 
+        hoverCard: 'https://i.stack.imgur.com/Vkq2a.png', 
         updatedQty: ''
     }
 
@@ -20,8 +20,8 @@ class ViewDeck extends Component {
             type: 'GET_LIST', 
             payload: this.props.reduxStore.selectedDeck.id
         });
-        
     }
+
     editDeck=(deck)=>{
         console.log('in edit deck with:', deck);
         // this.props.dispatch({
@@ -34,15 +34,23 @@ class ViewDeck extends Component {
     cardDisplay=(card)=>{
         console.log('hovering on', card.name, card, card.api_data);
        var parsedData= JSON.parse(card.api_data)
-       console.log(parsedData.image_uris.normal);
-       this.setState({
-           hoverCard: parsedData.image_uris.normal
-       })
+    //    console.log(parsedData.image_uris.normal);
+
+
+       if(parsedData.image_uris === undefined){
+        this.setState({
+        hoverCard: `https://s3.thingpic.com/images/Kz/uF3amfCnYFLBggjUNr1sPRKi.jpeg`
+        })
+        }else{
+            this.setState({
+                hoverCard: parsedData.image_uris.normal
+            })
+        }
     }
     removeDisplay=(card)=>{
         // console.log('left:', card.name, card, card.api_data);
         this.setState({
-            hoverCard: ''
+            hoverCard: 'https://i.stack.imgur.com/Vkq2a.png'
         })
     }
 
@@ -84,66 +92,65 @@ class ViewDeck extends Component {
         return (
                 
             <div >
+                <div id="editDeckView">   
+
+                
+
+<table >
+    <thead>
+        <tr>
+            <th>Hovercard</th>
+            <th>Quantity</th>
+            <th>Card Name</th>
+            <th>isCMDR?</th>
+            <th>isFeatured?</th>
+            <th>Type</th>
+            {/* <th>DELETE</th> */}
+
+        </tr>
+    </thead>
+    <tbody>
+
+        {includedCards.map((card) =>  
+        <tr key={card.id}>
+            <td>hoverCard</td>
+            <td>x {card.quantity}</td>
+            <td onMouseOver={()=>this.cardDisplay(card)} onMouseLeave={()=>this.removeDisplay(card)}>{card.name}</td>
+            
+            <td>{card.is_cmdr}</td>
+            <td>{card.is_featured}</td>
+            <td></td>
+            {/* <td><button onClick={()=>this.qtyDown(card)}>-</button><button onClick={()=>this.qtyUp(card)}>+</button></td>
+            <td><button onClick={()=>this.deleteCard(card)}>DELETE</button></td>   */}
+        </tr>
+        )}
+
+    </tbody>
+    {/* ////////////////////////////////////////////////////// */}
+    
+</table>
+</div>
+
+
+
+
                 <h1>Viewing {this.props.reduxStore.selectedDeck.deckname} from {this.props.reduxStore.user.username} </h1>
                 <div >
                     <img src={this.props.reduxStore.selectedDeck.featured_card} width="200px" height="280"/>
                 </div>            
                 <img src={this.state.hoverCard} width="200px" height="280"/> 
 
-                <div id="viewDeckTable">   
 
+
+
+
+                <h5 id="upvotes">Upvotes: {this.props.reduxStore.selectedDeck.upvotes}</h5>
+                <button onClick={() => this.editDeck(this.props.reduxStore.selectedDeck)}>EDIT</button>      
+                <hr/>
                 
-
-                    <table >
-                        <thead>
-                            <tr>
-                                <th>Quantity</th>
-                                <th>Card Name</th>
-                                <th>isCMDR?</th>
-                                <th>EDIT QTY</th>
-                                <th>DELETE</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {/* <tr>
-                                <td>1 x</td>
-                                <td>Yarok</td>
-                                <td>Commander</td>
-                                <td><button>-</button><button>+</button></td>
-                                <td><button>DELETE</button></td>
-                            </tr> */}
-                            
-
-
-
-                            {includedCards.map((card) =>  
-                            <tr key={card.id}>
-                                <td>x {card.quantity}</td>
-                                <td onMouseOver={()=>this.cardDisplay(card)} onMouseLeave={()=>this.removeDisplay(card)}>{card.name}</td>
-                                
-                                <td>{card.is_cmdr}</td>
-
-                                <td><button onClick={()=>this.qtyDown(card)}>-</button><button onClick={()=>this.qtyUp(card)}>+</button></td>
-                                <td><button onClick={()=>this.deleteCard(card)}>DELETE</button></td>  
-                            </tr>
-                            )}
-
-                        </tbody>
-                        {/* ////////////////////////////////////////////////////// */}
-                        
-                    </table>
-                </div>
-
-
-
-                    <h5 id="upvotes">Upvotes: {this.props.reduxStore.selectedDeck.upvotes}</h5>
-                    <button onClick={() => this.editDeck(this.props.reduxStore.selectedDeck)}>EDIT</button>      
-                    <hr/>
-                    
-                    <p>
-                        Description: {this.props.reduxStore.selectedDeck.description}
-                    </p>
+                <p>
+                    Description: {this.props.reduxStore.selectedDeck.description}
+                </p>
             </div>
 
         );

@@ -225,6 +225,15 @@ margin-right: -150px;
   position: absolute;
 }
 
+#editDeckView{
+  outline: solid black 2px;
+  width: 40%;
+  position: relative;  /* display: inline-block; */
+  float: right;
+  margin-right: 15%;
+  margin-top: 32px;
+}
+
 #listDisplayTextArea{
   height: 590px;
 }
