@@ -42,7 +42,7 @@ router.get('/',  (req, res) => {
     
 
 router.delete('/:id', (req, res) => {
-    console.log( 'in delete list router:', req.body.id)
+    console.log( 'in delete list item router:', req.body.id)
     const query = `DELETE FROM "card_item" WHERE "id"=$1;`
     pool.query(query, [req.body.id])
     .then(() => 
@@ -52,4 +52,26 @@ router.delete('/:id', (req, res) => {
     })
 });
  
+
+router.put('/:id',(req, res) => {
+    console.log( 'in edit list item router:', req.body)
+    const query = `
+    UPDATE "card_item" 
+    SET 
+    "name" = $1,
+    "quantity" = $2,
+    "is_cmdr" = $3,
+    "is_featured" = $4,
+    "api_data" = $5,
+    "deckid" = $6,
+    "comboid" = $7
+    WHERE "id" = $8 
+    ;`
+    pool.query(query, [req.body.name, req.body.quantity, req.body.is_cmdr, req.body.is_featured, req.body.api_data, req.body.deckid, req.body.comboid, req.body.id])
+    .then(() => 
+        res.sendStatus(200))
+    .catch(error => {
+        console.log('ERROR:', error);
+    })
+});
 module.exports = router;

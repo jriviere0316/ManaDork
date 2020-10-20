@@ -9,7 +9,8 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 class ViewDeck extends Component {
 
     state = {
-        hoverCard: '' 
+        hoverCard: '', 
+        updatedQty: ''
     }
 
     componentDidMount() {
@@ -44,13 +45,27 @@ class ViewDeck extends Component {
             hoverCard: ''
         })
     }
+
     qtyDown=(card)=>{
-        console.log('clicked -', card.name, card);
+        console.log('clicked -', card.name, card.quantity, card);
+        console.log('this cards qty is:', card.quantity);
+        let qtyLess = card.quantity -= 1;
+        console.log(qtyLess);
+        this.props.dispatch({
+            type: 'EDIT_LISTITEM',
+            payload: card
+        })
     }
     
     qtyUp=(card)=>{
         console.log('clicked + on: ', card.name, card);
-
+        console.log('this cards qty is:', card.quantity);
+        let qtyMore = card.quantity += 1;
+        console.log(qtyMore);
+        this.props.dispatch({
+            type: 'EDIT_LISTITEM',
+            payload: card
+        })
     }
 
     deleteCard=(card)=>{

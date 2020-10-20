@@ -207,8 +207,8 @@ class EditDeck extends Component {
 
                         <input type="number" placeholder="Quantity" defaultValue="1" value={this.state.qtyInput} onChange={this.handleQtyInput}></input><br/>
                         <button onClick={this.addToDeck}> * Add To Deck * </button><br/>
-                        <label htmlFor="isCmdrinput">Is this your commander?</label><br/>
-                        <input type="checkbox" id="isCmdrinput" value="Commander"></input><br/>
+                        {/* <label htmlFor="isCmdrinput">Is this your commander?</label><br/>
+                        <input type="checkbox" id="isCmdrinput" value="Commander"></input><br/> */}
                         <button onClick={this.saveAndNav}>Save</button>
                         <button onClick={this.saveAndStay}>Save and Continue Editing</button><br/>
                     </form>
