@@ -138,11 +138,14 @@ textarea{
 
 #userDiv{
   background-color: #00acb0;
-  outline: solid black 2px;
+  /* outline: solid black 2px; */
+  box-shadow: 0 0 3pt 2pt black;
+
   padding: 10px;
   display: inline-block;
   margin: 5%;
   text-align: center;
+  border-radius: 10px;
 }
 
 #userDeckScroll{
@@ -175,7 +178,9 @@ textarea{
 
 #descriptionDiv{
   background-color: #00acb0;
-  outline: solid black 2px;
+  /* outline: solid black 2px; */
+  box-shadow: 0 0 3pt 2pt black;
+  border-radius: 10px;
   padding: 10px;
   /* display: inline-block; */
   margin: auto;
@@ -194,8 +199,11 @@ textarea{
 
 
 #cardInputForm{
+  box-shadow: 0 0 3pt 2pt black;
+  border-radius: 10px;
+
   background-color: #00acb0;
-  outline: solid black 2px;
+  /* outline: solid black 2px; */
   padding: 10px;
   display: inline-block;
   left: 13%;
@@ -207,7 +215,10 @@ textarea{
 
 #featuredCardDiv{
   background-color: #00acb0;
-  outline: solid black 2px;
+  /* outline: solid black 2px; */
+  box-shadow: 0 0 3pt 2pt black;
+  border-radius: 10px;
+
   padding-left: 40px;
   padding-right: 40px;
 
@@ -240,8 +251,10 @@ margin-right: -150px;
 }
 
 #editDeckView{
-  outline: solid black 2px;
-  width: 40%;
+  /* outline: solid black 2px; */
+  box-shadow: 0 0 3pt 2pt black;
+  border-radius: 10px;
+  width: 43%;
   position: relative;  /* display: inline-block; */
   float: right;
   margin-right: 15%;
@@ -272,7 +285,9 @@ margin-left: 20px;}
 
 #editUserDiv{
   background-color: #00acb0;
-  outline: solid black 2px;
+  /* outline: solid black 2px; */
+  box-shadow: 0 0 3pt 2pt black;
+  border-radius: 10px;
   padding: 10px;
   margin: auto;
   width: 400px;

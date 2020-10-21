@@ -243,7 +243,7 @@ class EditDeck extends Component {
             {/*                         DECK NAME                     */}
                     <input id="deckName" placeholder="Deck Name" defaultValue={this.props.reduxStore.selectedDeck.deckname} onChange={(event)=>this.handleChange(event, 'deckname')}></input>
                 
-                {this.state.isPublic === false ?
+                {/* {this.state.isPublic === false ?
                     <>
                         <form onChange={this.handleRadio} >       
                             <label htmlFor="isPublic" >Public</label>
@@ -262,7 +262,7 @@ class EditDeck extends Component {
                         </form>
                     </>
                    
-                }
+                } */}
                    
 
                 <br/>
