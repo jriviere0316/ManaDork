@@ -14,7 +14,10 @@ class EditDeck extends Component {
         hoverCard: 'https://i.stack.imgur.com/Vkq2a.png',
         selectedCard: '',
         qtyInput: 1,
-        isPublic: this.props.reduxStore.selectedDeck.ispublic
+        isPublic: this.props.reduxStore.selectedDeck.ispublic,
+        deckname: this.props.reduxStore.selectedDeck.deckname,
+        description: this.props.reduxStore.selectedDeck.description
+
     }
     componentDidMount() {
         // this.props.dispatch({ type: 'FETCH_USER' });
@@ -24,6 +27,29 @@ class EditDeck extends Component {
             payload: this.props.reduxStore.selectedDeck.id
         });
     }
+
+    handleChange = (event, propertyName) => {
+        this.setState({
+            ...this.state,
+            [ propertyName ]: event.target.value
+        })
+    }
+
+
+
+
+    //PROBS WONT NEED THESE NEXT TWO FUNCTIONS
+    // handleDescription=(event)=>{
+    //     console.log('description event:', event.target.value);
+    // //     this.setState({
+    // //       cardSearchInput: event.target.value
+    // //   })
+    // }
+
+    // handleDeckName=(event)=>{
+    //     console.log('deckname event:', event.target.value);
+
+    // }
 
     cardDisplay=(card)=>{
         console.log('hovering on', card.name, card, card.api_data);
@@ -106,14 +132,29 @@ class EditDeck extends Component {
         // })
 
     }
+ 
 
-    saveAndNav=()=>{
-        console.log('in saveAndNav');
-        this.props.history.push('/viewdeck')
+    updateDeck=()=>{
+        console.log('in updateDeck');
+        this.props.dispatch({
+            type: 'UPDATE_DECK',
+            payload: {
+                comments: this.props.reduxStore.selectedDeck.comments,
+                decklist: this.props.reduxStore.selectedDeck.decklist,
+                deckname: this.state.deckname,
+                description: this.state.description,
+                featured_card: this.props.reduxStore.selectedDeck.featuredCard,
+                ispublic: this.state.isPublic,
+                // upvotes: this.props.reduxStore.selectedDeck.upvotes,
+                userid: this.props.reduxStore.selectedDeck.userid,
+                id: this.props.reduxStore.selectedDeck.id,
+
+            }
+        })
     }
 
-    saveAndStay=()=>{
-        console.log('in saveAndStay');
+    saveAndNav=()=>{
+        this.props.history.push('/viewdeck')
     }
     
 
@@ -179,19 +220,30 @@ class EditDeck extends Component {
 
     handleRadio() {
         console.log('in handle radio');
-        }
+    }
+
+        
 
     render(){
         console.log('recentCard state:',this.state.recentCard);
         console.log('redux state of cards:', this.props.reduxStore.card);
         console.log('state of cards at [0]', this.props.reduxStore.card[0]);
         console.log('selected deck:', this.props.reduxStore.selectedDeck);
-        console.log('hoverCard:', this.state.hoverCard);
-        console.log('selectedCard:', this.state.selectedCard.name, this.state.selectedCard);
-        console.log(this.state.isPublic);
-        console.log('qtyInput:', this.state.qtyInput);
+        // console.log('hoverCard:', this.state.hoverCard);
+        // console.log('selectedCard:', this.state.selectedCard.name, this.state.selectedCard);
+        // console.log(this.state.isPublic);
+        // console.log('qtyInput:', this.state.qtyInput);
 
         const includedCards = this.props.reduxStore.cardList.filter(card => card.deckid === this.props.reduxStore.selectedDeck.id);
+        const featuredCard = includedCards.filter(featured => featured.is_featured === true)
+        const mappedFeaturedCard = featuredCard.map(fCard => JSON.parse(fCard.api_data))
+        const featuredUri = mappedFeaturedCard.map(fUri => fUri.image_uris.normal)
+        // console.log('mappedFeaturedCard is:', mappedFeaturedCard);
+        // console.log('mappedFeaturedCard image uri is:', mappedFeaturedCard.artist);
+        // console.log('featuredUri:', featuredUri);
+
+        // console.log('description:', this.state.description);
+        console.log('state is:', this.state);
 
         return (
                 
@@ -199,12 +251,12 @@ class EditDeck extends Component {
 
                 <div>
 
-                    <h1 id="editDeckHeader">Editing: {this.props.reduxStore.selectedDeck.deckname}</h1>
+                    <h1 id="editDeckHeader" >Editing: {this.props.reduxStore.selectedDeck.deckname} </h1>
                 </div>
                 
                 <div id="descriptionDiv">
-            
-                    <input id="deckName" placeholder="Deck Name" defaultValue={this.props.reduxStore.selectedDeck.deckname}></input>
+            {/*                         DECK NAME                     */}
+                    <input id="deckName" placeholder="Deck Name" defaultValue={this.props.reduxStore.selectedDeck.deckname} onChange={(event)=>this.handleChange(event, 'deckname')}></input>
                 
                 {this.state.isPublic === false ?
                     <>
@@ -231,12 +283,13 @@ class EditDeck extends Component {
                    
 
                 <br/>
+            {/*                         DESCRIPTION                    */}
 
-                <textarea id="descriptionInput" placeholder="Deck Description" defaultValue={this.props.reduxStore.selectedDeck.description}></textarea>
+                <textarea id="descriptionInput" placeholder="Deck Description" onChange={(event)=>this.handleChange(event, 'description')} defaultValue={this.props.reduxStore.selectedDeck.description} ></textarea>
                 <br/>
 
-                <button onClick={this.saveAndNav}>Save</button>
-                <button onClick={this.saveAndStay}>Save and Continue Editing</button>
+                {/* <button onClick={this.saveAndNav}>Save</button> */}
+                <button onClick={this.updateDeck}>Update Name & Description</button>
                 </div>
                     
                 <br/> 
@@ -308,11 +361,11 @@ class EditDeck extends Component {
 
                         
 
-                        <input type="number" placeholder="Quantity" defaultValue="1" value={this.state.qtyInput} onChange={this.handleQtyInput}></input><br/>
+                        <input type="number" placeholder="Quantity" defaultValue={this.state.qtyInput} onChange={this.handleQtyInput}></input><br/>
                         <button onClick={this.addToDeck}> * Add To Deck * </button><br/>
                         {/* <label htmlFor="isCmdrinput">Is this your commander?</label><br/>
                         <input type="checkbox" id="isCmdrinput" value="Commander"></input><br/> */}
-                        <button onClick={this.saveAndNav}>Save and View Deck</button>
+                        <button onClick={this.saveAndNav}>View Deck</button>
                         {/* <button onClick={this.saveAndStay}>Save and Continue Editing</button><br/> */}
                     </form>
                 </div>
@@ -321,13 +374,14 @@ class EditDeck extends Component {
 
                 <br/>
                 <div id="featuredCardDiv">
+                    <h2>Featured Card</h2><br/>
                     <div id="cardImg">
-                        <img src={this.props.reduxStore.selectedDeck.featured_card} width='50%' height='50%'/>
+                        <img src={featuredUri} width='50%' height='50%'/>
                     </div>
-                    <input id="featuredCardInput" placeholder="Select Featured Card"></input>
+                    {/* <input id="featuredCardInput" placeholder="Select Featured Card"></input>
                     <br/>
                     <button onClick={this.saveAndNav}>Save</button>
-                    <button onClick={this.saveAndStay}>Save and Continue Editing</button>
+                    <button onClick={this.saveAndStay}>Save and Continue Editing</button> */}
                 </div>
 
 

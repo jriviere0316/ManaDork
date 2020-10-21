@@ -4,6 +4,10 @@ body,
   height: 100%;
 }
 
+
+img{
+  border-radius: 10px;
+}
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
@@ -195,7 +199,9 @@ textarea{
 #featuredCardDiv{
   background-color: #00acb0;
   outline: solid black 2px;
-  padding: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+
   display: inline-block;
   margin: 1%;
   position: relative;
@@ -206,7 +212,6 @@ textarea{
 #cardImg{
 padding: 20%;
 padding-top: 0;
-
 margin-left: -150px;
 margin-right: -150px;
 /* whyyyyyyyyyyyy margin whyyyyyyyyy^^ */

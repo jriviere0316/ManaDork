@@ -89,55 +89,57 @@ class ViewDeck extends Component {
         // console.log('recentCard state:',this.state.recentCard);
         const includedCards = this.props.reduxStore.cardList.filter(card => card.deckid === this.props.reduxStore.selectedDeck.id);
         console.log('includedCards:', includedCards);
+        const featuredCard = includedCards.filter(featured => featured.is_featured === true)
+        const mappedFeaturedCard = featuredCard.map(fCard => JSON.parse(fCard.api_data))
+        const featuredUri = mappedFeaturedCard.map(fUri => fUri.image_uris.normal)
         return (
                 
             <div >
                 <div id="editDeckView">   
+                    <table >
+                        <thead>
+                            <tr>
+                                <th>Hovercard</th>
+                                <th>Quantity</th>
+                                <th>Card Name</th>
+                                <th>isCMDR?</th>
+                                <th>isFeatured?</th>
+                                <th>Type</th>
+                                {/* <th>DELETE</th> */}
 
-                
+                            </tr>
+                        </thead>
+                        <tbody>
 
-<table >
-    <thead>
-        <tr>
-            <th>Hovercard</th>
-            <th>Quantity</th>
-            <th>Card Name</th>
-            <th>isCMDR?</th>
-            <th>isFeatured?</th>
-            <th>Type</th>
-            {/* <th>DELETE</th> */}
+                            {includedCards.map((card) =>  
+                            <tr key={card.id}>
+                                <td>hoverCard</td>
+                                <td>x {card.quantity}</td>
+                                <td onMouseOver={()=>this.cardDisplay(card)} onMouseLeave={()=>this.removeDisplay(card)}>{card.name}</td>
+                                
+                                <td>{card.is_cmdr}</td>
+                                <td>{card.is_featured}</td>
+                                <td></td>
+                            </tr>
+                            )}
 
-        </tr>
-    </thead>
-    <tbody>
-
-        {includedCards.map((card) =>  
-        <tr key={card.id}>
-            <td>hoverCard</td>
-            <td>x {card.quantity}</td>
-            <td onMouseOver={()=>this.cardDisplay(card)} onMouseLeave={()=>this.removeDisplay(card)}>{card.name}</td>
-            
-            <td>{card.is_cmdr}</td>
-            <td>{card.is_featured}</td>
-            <td></td>
-            {/* <td><button onClick={()=>this.qtyDown(card)}>-</button><button onClick={()=>this.qtyUp(card)}>+</button></td>
-            <td><button onClick={()=>this.deleteCard(card)}>DELETE</button></td>   */}
-        </tr>
-        )}
-
-    </tbody>
-    {/* ////////////////////////////////////////////////////// */}
-    
-</table>
-</div>
+                        </tbody>
+                        {/* ////////////////////////////////////////////////////// */}
+                        
+                    </table>
+                </div>
 
 
 
 
                 <h1>Viewing {this.props.reduxStore.selectedDeck.deckname} from {this.props.reduxStore.user.username} </h1>
-                <div >
-                    <img src={this.props.reduxStore.selectedDeck.featured_card} width="200px" height="280"/>
-                </div>            
+                <div id="featuredCardDiv">
+                    <h2>Featured Card</h2><br/>
+                    <div id="cardImg">
+                        <img src={featuredUri} width='50%' height='50%'/>
+                    </div>
+                </div>
+                <br/>          
                 <img src={this.state.hoverCard} width="200px" height="280"/> 
 
 
@@ -151,9 +153,7 @@ class ViewDeck extends Component {
                 <p>
                     Description: {this.props.reduxStore.selectedDeck.description}
                 </p>
-            </div>
-
-        );
+            </div>);
     }
 }
 

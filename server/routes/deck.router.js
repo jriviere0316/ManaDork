@@ -2,6 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const axios = require('axios');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { Router } = require('express');
 require('dotenv').config();
 
 const router = express.Router();
@@ -53,6 +54,31 @@ router.delete('/:id', (req, res) => {
         res.sendStatus(200))
     .catch(error => {
         console.log('ERROR:', error);
+    })
+});
+
+router.put('/:id', (req, res) => {
+    console.log('in edit router with:', req.body);
+    const query = `
+    UPDATE "deck"
+    SET 
+
+    "comments" = $1,
+    "decklist" = $2,
+    "deckname" = $3,
+    "description"= $4,
+    "featured_card" = $5,
+    "ispublic" = $6,
+    "userid" = $7
+    WHERE "id" = $8
+    ;`;
+    pool.query(query, [req.body.comments, 
+        req.body.decklist, req.body.deckname, req.body.description, req.body.featured_card, 
+        req.body.ispublic, req.body.userid, req.body.id])
+    .then(() => 
+    res.sendStatus(200))
+    .catch(error => {
+      console.log('ERROR:', error);
     })
   });
 

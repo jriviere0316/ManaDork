@@ -26,7 +26,7 @@ function* fetchUser() {
 
 
 function* updateUser(action) {
-  console.log('in updateUser');
+  console.log('in updateUser', action.payload.id);
   yield axios ({
     method: 'PUT',
     url: `/api/user/${action.payload.id}`,

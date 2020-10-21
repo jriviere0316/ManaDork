@@ -51,7 +51,8 @@ class EditUser extends Component {
     }
 
     render(){
-        console.log('recentCard state:',this.state);
+        // console.log('recentCard state:',this.state);
+        console.log('state is', this.state);
         return (
                 
                 <div >
