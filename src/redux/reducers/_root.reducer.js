@@ -5,6 +5,7 @@ import card from './card.reducer';
 import deck from './deck.reducer';
 import selectedDeck from './selectedDeck.reducer'
 import cardList from './list.reducer';
+import friendsReducer from './friends.reducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   card,
   deck,
   selectedDeck,
-  cardList
+  cardList,
+  friendsReducer
 });
 
 export default rootReducer;

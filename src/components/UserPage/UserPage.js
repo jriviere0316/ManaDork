@@ -15,7 +15,7 @@ class UserPage extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
     this.props.dispatch({ type: 'GET_DECK' });
-    // this.props.dispatch({ type: 'GET_LIST' });
+    this.props.dispatch({ type: 'GET_FRIENDS' });
   }
 
   createDeck=()=>{
@@ -87,11 +87,16 @@ class UserPage extends Component {
     
    
     
-  
+  viewFriend=(friend)=>{
+    console.log('in view friend with:', friend);
+  }
 
 
 
   render() {
+
+    const friendsList = this.props.store.friendsReducer.filter(user => user.id !== this.props.store.user.id);
+    console.log('friendsList:', friendsList);
     console.log('store', this.props.store);
     return (
       <div>
@@ -133,10 +138,10 @@ class UserPage extends Component {
             <button onClick={this.viewUsers}>View/Search Users</button>
             <hr/>
             <div id="userDeckScroll">
-              {this.props.store.deck.map((deck) =>  
-                <div key={deck.id}>
+              {friendsList.map((friend) =>  
+                <div key={friend.id}>
 
-                  <h4 id="deckName" onClick={() => this.viewDeck(deck)}>{deck.deckname}</h4>
+                  <h4 id="deckName" onClick={() => this.viewFriend(friend)}>{friend.username}</h4>
                   {/* <h5 id="upvotes">Upvotes: {deck.upvotes}</h5> */}
                   {/* <button onClick={() => this.editDeck(deck)}>EDIT</button>
                   <button onClick={() => this.deleteDeck(deck.id)}>DELETE</button> */}
