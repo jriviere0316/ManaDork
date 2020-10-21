@@ -35,22 +35,6 @@ class EditDeck extends Component {
         })
     }
 
-
-
-
-    //PROBS WONT NEED THESE NEXT TWO FUNCTIONS
-    // handleDescription=(event)=>{
-    //     console.log('description event:', event.target.value);
-    // //     this.setState({
-    // //       cardSearchInput: event.target.value
-    // //   })
-    // }
-
-    // handleDeckName=(event)=>{
-    //     console.log('deckname event:', event.target.value);
-
-    // }
-
     cardDisplay=(card)=>{
         console.log('hovering on', card.name, card, card.api_data);
        var parsedData= JSON.parse(card.api_data)
@@ -151,6 +135,7 @@ class EditDeck extends Component {
 
             }
         })
+        this.props.history.push('/user')
     }
 
     saveAndNav=()=>{
@@ -276,9 +261,7 @@ class EditDeck extends Component {
                             <input type="radio" name='publicstatus' id="isPublic" value="false"></input>
                         </form>
                     </>
-                            
-                
-                
+                   
                 }
                    
 
@@ -289,7 +272,7 @@ class EditDeck extends Component {
                 <br/>
 
                 {/* <button onClick={this.saveAndNav}>Save</button> */}
-                <button onClick={this.updateDeck}>Update Name & Description</button>
+                <button onClick={this.updateDeck}>Save</button>
                 </div>
                     
                 <br/> 
@@ -301,7 +284,7 @@ class EditDeck extends Component {
                                 {/* <th>Hovercard</th> */}
                                 <th>Quantity</th>
                                 <th>Card Name</th>
-                                <th>isCMDR?</th>
+                                {/* <th>isCMDR?</th> */}
                                 <th>isFeatured?</th>
                                 <th>EDIT QTY</th>
                                 <th>DELETE</th>
@@ -316,7 +299,7 @@ class EditDeck extends Component {
                                 <td>x {card.quantity}</td>
                                 <td onMouseOver={()=>this.cardDisplay(card)} onMouseLeave={()=>this.removeDisplay(card)}>{card.name}</td>
                                 
-                                <td>{card.is_cmdr}</td>
+                                {/* <td>{card.is_cmdr}</td> */}
                                 <td>{card.is_featured}</td>
                                 <td><button onClick={()=>this.qtyDown(card)}>-</button><button onClick={()=>this.qtyUp(card)}>+</button></td>
                                 <td><button onClick={()=>this.deleteCard(card)}>DELETE</button></td>  
@@ -383,15 +366,6 @@ class EditDeck extends Component {
                     <button onClick={this.saveAndNav}>Save</button>
                     <button onClick={this.saveAndStay}>Save and Continue Editing</button> */}
                 </div>
-
-
-
-
-
-                
-
-
-
             </div>
         );
     }

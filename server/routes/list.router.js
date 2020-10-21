@@ -26,7 +26,7 @@ router.post('/', (req, res, next) => {//LEFT OFF HERE*********** req.body.userid
 router.get('/',  (req, res) => {
     console.log('req.user:', req.user);
     console.log( 'in list GET with req.body:', req)
-    const query = `SELECT * FROM "card_item"  ;`
+    const query = `SELECT * FROM "card_item" ORDER BY name ASC ;`
     // const queryParams = [req.body.deckid]
     
     

@@ -80,6 +80,6 @@ router.put('/:id', (req, res) => {
     .catch(error => {
       console.log('ERROR:', error);
     })
-  });
+});
 
 module.exports = router;

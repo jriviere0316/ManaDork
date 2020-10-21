@@ -20,6 +20,7 @@ class ViewDeck extends Component {
             type: 'GET_LIST', 
             payload: this.props.reduxStore.selectedDeck.id
         });
+        
     }
 
     editDeck=(deck)=>{
@@ -102,7 +103,7 @@ class ViewDeck extends Component {
                                 <th>Hovercard</th>
                                 <th>Quantity</th>
                                 <th>Card Name</th>
-                                <th>isCMDR?</th>
+                                {/* <th>isCMDR?</th> */}
                                 <th>isFeatured?</th>
                                 <th>Type</th>
                                 {/* <th>DELETE</th> */}
@@ -117,7 +118,7 @@ class ViewDeck extends Component {
                                 <td>x {card.quantity}</td>
                                 <td onMouseOver={()=>this.cardDisplay(card)} onMouseLeave={()=>this.removeDisplay(card)}>{card.name}</td>
                                 
-                                <td>{card.is_cmdr}</td>
+                                {/* <td>{card.is_cmdr}</td> */}
                                 <td>{card.is_featured}</td>
                                 <td></td>
                             </tr>
@@ -132,7 +133,7 @@ class ViewDeck extends Component {
 
 
 
-                <h1>Viewing {this.props.reduxStore.selectedDeck.deckname} from {this.props.reduxStore.user.username} </h1>
+                <h2>Viewing {this.props.reduxStore.selectedDeck.deckname} from {this.props.reduxStore.user.username} </h2>
                 <div id="featuredCardDiv">
                     <h2>Featured Card</h2><br/>
                     <div id="cardImg">

@@ -13,12 +13,11 @@ class UserPage extends Component {
   }
 
   componentDidMount() {
-    // this.props.dispatch({ type: 'FETCH_USER' });
+    this.props.dispatch({ type: 'FETCH_USER' });
     this.props.dispatch({ type: 'GET_DECK' });
     // this.props.dispatch({ type: 'GET_LIST' });
-
-    
   }
+
   createDeck=()=>{
     console.log('click');
     var txt;
@@ -93,6 +92,7 @@ class UserPage extends Component {
 
 
   render() {
+    console.log('store', this.props.store);
     return (
       <div>
         <img id='profilePic' height='130px' width='130px' src={this.state.profile.defaultPic}></img>
@@ -123,13 +123,29 @@ class UserPage extends Component {
 
                 </div>  
               )}
-            </div>          {/* <p id="demo"></p> */}
+            </div>          
             
           </div>
-
+{/* ////////////// FRIENDS SCROLL BOX ////////////// */}
           <div id="userDiv">
           <h1>{this.props.store.user.username}'s Friends</h1>
-          <textarea></textarea>
+          <br/>
+            <button onClick={this.viewUsers}>View/Search Users</button>
+            <hr/>
+            <div id="userDeckScroll">
+              {this.props.store.deck.map((deck) =>  
+                <div key={deck.id}>
+
+                  <h4 id="deckName" onClick={() => this.viewDeck(deck)}>{deck.deckname}</h4>
+                  {/* <h5 id="upvotes">Upvotes: {deck.upvotes}</h5> */}
+                  {/* <button onClick={() => this.editDeck(deck)}>EDIT</button>
+                  <button onClick={() => this.deleteDeck(deck.id)}>DELETE</button> */}
+                  <hr/>
+
+                </div>  
+              )}
+            </div>  
+          {/* <textarea></textarea> */}
           </div>
         </div>
         <br/>

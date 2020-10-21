@@ -9,8 +9,17 @@ img{
   border-radius: 10px;
 }
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Ubuntu', serif; font-size: 20px; 
+
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
   margin: 0px;
+}
+input, textarea{
+  font-family: 'Ubuntu', serif; font-size: 15px; 
+}
+input{
+  width: 300px;
+  text-align: center;
 }
 
 img {
@@ -160,7 +169,7 @@ textarea{
   border-radius: 8px;
   width: 80%;
   height: 500px;
-  margin: auto;
+  margin: auto; 
 }
 
 
@@ -266,7 +275,7 @@ margin-left: 20px;}
   outline: solid black 2px;
   padding: 10px;
   margin: auto;
-  width: 300px;
+  width: 400px;
   text-align: center;
 }
 
