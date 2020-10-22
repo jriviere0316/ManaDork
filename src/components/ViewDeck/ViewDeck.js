@@ -103,12 +103,15 @@ class ViewDeck extends Component {
                     <table >
                         <thead>
                             <tr>
-                                <th>Hovercard</th>
+                                <th></th>
+                                {/* Hovercard^ */}
                                 <th>Quantity</th>
-                                <th>Card Name</th>
+                                <th id="nameTh">Card Name</th>
                                 {/* <th>isCMDR?</th> */}
-                                <th>isFeatured?</th>
-                                <th>Type</th>
+                                <th></th>
+                                {/* isFeatured? */}
+                                <th></th>
+                                {/* Type */}
                                 {/* <th>DELETE</th> */}
 
                             </tr>
@@ -117,9 +120,10 @@ class ViewDeck extends Component {
 
                             {includedCards.map((card) =>  
                             <tr key={card.id}>
-                                <td>hoverCard</td>
+                                <td></td>
+                                {/* //hovercard^ */}
                                 <td id="qtyTd">x {card.quantity}</td>
-                                <td onMouseOver={()=>this.cardDisplay(card)} onMouseLeave={()=>this.removeDisplay(card)}>{card.name}</td>
+                                <td id="nameTd" onMouseOver={()=>this.cardDisplay(card)} onMouseLeave={()=>this.removeDisplay(card)}>{card.name}</td>
                                 
                                 {/* <td>{card.is_cmdr}</td> */}
                                 <td>{card.is_featured}</td>
@@ -159,8 +163,9 @@ class ViewDeck extends Component {
 
                 {/* <h5 id="upvotes">Upvotes: {this.props.reduxStore.selectedDeck.upvotes}</h5>
                 <hr/> */}
+                
                 <div id="descriptionDiv">
-                    <h2>Description:</h2>
+                    <h2 id="descriptionDivText">Description:</h2>
                     <textarea id="descriptionInput" placeholder="Deck Description"  value={this.props.reduxStore.selectedDeck.description} ></textarea>
                     <br/>
                 </div>

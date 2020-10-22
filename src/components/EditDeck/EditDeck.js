@@ -352,10 +352,6 @@ class EditDeck extends Component {
                     <div id="cardImg">
                         <img src={featuredUri} width='50%' height='50%'/>
                     </div>
-                    {/* <input id="featuredCardInput" placeholder="Select Featured Card"></input>
-                    <br/>
-                    <button onClick={this.saveAndNav}>Save</button>
-                    <button onClick={this.saveAndStay}>Save and Continue Editing</button> */}
                 </div>
             </div>
         );

@@ -8,8 +8,8 @@ import React from 'react';
 const InfoPage = () => (
   <div>
     <h1>How to play Magic: The Gathering</h1>
-
-<p>Magic: The Gathering is a wonderful game that has you slinging spells at friends and enemies with one aim: to win. It has been around since 1993 and has gained popularity over the years due to its fun nature and depth of game mechanics. There are even people who make their living from playing Magic in tournaments around the world!
+<hr/>
+<p id="howToPlayPTag">Magic: The Gathering is a wonderful game that has you slinging spells at friends and enemies with one aim: to win. It has been around since 1993 and has gained popularity over the years due to its fun nature and depth of game mechanics. There are even people who make their living from playing Magic in tournaments around the world!
 <br/><br/>
 As a result of the level of play that you can reach, starting off can feel daunting. Because of this, there are lots of articles online to help you understand how to play this classic card game. This article is going to focus on the way each turn progresses. While this is taken care of automatically in Magic: The Gathering Arena, it very much isn’t in paper MtG. So, in order to learn how the game will progress, you can simply read on.
 <br/><br/>

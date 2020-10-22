@@ -9,7 +9,7 @@ import RegisterForm from '../RegisterForm/RegisterForm';
 
 class LandingPage extends Component {
   state = {
-    heading: 'Class Component',
+    heading: 'Welcome to ManaDork',
   };
 
   onLogin = (event) => {
@@ -23,28 +23,21 @@ class LandingPage extends Component {
 
         <div className="grid">
           <div className="grid-col grid-col_8">
-            <p>
-              This is the LANDING PAGE!!!!!
-            </p>
+       
 
-            <p>
-              Welcome to ManaDork!
-            </p>
-
-            <p>
-              Fusce porta diam ac tortor elementum, ut imperdiet metus volutpat.
-              Suspendisse posuere dapibus maximus. Aliquam vitae felis libero.
-              In vehicula sapien at semper ultrices. Vivamus sed feugiat libero.
-              Sed sagittis neque id diam euismod, ut egestas felis ultricies.
-              Nullam non fermentum mauris. Sed in enim ac turpis faucibus
-              pretium in sit amet nisi.
+          
+            <hr/>
+            <p id="landingPtag">
+              ManaDork is a Magic: The Gathering web app designed to help users create MTG deck lists.  
+              <br/><br/>
+              Login or create your account to start creating decks and learning how to play today!
             </p>
           </div>
           <div className="grid-col grid-col_4">
             <RegisterForm />
 
             <center>
-              <h4>Already a Member?</h4>
+              <h4 id="h4tag">Already a Member?</h4>
               <button className="btn btn_sizeSm" onClick={this.onLogin}>
                 Login
               </button>
