@@ -8,15 +8,16 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 class EditDeck extends Component {
 
     state = {
-        cardSearchInput: [],
+        cardSearchInput: '',
         featuredCard: '',
         recentCard: '',
         hoverCard: 'https://i.stack.imgur.com/Vkq2a.png',
-        selectedCard: '',
+        selectedCard: {},
         qtyInput: 1,
         isPublic: this.props.reduxStore.selectedDeck.ispublic,
         deckname: this.props.reduxStore.selectedDeck.deckname,
-        description: this.props.reduxStore.selectedDeck.description
+        description: this.props.reduxStore.selectedDeck.description,
+        defaultSearch: ''
 
     }
     componentDidMount() {
@@ -109,6 +110,7 @@ class EditDeck extends Component {
          hoverCard: 'https://i.stack.imgur.com/Vkq2a.png',
          selectedCard: '',
          qtyInput: 1,
+         defaultSearch: ''
         })
         // this.props.dispatch({
         //     type: 'UNSET_CARD'
@@ -146,7 +148,7 @@ class EditDeck extends Component {
         console.log('selectOption SELECTED:', option.name, option);
         this.setState({
             selectedCard: option,
-            cardSearchInput: []
+            cardSearchInput: option.name
         })
 
     }
@@ -288,21 +290,24 @@ class EditDeck extends Component {
                                 <th>DELETE</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {includedCards.map((card) =>  
-                            <tr key={card.id}>
-                                {/* <td>hoverCard</td> */}
-                                <td id="qtyTd">x {card.quantity}</td>
-                                <td onMouseOver={()=>this.cardDisplay(card)} onMouseLeave={()=>this.removeDisplay(card)}>{card.name}</td>
-                                {/* <td>{card.is_cmdr}</td> */}
-                                
-                                <td><input type="checkbox" id="myCheck" defaultValue={card.is_featured} defaultChecked={card.is_featured} onChange={()=>this.handleFeatured(card)} /> </td>
+                        
+                        <div id="optionsScrollDiv">
+                            <tbody>
+                                {includedCards.map((card) =>  
+                                <tr key={card.id}>
+                                    {/* <td>hoverCard</td> */}
+                                    <td id="qtyTd">x {card.quantity}</td>
+                                    <td onMouseOver={()=>this.cardDisplay(card)} onMouseLeave={()=>this.removeDisplay(card)}>{card.name}</td>
+                                    {/* <td>{card.is_cmdr}</td> */}
+                                    
+                                    <td><input type="checkbox" id="myCheck" defaultValue={card.is_featured} defaultChecked={card.is_featured} onChange={()=>this.handleFeatured(card)} /> </td>
 
-                                <td><button id="incrementBtn" onClick={()=>this.qtyDown(card)}> - </button><button id="incrementBtn"  onClick={()=>this.qtyUp(card)}>+</button></td>
-                                <td><button onClick={()=>this.deleteCard(card)}>DELETE</button></td>  
-                            </tr>
-                            )}
-                        </tbody>
+                                    <td><button id="incrementBtn" onClick={()=>this.qtyDown(card)}> - </button><button id="incrementBtn"  onClick={()=>this.qtyUp(card)}>+</button></td>
+                                    <td><button onClick={()=>this.deleteCard(card)}>DELETE</button></td>  
+                                </tr>
+                                )}
+                            </tbody>
+                        </div>
                     </table>
                 </div>
                 <br/>   
@@ -320,7 +325,7 @@ class EditDeck extends Component {
                             </>
                         }
                         <br/>
-                            <input id="cardSearchInput" placeholder="Card Name" onChange={this.handleSearchInput}></input>
+                            <input id="cardSearchInput" placeholder="Card Name" value={this.state.cardSearchInput} onChange={this.handleSearchInput}></input>
                         <br/>
 
                         {this.state.cardSearchInput.length >= 1 ?

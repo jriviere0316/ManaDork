@@ -7,7 +7,7 @@ import React from 'react';
 
 const InfoPage = () => (
   <div>
-    <h1>How to play Magic: The Gathering</h1>
+    <h1 id="howToHeader">How to play Magic: The Gathering</h1>
 <hr/>
 <p id="howToPlayPTag">Magic: The Gathering is a wonderful game that has you slinging spells at friends and enemies with one aim: to win. It has been around since 1993 and has gained popularity over the years due to its fun nature and depth of game mechanics. There are even people who make their living from playing Magic in tournaments around the world!
 <br/><br/>

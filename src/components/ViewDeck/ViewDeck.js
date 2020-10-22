@@ -84,7 +84,13 @@ class ViewDeck extends Component {
             payload: card
         })
     }
-
+    
+    // placeDiv(x_pos, y_pos) {
+    //     var d = document.getElementById('yourDivId');
+    //     d.style.position = "absolute";
+    //     d.style.left = x_pos+'px';
+    //     d.style.top = y_pos+'px';
+    //   }
 
     render(){
         // console.log('recentCard state:',this.state.recentCard);
@@ -98,8 +104,14 @@ class ViewDeck extends Component {
             <div >
 
 <h1 id="editDeckHeader">Viewing {this.props.reduxStore.selectedDeck.deckname} from {this.props.reduxStore.user.username} </h1>
-
-                <div id="editDeckView">   
+            
+                
+                
+                <div id="viewDeckEditDeckView" > 
+                <div>
+                <img  id="featuredViewDeckCard" src={this.state.hoverCard} width="200px" height="280"/> 
+                </div>
+                <br/>  
                     <table >
                         <thead>
                             <tr>
@@ -134,17 +146,18 @@ class ViewDeck extends Component {
                         </tbody>
                         {/* ////////////////////////////////////////////////////// */}
                         
+
                     </table>
                 </div>
 
 
 
+                <br/>
 
 
 
 
-
-                <div id="featuredCardDiv">
+                <div id="viewDeckFeaturedCardDiv">
                     <h2>Featured Card</h2><br/>
                     <div id="cardImg">
                         <img src={featuredUri} width='50%' height='50%'/>
@@ -155,8 +168,7 @@ class ViewDeck extends Component {
 
                 </div>
                 <br/>          
-                <img src={this.state.hoverCard} width="200px" height="280"/> 
-
+                <br/>                   
 
 
 
