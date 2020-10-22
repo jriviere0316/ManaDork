@@ -96,6 +96,9 @@ class ViewDeck extends Component {
         return (
                 
             <div >
+
+<h1 id="editDeckHeader">Viewing {this.props.reduxStore.selectedDeck.deckname} from {this.props.reduxStore.user.username} </h1>
+
                 <div id="editDeckView">   
                     <table >
                         <thead>
@@ -115,7 +118,7 @@ class ViewDeck extends Component {
                             {includedCards.map((card) =>  
                             <tr key={card.id}>
                                 <td>hoverCard</td>
-                                <td>x {card.quantity}</td>
+                                <td id="qtyTd">x {card.quantity}</td>
                                 <td onMouseOver={()=>this.cardDisplay(card)} onMouseLeave={()=>this.removeDisplay(card)}>{card.name}</td>
                                 
                                 {/* <td>{card.is_cmdr}</td> */}
@@ -133,12 +136,19 @@ class ViewDeck extends Component {
 
 
 
-                <h2>Viewing {this.props.reduxStore.selectedDeck.deckname} from {this.props.reduxStore.user.username} </h2>
+
+
+
+
                 <div id="featuredCardDiv">
                     <h2>Featured Card</h2><br/>
                     <div id="cardImg">
                         <img src={featuredUri} width='50%' height='50%'/>
+                        <br/>
+                        <button onClick={() => this.editDeck(this.props.reduxStore.selectedDeck)}>Edit Deck</button>      
+
                     </div>
+
                 </div>
                 <br/>          
                 <img src={this.state.hoverCard} width="200px" height="280"/> 
@@ -147,13 +157,13 @@ class ViewDeck extends Component {
 
 
 
-                <h5 id="upvotes">Upvotes: {this.props.reduxStore.selectedDeck.upvotes}</h5>
-                <button onClick={() => this.editDeck(this.props.reduxStore.selectedDeck)}>EDIT</button>      
-                <hr/>
-                
-                <p>
-                    Description: {this.props.reduxStore.selectedDeck.description}
-                </p>
+                {/* <h5 id="upvotes">Upvotes: {this.props.reduxStore.selectedDeck.upvotes}</h5>
+                <hr/> */}
+                <div id="descriptionDiv">
+                    <h2>Description:</h2>
+                    <textarea id="descriptionInput" placeholder="Deck Description"  value={this.props.reduxStore.selectedDeck.description} ></textarea>
+                    <br/>
+                </div>
             </div>);
     }
 }

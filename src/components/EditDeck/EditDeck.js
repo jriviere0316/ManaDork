@@ -20,14 +20,20 @@ class EditDeck extends Component {
 
     }
     componentDidMount() {
-        // this.props.dispatch({ type: 'FETCH_USER' });
-        // this.props.dispatch({ type: 'GET_DECK' });
         this.props.dispatch({ 
             type: 'GET_LIST', 
             payload: this.props.reduxStore.selectedDeck.id
         });
     }
-
+    handleFeatured=(card)=>{
+        console.log('in handle featured', card.id);
+        card.is_featured = !card.is_featured
+        console.log('updated featured status:', card.is_featured);
+        this.props.dispatch({
+            type: 'EDIT_LISTITEM',
+            payload: card
+        })
+    }
     handleChange = (event, propertyName) => {
         this.setState({
             ...this.state,
@@ -37,11 +43,8 @@ class EditDeck extends Component {
 
     cardDisplay=(card)=>{
         console.log('hovering on', card.name, card, card.api_data);
-       var parsedData= JSON.parse(card.api_data)
-    //    console.log(parsedData.image_uris.normal);
-
-
-       if(parsedData.image_uris === undefined){
+        var parsedData= JSON.parse(card.api_data)
+        if(parsedData.image_uris === undefined){
         this.setState({
         hoverCard: `https://s3.thingpic.com/images/Kz/uF3amfCnYFLBggjUNr1sPRKi.jpeg`
         })
@@ -51,8 +54,8 @@ class EditDeck extends Component {
             })
         }
     }
+
     removeDisplay=(card)=>{
-        // console.log('left:', card.name, card, card.api_data);
         this.setState({
             hoverCard: 'https://i.stack.imgur.com/Vkq2a.png'
         })
@@ -70,7 +73,6 @@ class EditDeck extends Component {
 
     handleQtyInput=(event)=>{
         console.log('qty event:', event.target.value);
-
         this.setState({
             qtyInput: event.target.value
         })
@@ -79,11 +81,10 @@ class EditDeck extends Component {
 
     test=()=>{
         console.log('in test:', this.state.cardSearchInput);
-        
-    this.props.dispatch({
+        this.props.dispatch({
         type: 'FETCH_CARD',
         payload: this.state.cardSearchInput
-    })
+        })
     }
     
     addToDeck=()=>{
@@ -98,9 +99,7 @@ class EditDeck extends Component {
                 api_data: this.state.selectedCard,
                 deckid: this.props.reduxStore.selectedDeck.id,
                 comboid: ''
-                
             }
-            //"card_item" ("id", "name", "quantity", "is_cmdr", "is_featured", "api_data", "deckid", "comboid")
         })
         this.setState({
          ...this.state,
@@ -264,7 +263,6 @@ class EditDeck extends Component {
                    
                 } */}
                    
-
                 <br/>
             {/*                         DESCRIPTION                    */}
 
@@ -285,27 +283,25 @@ class EditDeck extends Component {
                                 <th>Quantity</th>
                                 <th>Card Name</th>
                                 {/* <th>isCMDR?</th> */}
-                                <th>isFeatured?</th>
+                                <th>Feat?</th>
                                 <th>EDIT QTY</th>
                                 <th>DELETE</th>
-
                             </tr>
                         </thead>
                         <tbody>
-
                             {includedCards.map((card) =>  
                             <tr key={card.id}>
                                 {/* <td>hoverCard</td> */}
-                                <td>x {card.quantity}</td>
+                                <td id="qtyTd">x {card.quantity}</td>
                                 <td onMouseOver={()=>this.cardDisplay(card)} onMouseLeave={()=>this.removeDisplay(card)}>{card.name}</td>
-                                
                                 {/* <td>{card.is_cmdr}</td> */}
-                                <td>{card.is_featured}</td>
-                                <td><button onClick={()=>this.qtyDown(card)}>-</button><button onClick={()=>this.qtyUp(card)}>+</button></td>
+                                
+                                <td><input type="checkbox" id="myCheck" defaultValue={card.is_featured} defaultChecked={card.is_featured} onChange={()=>this.handleFeatured(card)} /> </td>
+
+                                <td><button id="incrementBtn" onClick={()=>this.qtyDown(card)}> - </button><button id="incrementBtn"  onClick={()=>this.qtyUp(card)}>+</button></td>
                                 <td><button onClick={()=>this.deleteCard(card)}>DELETE</button></td>  
                             </tr>
                             )}
-
                         </tbody>
                     </table>
                 </div>
@@ -313,7 +309,6 @@ class EditDeck extends Component {
                 <div>
                     {/* <h1>{this.props.reduxStore.card}</h1> */}
                     <form id="cardInputForm">
-
                         {this.state.hoverCard.length >= 1 ?
                             <>
                                 <img src={this.state.hoverCard} alt='Card Display' width='215px' height='300px'/>
@@ -324,8 +319,6 @@ class EditDeck extends Component {
                                 alt='Card Display' width='215px' height='300px'/> */}
                             </>
                         }
-                        
-                        
                         <br/>
                             <input id="cardSearchInput" placeholder="Card Name" onChange={this.handleSearchInput}></input>
                         <br/>
@@ -342,10 +335,8 @@ class EditDeck extends Component {
                             </>
                         }  
 
-                        
-
                         <input type="number" placeholder="Quantity" defaultValue={this.state.qtyInput} onChange={this.handleQtyInput}></input><br/>
-                        <button onClick={this.addToDeck}> * Add To Deck * </button><br/>
+                        <button onClick={this.addToDeck}> Add To Deck → </button><br/>
                         {/* <label htmlFor="isCmdrinput">Is this your commander?</label><br/>
                         <input type="checkbox" id="isCmdrinput" value="Commander"></input><br/> */}
                         <button onClick={this.saveAndNav}>View Deck</button>

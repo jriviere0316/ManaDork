@@ -62,7 +62,7 @@ class EditUser extends Component {
                         <h1>Edit User</h1>
                         <hr/>
                         <form onSubmit={this.editUser}>
-                            <h13>Username</h13>
+                            <h6 id="editInfoTag">Username</h6>
                             <input 
                             type="text"
                             placeholder="username" 
@@ -71,7 +71,7 @@ class EditUser extends Component {
                             </input>
 
                             <br/>
-                            <h13>Image URL</h13>
+                            <h6 id="editInfoTag">Image URL</h6>
                             <input 
                             type="text"
                             placeholder="image_url" 

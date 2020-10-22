@@ -4,13 +4,33 @@ body,
   height: 100%;
 }
 
-
+h1, h2{
+  color: white;
+}
+#loginH2{
+  color: black;
+  margin-bottom: 10px;
+}
+h2{
+  margin-bottom: 0;
+}
 img{
   border-radius: 10px;
 }
+button{
+  border-radius: 4px;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-family: 'Ubuntu', serif; font-size: 15px; 
+
+
+}
+button:hover{
+  background-color: chartreuse;
+}
 body {
   font-family: 'Ubuntu', serif; font-size: 20px; 
-
+  background-color: rgb(32, 34, 34);
   /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
   margin: 0px;
 }
@@ -80,7 +100,7 @@ Button
   border-radius: 0;
   background: none;
   font: inherit;
-  color: #444;
+  color: white;
 }
 
 .btn_asLink:hover {
@@ -116,7 +136,7 @@ Form Treatment
   margin: 0 auto 20px;
   background-color: #efefef;
   border-radius: 3px;
-  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+  box-shadow: 0 0 1pt 1pt black;
 }
 
 input {
@@ -139,7 +159,7 @@ textarea{
 #userDiv{
   background-color: #00acb0;
   /* outline: solid black 2px; */
-  box-shadow: 0 0 3pt 2pt black;
+  box-shadow: 0 0 1pt 1pt black;
 
   padding: 10px;
   display: inline-block;
@@ -147,7 +167,16 @@ textarea{
   text-align: center;
   border-radius: 10px;
 }
-
+#incrementBtn{
+  height: 25px;
+  width: 25px;
+}
+#qtyTd{
+  text-align: center;
+}
+#myCheck{
+width: 10px
+}
 #userDeckScroll{
   background-color: white;
   border-radius: 2px;
@@ -179,7 +208,7 @@ textarea{
 #descriptionDiv{
   background-color: #00acb0;
   /* outline: solid black 2px; */
-  box-shadow: 0 0 3pt 2pt black;
+  box-shadow: 0 0 1pt 1pt black;
   border-radius: 10px;
   padding: 10px;
   /* display: inline-block; */
@@ -197,10 +226,16 @@ textarea{
   width: 40%;
 } */
 
+#editInfoTag{
+  text-align: left;
+  padding-left: 50px;
+  margin: 0;
 
+}
 #cardInputForm{
-  box-shadow: 0 0 3pt 2pt black;
+  box-shadow: 0 0 1pt 1pt black;
   border-radius: 10px;
+  width: 350px;
 
   background-color: #00acb0;
   /* outline: solid black 2px; */
@@ -213,10 +248,12 @@ textarea{
   text-align: center;
 }
 
+
+
 #featuredCardDiv{
   background-color: #00acb0;
   /* outline: solid black 2px; */
-  box-shadow: 0 0 3pt 2pt black;
+  box-shadow: 0 0 1pt 1pt black;
   border-radius: 10px;
 
   padding-left: 40px;
@@ -252,13 +289,14 @@ margin-right: -150px;
 
 #editDeckView{
   /* outline: solid black 2px; */
-  box-shadow: 0 0 3pt 2pt black;
+  background-color: white;
+  box-shadow: 0 0 1pt 1pt black;
   border-radius: 10px;
   width: 43%;
   position: relative;  /* display: inline-block; */
   float: right;
-  margin-right: 15%;
-  margin-top: 32px;
+  margin-right: 14%;
+  margin-top: 38px;
 }
 
 #listDisplayTextArea{
@@ -267,7 +305,7 @@ margin-right: -150px;
 
 
 #deckName:hover{
-  color: #e01616;
+  color: rgb(29, 174, 123);
   text-decoration: underline;
 }
 
@@ -286,7 +324,7 @@ margin-left: 20px;}
 #editUserDiv{
   background-color: #00acb0;
   /* outline: solid black 2px; */
-  box-shadow: 0 0 3pt 2pt black;
+  box-shadow: 0 0 1pt 1pt black;
   border-radius: 10px;
   padding: 10px;
   margin: auto;
@@ -294,9 +332,7 @@ margin-left: 20px;}
   text-align: center;
 }
 
-#optionsDiv{
-  margin-right: 40px;
-  margin-top: 0px;}
+
 
 #optionLi{
   width: 305px;
@@ -307,13 +343,30 @@ margin-left: 20px;}
   list-style-type: none;
   background-color: #efefef;
 }
-#cardOptions{
-  margin-top: 0;
-}
+
 #cardSearchInput{
   width: 300px;
   margin-bottom: 0 ;
 }
+
+#optionsDiv{
+  margin-top: 0px;
+  }
+
+#cardOptions{
+  width: 305px;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  align-content: center;
+  left: 13%;
+  padding-left: 0;
+
+}
+#optionLi{
+  margin-left: 0;
+}
 #optionLi:hover{
+  
   background-color: chartreuse;
 }
