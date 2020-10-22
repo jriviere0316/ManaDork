@@ -276,7 +276,7 @@ padding-left: 22px;
   display: inline-block;
   margin: 1%;
   position: relative;
-  left: 13%;
+  left: 6.5%;
   text-align: center;
 }
 
@@ -287,6 +287,8 @@ padding-left: 22px;
   border-radius: 10px;
   padding-left: 40px;
   padding-right: 40px;
+  margin-left: 60px;
+  margin-top: 10px;
   display: inline-block;
   
   /* margin: 1%; */
@@ -325,10 +327,11 @@ margin-right: -150px;
   width: 43%;
   position: relative;  /* display: inline-block; */
   float: right;
-  margin-right: 5.5%;
-  margin-top: 38px;
+  margin-right: 10%;
+  margin-top: 33px;
   height: 500px;
   overflow: auto;
+  margin-bottom: 40px;
 
 }
 #viewDeckEditDeckView{

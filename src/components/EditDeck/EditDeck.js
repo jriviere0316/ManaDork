@@ -281,33 +281,31 @@ class EditDeck extends Component {
                     <table >
                         <thead>
                             <tr>
-                                {/* <th>Hovercard</th> */}
                                 <th>Quantity</th>
                                 <th>Card Name</th>
                                 {/* <th>isCMDR?</th> */}
-                                <th>Feat?</th>
-                                <th>EDIT QTY</th>
+                                <th>Featured?</th>
+                                
+                                <th>Edit</th>
+                                {/* Type */}
                                 <th>DELETE</th>
                             </tr>
                         </thead>
                         
-                        <div id="optionsScrollDiv">
+                        {/* <div id="optionsScrollDiv"> */}
                             <tbody>
                                 {includedCards.map((card) =>  
                                 <tr key={card.id}>
-                                    {/* <td>hoverCard</td> */}
                                     <td id="qtyTd">x {card.quantity}</td>
                                     <td onMouseOver={()=>this.cardDisplay(card)} onMouseLeave={()=>this.removeDisplay(card)}>{card.name}</td>
                                     {/* <td>{card.is_cmdr}</td> */}
-                                    
                                     <td><input type="checkbox" id="myCheck" defaultValue={card.is_featured} defaultChecked={card.is_featured} onChange={()=>this.handleFeatured(card)} /> </td>
-
                                     <td><button id="incrementBtn" onClick={()=>this.qtyDown(card)}> - </button><button id="incrementBtn"  onClick={()=>this.qtyUp(card)}>+</button></td>
                                     <td><button onClick={()=>this.deleteCard(card)}>DELETE</button></td>  
                                 </tr>
                                 )}
                             </tbody>
-                        </div>
+                        {/* </div> */}
                     </table>
                 </div>
                 <br/>   
