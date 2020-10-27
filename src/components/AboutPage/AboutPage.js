@@ -8,7 +8,9 @@ import React from 'react';
 const AboutPage = () => (
   <div className="container">
     <div>
-      <p id="aboutPtag">This about page is for anyone to read!</p>
+      <p id="aboutPtag">This app was created with Javascript, Postgresql, CSS, Axios, React, Redux, and the Scryfall API</p>
+      <p id="aboutPtag">Thank you for using ManaDork!</p>
+
     </div>
   </div>
 );

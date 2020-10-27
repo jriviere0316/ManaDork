@@ -119,8 +119,8 @@ class EditDeck extends Component {
     }
  
 
-    updateDeck=()=>{
-        console.log('in updateDeck');
+    updateDeckAndNav=()=>{
+        console.log('in updateDeckAndNav');
         this.props.dispatch({
             type: 'UPDATE_DECK',
             payload: {
@@ -136,11 +136,30 @@ class EditDeck extends Component {
 
             }
         })
-        this.props.history.push('/user')
+        this.props.history.push('/viewdeck')
     }
 
-    saveAndNav=()=>{
+    viewDeck=()=>{
         this.props.history.push('/viewdeck')
+    }
+
+    updateDeck=()=>{
+        this.props.dispatch({
+            type: 'UPDATE_DECK',
+            payload: {
+                comments: this.props.reduxStore.selectedDeck.comments,
+                decklist: this.props.reduxStore.selectedDeck.decklist,
+                deckname: this.state.deckname,
+                description: this.state.description,
+                featured_card: this.props.reduxStore.selectedDeck.featuredCard,
+                ispublic: this.state.isPublic,
+                // upvotes: this.props.reduxStore.selectedDeck.upvotes,
+                userid: this.props.reduxStore.selectedDeck.userid,
+                id: this.props.reduxStore.selectedDeck.id,
+
+            }
+        })
+        alert(`${this.state.deckname} has been updated!`)
     }
     
 
@@ -272,7 +291,9 @@ class EditDeck extends Component {
                 <br/>
 
                 {/* <button onClick={this.saveAndNav}>Save</button> */}
+                <button onClick={this.updateDeckAndNav}>Save & View</button>
                 <button onClick={this.updateDeck}>Save</button>
+
                 </div>
                     
                 <br/> 
@@ -342,7 +363,7 @@ class EditDeck extends Component {
                         <button onClick={this.addToDeck}> Add To Deck → </button><br/>
                         {/* <label htmlFor="isCmdrinput">Is this your commander?</label><br/>
                         <input type="checkbox" id="isCmdrinput" value="Commander"></input><br/> */}
-                        <button onClick={this.saveAndNav}>View Deck</button>
+                        <button onClick={this.viewDeck}>View Deck</button>
                         {/* <button onClick={this.saveAndStay}>Save and Continue Editing</button><br/> */}
                     </form>
                 </div>

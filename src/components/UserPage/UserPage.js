@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-// const mtg = require('mtgsdk')
 
 class UserPage extends Component {
   
@@ -74,7 +73,8 @@ class UserPage extends Component {
 
   deleteDeck=(deck)=>{
     console.log('in delete deck with:', deck);
-    var r = window.confirm(`Are you sure you want to permanenently delete this deck?`)
+    var r = window.confirm(`Are you sure you want to permanenently delete this deck? `)
+    //https://cdn.cardsrealm.com/images/cartas/crop/m13-magic-2013/door-to-nothingness-203-min.jpeg?1578
     if (r === true){
         this.props.dispatch({
         type: 'DELETE_DECK',
@@ -99,7 +99,7 @@ class UserPage extends Component {
     console.log('friendsList:', friendsList);
     console.log('store', this.props.store);
     return (
-      <div>
+      <div id="userMainDiv">
         <img id='profilePic' height='130px' width='130px' src={this.state.profile.defaultPic}></img>
           <div id='profileInfo'>
             <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
@@ -118,13 +118,13 @@ class UserPage extends Component {
             
             <div id="userDeckScroll">
               {this.props.store.deck.map((deck) =>  
-                <div key={deck.id}>
+                <div id="deckOptions"key={deck.id}>
 
                   <h4 id="deckName" onClick={() => this.viewDeck(deck)}>{deck.deckname}</h4>
                   <h5 id="upvotes">Upvotes: {deck.upvotes}</h5>
                   <button onClick={() => this.editDeck(deck)}>EDIT</button>
                   <button onClick={() => this.deleteDeck(deck.id)}>DELETE</button>
-                  <hr/>
+                  <br/>
 
                 </div>  
               )}
@@ -132,26 +132,25 @@ class UserPage extends Component {
             
           </div>
 {/* ////////////// FRIENDS SCROLL BOX ////////////// */}
-          <div id="userDiv">
+          {/* <div id="userDiv">
           <h1>{this.props.store.user.username}'s Friends</h1>
           <br/>
             <button onClick={this.viewUsers}>View/Search Users</button>
             <hr/>
-            <div id="userDeckScroll">
+            <div id="friendsDeckScroll">
               {friendsList.map((friend) =>  
-                <div key={friend.id}>
+                <div id="friendOptions" key={friend.id}>
 
                   <h4 id="deckName" onClick={() => this.viewFriend(friend)}>{friend.username}</h4>
-                  {/* <h5 id="upvotes">Upvotes: {deck.upvotes}</h5> */}
-                  {/* <button onClick={() => this.editDeck(deck)}>EDIT</button>
-                  <button onClick={() => this.deleteDeck(deck.id)}>DELETE</button> */}
-                  <hr/>
+                  
 
                 </div>  
               )}
             </div>  
-          {/* <textarea></textarea> */}
-          </div>
+          </div> */}
+
+
+          
         </div>
         <br/>
 

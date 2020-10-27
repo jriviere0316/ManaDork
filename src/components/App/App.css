@@ -7,6 +7,9 @@ body,
 h1, h2, #aboutPtag, #howToPlayPTag{
   color: white;
 }
+#aboutPtag{
+  text-align: center;
+}
 #loginH2{
   color: black;
   margin-bottom: 10px;
@@ -63,12 +66,13 @@ Button
 -------------------------------------------------------------------------------- */
 
 .btn {
+  
   display: inline-block;
   padding: 10px 20px;
   border-color: #014041;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
+  background-color: #68b4b5;
   color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;
@@ -159,14 +163,25 @@ textarea{
   height: 200px;
 }
 
+#logoutbtn{
+  background-color: #014041;
+  background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
+
+}
+
 #userDiv{
+  position: relative;
   background-color: #00acb0;
+  background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
   /* outline: solid black 2px; */
   box-shadow: 0 0 1pt 1pt black;
-
   padding: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
   display: inline-block;
-  margin: 5%;
+  margin: 45px;
+  margin-left: 335px;
   text-align: center;
   border-radius: 10px;
 }
@@ -192,7 +207,14 @@ width: 10px
   background-color: white;
   border-radius: 2px;
   width: 400px;
-  height: 200px;
+  height:380px;
+  overflow: auto;
+}
+#friendsDeckScroll{
+  background-color: white;
+  border-radius: 2px;
+  width: 400px;
+  height:380px;
   overflow: auto;
 }
 
@@ -218,6 +240,8 @@ width: 10px
 
 #descriptionDiv{
   padding-top: 100px;
+  background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
+
   background-color: #00acb0;
   /* outline: solid black 2px; */
   box-shadow: 0 0 1pt 1pt black;
@@ -237,14 +261,13 @@ padding-left: 22px;
 #descriptionInput{
   width: 95%;
 }
-/* #deckName{
-  width: 40%;
+ #deckName{
+margin-bottom: 10px;
+margin-top: 10px;
 }
-#upvotes{
-  width: 40%;
-} */
 
 #editInfoTag{
+  color: white;
   text-align: left;
   padding-left: 50px;
   margin: 0;
@@ -252,6 +275,8 @@ padding-left: 22px;
 }
 #cardInputForm{
   box-shadow: 0 0 1pt 1pt black;
+  background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
+
   border-radius: 10px;
   width: 350px;
   background-color: #00acb0;
@@ -268,6 +293,8 @@ padding-left: 22px;
 
 #featuredCardDiv{
   background-color: #00acb0;
+  background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
+
   /* outline: solid black 2px; */
   box-shadow: 0 0 1pt 1pt black;
   border-radius: 10px;
@@ -282,6 +309,8 @@ padding-left: 22px;
 
 #viewDeckFeaturedCardDiv{
   background-color: #00acb0;
+  background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
+
   /* outline: solid black 2px; */
   box-shadow: 0 0 1pt 1pt black;
   border-radius: 10px;
@@ -374,6 +403,8 @@ display: inline-block;
 margin-left: 20px;}
 
 #editUserDiv{
+  background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
+
   background-color: #00acb0;
   /* outline: solid black 2px; */
   box-shadow: 0 0 1pt 1pt black;
@@ -405,9 +436,10 @@ margin-left: 20px;}
 #optionsDiv{
   margin-top: 0px;
   overflow: auto;
-  height: 300px;
-  width: 300px;
-  margin-left: 26px;
+  max-height: 200px;
+    
+  width: 308px;
+  margin-left: 21px;
   background-color: white;
   }
 
@@ -438,13 +470,42 @@ margin-left: 20px;}
 }
 
 #featuredViewDeckCard{
-  /* display: inline-block; */
-  /* padding-top: 20%; */
   margin: 0;
-  /* padding-left: 27%; */
-  right: 170px;
+  right: 200px;
   padding-top: 130px;
+  border-radius: 10px;
   position: fixed;
   float: right;
+}
+
+#deckOptions{
+  border-bottom: 1px solid black;
+  padding-bottom: 15px;
+  padding-top: 0px;
+}
+
+#friendOptions{
+  height: 120px;
+  border-bottom: 1px solid black;
+  padding-bottom: 15px;
+  padding-top: 0px;
+}
+
+
+#howToPlayVid{
+margin-left: 32.5%;
+}
+
+#howToLink{
+  color: chartreuse;
+  margin-left: 466px;
+}
+#howToLink:hover{
+  color: rgb(61, 255, 255);
+}
+
+#lifeTotals{
+  text-align: center;
+  color: white;
 }
 

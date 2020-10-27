@@ -1,21 +1,27 @@
 .nav-title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 50px;
+    font-weight: 1000;
+  
     display: inline-block;
     color: #f2f2f2;
     padding-left: 10px;
+    padding-bottom: 10px;
 }
 
 .nav {
+  
   margin: 0 0 30px;
   background-color: #00acb0;
+  background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
   overflow: hidden;
+  margin-bottom: 15px;
 }
 
 .nav-link {
   float: left;
+  
   color: #f2f2f2;
-  background-color: #00acb0;
+  /* background-color: #00acb0; */
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
