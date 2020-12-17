@@ -7,6 +7,7 @@ import deckSaga from './deck.saga';
 import selectedDeckSaga from './selectedDeck.saga';
 import listSaga from './listitem.saga';
 import friendsSaga from './friends.saga';
+// import postSaga from './post.saga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -24,5 +25,6 @@ export default function* rootSaga() {
     selectedDeckSaga(),
     listSaga(),
     friendsSaga(),
+    // postSaga()
   ]);
 }

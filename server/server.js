@@ -15,6 +15,7 @@ const cardRouter = require('./routes/card.router');
 // const queryRouter = require('./routes/card.router');
 const listRouter = require('./routes/list.router');
 const friendsRouter = require('./routes/friends.router');
+const postRouter = require('./routes/post.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -34,6 +35,7 @@ app.use('/api/card', cardRouter);
 // app.use('./api/query', queryRouter);
 app.use('/api/list', listRouter);
 app.use('/api/friends', friendsRouter);
+app.use('/api/post', postRouter);
 
 // Serve static files
 app.use(express.static('build'));
@@ -45,3 +47,6 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
+
+
+module.exports = app;
