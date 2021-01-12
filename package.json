@@ -25,15 +25,16 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.2",
-    "scryfall-sdk": "^2.0.0"
+    "scryfall-sdk": "^2.0.0",
+    "supertest": "^5.0.0"
   },
   "scripts": {
     "start": "node server/server.js",
     "client": "react-scripts start",
     "server": "nodemon --watch server server/server.js",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test": "jest"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

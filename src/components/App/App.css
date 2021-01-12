@@ -181,7 +181,7 @@ textarea{
   padding-bottom: 40px;
   display: inline-block;
   margin: 45px;
-  margin-left: 335px;
+  /* margin-left: 335px; */
   text-align: center;
   border-radius: 10px;
 }

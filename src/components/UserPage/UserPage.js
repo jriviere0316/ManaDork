@@ -132,7 +132,7 @@ class UserPage extends Component {
             
           </div>
 {/* ////////////// FRIENDS SCROLL BOX ////////////// */}
-          {/* <div id="userDiv">
+          <div id="userDiv">
           <h1>{this.props.store.user.username}'s Friends</h1>
           <br/>
             <button onClick={this.viewUsers}>View/Search Users</button>
@@ -147,7 +147,7 @@ class UserPage extends Component {
                 </div>  
               )}
             </div>  
-          </div> */}
+          </div>
 
 
           
