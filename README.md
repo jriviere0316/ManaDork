@@ -1,8 +1,11 @@
 # ManaDork
 
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+This is ManaDork!  A web app with the purpose of aiding the creation of Magic: The Gathering deck lists.
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in package.json).
+
+I recommend following these instructions carefully. It's a lot, and will take a moment to set up, but your life will be much easier this way in the long run.
+
 
 ## Use the Template for This Repository (Don't Clone) 
 
@@ -19,17 +22,47 @@ Before you get started, make sure you have the following software installed on y
 
 ## Create database and table
 
-Create a new database called `prime_app` and create a `user` table:
+Create a new database called `ManaDork` and create the following tables:
 
 ```SQL
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
+    "password" VARCHAR (1000) NOT NULL,
+    "decks" VARCHAR (2000),
+    "img_url" VARCHAR (256),
+    "clearance" VARCHAR (15),
+    "friends" VARCHAR (5000)
+    
+);
+
+CREATE TABLE "card_item" (
+    "id" SERIAL PRIMARY KEY,
+    "name" VARCHAR (200) NOT NULL,
+    "quantity" INT,
+    "is_cmdr" BOOLEAN,
+    "is_featured" BOOLEAN,
+    "api_data" VARCHAR (50000),
+    "deckid" INT REFERENCES "deck",
+    "comboid" VARCHAR (200)
+
+);
+
+CREATE TABLE "deck" (
+    "id" SERIAL PRIMARY KEY,
+    "userid" INT REFERENCES "user",
+    "deckname" VARCHAR (80) NOT NULL,
+    "ispublic" BOOLEAN,
+    "description" VARCHAR (2000),
+    "decklist" VARCHAR (5000),
+    "featured_card" VARCHAR (256),
+    "upvotes" VARCHAR (15),
+    "comments" VARCHAR (5000)
+    
 );
 ```
 
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+If you would like to name your database something else, you will need to change `ManaDork` to the name of your new database name in `server/modules/pool.js`
 
 ## Development Setup Instructions
 
@@ -116,6 +149,3 @@ This code is also heavily commented. We recommend reading through the comments, 
 1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
 1. In the deploy section, select manual deploy
 
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
