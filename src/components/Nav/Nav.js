@@ -37,6 +37,9 @@ const Nav = (props) => {
             {/* <Link className="nav-link" to="/edituser">
               Edit User
             </Link> */}
+            <Link className="nav-link" to="/userHub">
+            userHub
+            </Link>
             <Link className="nav-link" to="/info">
               How To Play
             </Link>
