@@ -4,9 +4,9 @@
   "private": true,
   "proxy": "http://localhost:5000",
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/lab": "^4.0.0-alpha.56",
-    "axios": "^0.19.0",
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "cookie-session": "^2.0.0-beta.3",
     "cross-fetch": "^3.0.6",
@@ -15,7 +15,7 @@
     "mtgsdk": "^0.4.3",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "pg": "^8.3.0",
+    "pg": "^8.5.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -25,7 +25,7 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.2",
-    "scryfall-sdk": "^2.0.0",
+    "scryfall-sdk": "^2.1.1",
     "supertest": "^5.0.0"
   },
   "scripts": {
@@ -37,7 +37,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.7"
   },
   "browserslist": [
     ">0.2%",
