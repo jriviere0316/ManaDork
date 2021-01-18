@@ -23,6 +23,7 @@ import EditDeck from '../EditDeck/EditDeck';
 import ViewDeck from '../ViewDeck/ViewDeck';
 import EditUser from '../EditUser/EditUser';
 import Asyncinput from '../AsyncInput/AsyncInput';
+import UserHub from '../UserHub/UserHub';
 // import mapStateToProps from 
 import './App.css';
 
@@ -68,6 +69,12 @@ class App extends Component {
               exact
               path="/user"
               component={UserPage}
+            />
+            <ProtectedRoute
+              // logged in shows UserPage else shows LoginPage
+              exact
+              path="/userhub"
+              component={UserHub}
             />
             <ProtectedRoute
               // logged in shows UserPage else shows LoginPage

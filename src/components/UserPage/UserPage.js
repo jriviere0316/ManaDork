@@ -131,7 +131,7 @@ class UserPage extends Component {
             </div>          
             
           </div>
-{/* ////////////// FRIENDS SCROLL BOX ////////////// */}
+            {/* ////////////// FRIENDS SCROLL BOX ////////////// */}
           <div id="userDiv">
           <h1>{this.props.store.user.username}'s Friends</h1>
           <br/>
