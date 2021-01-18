@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/',  (req, res) => {
     console.log( 'in FRIENDS GET with req.body:', req)
-    const query = `SELECT * FROM "user" ORDER BY username ASC; ;`
+    const query = `SELECT id, username FROM "user" ORDER BY username ASC;`
     
     
     pool.query(query)

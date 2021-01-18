@@ -15,7 +15,7 @@ function UserHub(props) {
     //"STATE" STUFF
   useEffect( () => {
     console.log('in useEffect');
-    //dispatch({type: 'GET_TASKS'}) 
+    props.dispatch({ type: 'GET_FRIENDS' });
     //checkTaskMap(); 
     },[state])
 
@@ -50,12 +50,12 @@ function UserHub(props) {
     const viewUsers = () => {
         console.log('in viewUsers');
     }
-    const viewFriend = () => {
-        console.log('in viewFriend');
+    const viewFriend = (friend) => {
+        console.log('in viewFriend with:', friend);
     }
 
     const friendsList = props.store.friendsReducer.filter(user => user.id !== props.store.user.id);
-
+    console.log('friendsList is', friendsList);
 
 
   return (
@@ -90,6 +90,7 @@ function UserHub(props) {
 
 
           {/* ////////////// FRIENDS SCROLL BOX ////////////// */}
+          
           <div id="userDiv">
           <h1>{props.store.user.username}'s Friends</h1>
           <br/>
@@ -100,17 +101,12 @@ function UserHub(props) {
                 <div id="friendOptions" key={friend.id}>
 
                   <h4 id="deckName" onClick={() => viewFriend(friend)}>{friend.username}</h4>
-                  
 
                 </div>  
               )}
             </div>  
           </div>
-
-
-          
         </div>
-
     </div>
   );
 }
