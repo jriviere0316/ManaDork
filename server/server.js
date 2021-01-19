@@ -16,6 +16,7 @@ const cardRouter = require('./routes/card.router');
 const listRouter = require('./routes/list.router');
 const friendsRouter = require('./routes/friends.router');
 const postRouter = require('./routes/post.router');
+const selectedRouter = require('./routes/selecteddeck.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -36,6 +37,7 @@ app.use('/api/card', cardRouter);
 app.use('/api/list', listRouter);
 app.use('/api/friends', friendsRouter);
 app.use('/api/post', postRouter);
+app.use('/api/selected', selectedRouter)
 
 // Serve static files
 app.use(express.static('build'));

@@ -85,7 +85,7 @@ class App extends Component {
             <ProtectedRoute
               // logged in shows UserPage else shows LoginPage
               exact
-              path="/editdeck"
+              path="/editdeck/:id"
               component={EditDeck}
             />
              <ProtectedRoute

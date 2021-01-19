@@ -1,6 +1,6 @@
 const selectedDeckReducer = (state = [], action) => {
     switch (action.type) {
-      case 'SET_SELECTEDDECK':
+      case 'SET_SELECTED_DECK':
         return action.payload;
       case 'UNSET_DECK':
         return {};
