@@ -21,6 +21,11 @@ class ViewDeck extends Component {
             payload: this.props.reduxStore.selectedDeck.id
         });
         
+        //console.log('dispatching selected deck');
+        this.props.dispatch({
+            type: 'GET_SELECTED_DECK',
+            payload: this.props.history.location.pathname.split("/")[2]
+        })
     }
 
     editDeck=(deck)=>{
@@ -29,7 +34,9 @@ class ViewDeck extends Component {
         //   type: 'SET_SELECTEDDECK',
         //   payload: deck
         // })
-        this.props.history.push('/editdeck')
+        const id = this.props.history.location.pathname.split("/")[2]
+
+        this.props.history.push(`/editdeck/${id}`)
     }
 
     cardDisplay=(card)=>{

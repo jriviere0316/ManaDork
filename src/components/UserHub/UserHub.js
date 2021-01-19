@@ -31,10 +31,12 @@ function UserHub(props) {
     }
     const viewDeck = (deck) => {
         console.log('in viewDeck with:', deck);
-        props.history.push(`editdeck/${deck}`)
+        props.history.push(`viewdeck/${deck}`)
     }
-    const editDeck = () => {
-        console.log('in editDeck');
+    const editDeck = (deck) => {
+        console.log('in editDeck with:', deck);
+        props.history.push(`editdeck/${deck}`)
+
     }
     const deleteDeck = (deck) => {
         console.log('in delete deck with:', deck);
@@ -78,7 +80,7 @@ function UserHub(props) {
 
                     <h4 id="deckName" onClick={() => viewDeck(deck.id)}>{deck.deckname}</h4>
                     <h5 id="upvotes">Upvotes: {deck.upvotes}</h5>
-                    <button onClick={() => editDeck(deck)}>EDIT</button>
+                    <button onClick={() => editDeck(deck.id)}>EDIT</button>
                     <button onClick={() => deleteDeck(deck.id)}>DELETE</button>
                     
                     <br/>

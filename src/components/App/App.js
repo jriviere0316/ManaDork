@@ -97,7 +97,7 @@ class App extends Component {
             <ProtectedRoute
               // logged in shows UserPage else shows ViewDeck
               exact
-              path="/viewdeck"
+              path="/viewdeck/:id"
               component={ViewDeck}
             />
 
