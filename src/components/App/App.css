@@ -471,7 +471,8 @@ margin-left: 20px;}
 
 #featuredViewDeckCard{
   margin: 0;
-  right: 200px;
+  right: 800px;
+  position: static;
   padding-top: 130px;
   border-radius: 10px;
   position: fixed;

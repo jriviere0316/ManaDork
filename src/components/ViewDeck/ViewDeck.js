@@ -115,9 +115,11 @@ class ViewDeck extends Component {
                 
                 
                 <div id="viewDeckEditDeckView" > 
-                <div>
-                <img  id="featuredViewDeckCard" src={this.state.hoverCard} width="200px" height="280"/> 
-                </div>
+                
+                    <div>
+                        <img  id="featuredViewDeckCard" src={this.state.hoverCard} width="200px" height="280"/> 
+                    </div>
+
                 <br/>  
                     <table >
                         <thead>

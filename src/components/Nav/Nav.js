@@ -43,6 +43,9 @@ const Nav = (props) => {
             <Link className="nav-link" to="/info">
               How To Play
             </Link>
+            <Link className="nav-link" to="/lifetotal">
+              Life Counter
+            </Link>
             {/* <Link className="nav-link" to="/editdeck">
               Edit Deck
             </Link>

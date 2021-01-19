@@ -1,0 +1,42 @@
+.outlined{
+    border: solid black 2px;
+    width: 320px;
+    height: 645px;
+    box-shadow: 0 0 0pt 2pt black; 
+    border-radius: 10px;
+    display: block;
+    margin: auto;
+    background-color: white;
+    /* background: linear-gradient(#000, #000) no-repeat center/2px 70%; */
+
+}
+
+.leftPlayerDiv{
+    padding-top: 10px;
+    transform: rotate(90deg);
+    box-shadow: 0 0 0pt 2pt black; 
+    height: 150px;
+    width: 150px;
+    margin: 0px;
+    background: white;
+}
+
+.rightPlayerDiv{
+    padding-top: 10px;
+    transform: rotate(-90deg);
+    box-shadow: 0 0 0pt 2pt black; 
+    height: 150px;
+    width: 150px;
+    margin: 0px;
+    background: white;
+}
+
+.lifeBtn{
+    height: 42px; 
+    /* background: chartreuse; */
+    /* border: solid black 2px; */
+}
+
+.lifeTotal{
+    font-size: x-large;
+}

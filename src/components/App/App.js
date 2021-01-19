@@ -24,6 +24,7 @@ import ViewDeck from '../ViewDeck/ViewDeck';
 import EditUser from '../EditUser/EditUser';
 import Asyncinput from '../AsyncInput/AsyncInput';
 import UserHub from '../UserHub/UserHub';
+import LifeTotal from '../LifeTotal/LifeTotal';
 // import mapStateToProps from 
 import './App.css';
 
@@ -53,6 +54,12 @@ class App extends Component {
               component={AboutPage}
             />
             {/* Visiting localhost:3000/about will show the about page. */}
+            <Route
+              // shows AboutPage at all times (logged in or not)
+              exact
+              path="/lifetotal"
+              component={LifeTotal}
+            />
             <Route
               // shows AboutPage at all times (logged in or not)
               exact
