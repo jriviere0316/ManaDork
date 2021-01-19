@@ -39,7 +39,7 @@ class EditUser extends Component {
 
 
     navHome=()=>{
-        this.props.history.push('/user');
+        this.props.history.push('/userHub');
 
     }
     
