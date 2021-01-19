@@ -40,8 +40,8 @@ class ViewDeck extends Component {
     }
 
     cardDisplay=(card)=>{
-        console.log('hovering on', card.name, card, card.api_data);
-       var parsedData= JSON.parse(card.api_data)
+        //console.log('hovering on', card.name, card, card.api_data);
+       var parsedData = JSON.parse(card.api_data)
     //    console.log(parsedData.image_uris.normal);
 
 
@@ -102,7 +102,7 @@ class ViewDeck extends Component {
     render(){
         // console.log('recentCard state:',this.state.recentCard);
         const includedCards = this.props.reduxStore.cardList.filter(card => card.deckid === this.props.reduxStore.selectedDeck.id);
-        console.log('includedCards:', includedCards);
+        //console.log('includedCards:', includedCards);
         const featuredCard = includedCards.filter(featured => featured.is_featured === true)
         const mappedFeaturedCard = featuredCard.map(fCard => JSON.parse(fCard.api_data))
         const featuredUri = mappedFeaturedCard.map(fUri => fUri.image_uris.normal)

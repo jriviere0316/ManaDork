@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import Swal from 'sweetalert2'
 
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
@@ -40,16 +41,50 @@ function UserHub(props) {
     }
     const deleteDeck = (deck) => {
         console.log('in delete deck with:', deck);
-        var r = window.confirm(`Are you sure you want to permanenently delete this deck? `)
+        //var r = window.confirm(`Are you sure you want to permanenently delete this deck? `)
+        //Swal.fire(`Are you sure you want to permanenently delete this deck? `)
+        Swal.fire({
+            title: 'Are you sure?',
+            imageUrl: `https://cdn.cardsrealm.com/images/cartas/crop/m13-magic-2013/door-to-nothingness-203-min.jpeg?1578`,
+            text: 'You will not be able to recover this deck after confirming!',
+            //icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+          }).then((result) => {
+            if (result.value) {
+                
+                props.dispatch({
+                    type: 'DELETE_DECK',
+                    payload: deck
+                })
+
+                Swal.fire(
+                'Deleted!',
+                'Your deck has been deleted.',
+                'success'
+              )
+
+
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+              Swal.fire(
+                'Cancelled',
+                'Your deck is safe! :)',
+                'error'
+              )
+            }
+          })
+        
         //https://cdn.cardsrealm.com/images/cartas/crop/m13-magic-2013/door-to-nothingness-203-min.jpeg?1578
-        if (r === true){
-            props.dispatch({
-            type: 'DELETE_DECK',
-            payload: deck
-            })
-          } else {
-          return;
-        }    }
+        // if (r === true){
+        //     props.dispatch({
+        //     type: 'DELETE_DECK',
+        //     payload: deck
+        //     })
+        //   } else {
+        //   return;
+        // }    
+    }
     const viewUsers = () => {
         console.log('in viewUsers');
     }
