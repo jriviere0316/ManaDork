@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 // import {connect} from 'react-redux';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import Swal from 'sweetalert2'
+
 // const mtg = require('mtgsdk')
 // var scryfallSdk = require("scryfall-sdk")
 
@@ -30,6 +32,13 @@ class EditDeck extends Component {
         this.props.dispatch({
             type: 'GET_SELECTED_DECK',
             payload: this.props.history.location.pathname.split("/")[2]
+        })
+
+        this.setState({
+            ...this.state,
+            deckname: this.props.reduxStore.selectedDeck.deckname,
+            description: this.props.reduxStore.selectedDeck.description,
+            isPublic: this.props.reduxStore.selectedDeck.ispublic
         })
     }
     handleFeatured=(card)=>{
@@ -142,7 +151,7 @@ class EditDeck extends Component {
 
             }
         })
-        this.props.history.push('/viewdeck')
+        this.props.history.push(`/viewdeck/${this.props.reduxStore.selectedDeck.id}`)
     }
 
     viewDeck=()=>{
@@ -166,7 +175,8 @@ class EditDeck extends Component {
 
             }
         })
-        alert(`${this.state.deckname} has been updated!`)
+        //alert(`${this.state.deckname} has been updated!`)
+        Swal.fire(`${this.state.deckname} has been updated!`)
     }
     
 
