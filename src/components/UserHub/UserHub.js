@@ -27,9 +27,6 @@ function UserHub(props) {
 
 
     //FUNCTIONS
-    const createDeck = () => {
-        console.log('in createDeck');
-    }
     const viewDeck = (deck) => {
         console.log('in viewDeck with:', deck);
         props.history.push(`viewdeck/${deck}`)
@@ -38,6 +35,11 @@ function UserHub(props) {
         console.log('in editDeck with:', deck);
         props.history.push(`editdeck/${deck}`)
 
+    }
+    const editProfile = (deck) => {
+        // console.log('in editDeck with:', deck);
+        // props.history.push(`editdeck/${deck}`)
+        props.history.push('/edituser')
     }
     const deleteDeck = (deck) => {
         console.log('in delete deck with:', deck);
@@ -65,25 +67,54 @@ function UserHub(props) {
                 'success'
               )
 
-
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-              Swal.fire(
-                'Cancelled',
-                'Your deck is safe! :)',
-                'error'
-              )
+              Swal.fire({
+                  title: 'Your deck is safe! :)',
+                  imageUrl: `https://media.wizards.com/2017/images/daily/c4rd4r7_HZKwaCZ0af.jpg`,
+                })
             }
-          })
+        })    
+    }
+    const createDeck = () => {
+        console.log('create deck clicked');
+        var txt;
+        var deck = prompt("Please enter a deck name:", "My Awesome Deck");
         
-        //https://cdn.cardsrealm.com/images/cartas/crop/m13-magic-2013/door-to-nothingness-203-min.jpeg?1578
-        // if (r === true){
-        //     props.dispatch({
-        //     type: 'DELETE_DECK',
-        //     payload: deck
-        //     })
-        //   } else {
-        //   return;
-        // }    
+
+        
+        if (deck === null || deck === "") {
+          txt = "Canceled!";
+          //alert(txt)
+          Swal.fire({
+            title: `${txt}`,
+            imageUrl: `https://media.magic.wizards.com/image_legacy_migration/images/magic/daily/arcana/1094_cancel_ZEN.jpg`,
+          })
+          return
+        } 
+        else {
+          txt = deck;
+          //   alert(txt)
+          console.log(txt);
+          props.dispatch({
+            type: 'CREATE_DECK',
+            payload: {
+              userid: props.store.user.id,
+              deckname: txt,
+              ispublic: false,
+              description: "",
+              decklist: '',
+              featured_card: '',
+              upvotes: 0,
+              comments: ''
+            },
+          });
+          Swal.fire({
+            title: `New deck created: ${txt}`,
+            imageUrl: `https://www.greatnessatanycost.com/wp-content/uploads/2019/05/Karn-the-Great-Creator-War-of-the-Spark-Arts-cut.jpg`,
+        })
+        }
+        // this.props.history.push('/editdeck')   //NEED TO REFERENCE NEWLY CREATED DECK 
+    
     }
     const viewUsers = () => {
         console.log('in viewUsers');
@@ -98,10 +129,23 @@ function UserHub(props) {
 
   return (
     <div>
-      <h2>{heading}</h2>
-      <h2>Hello {props.store.user.username} </h2>
-      
+      {/* <h2>{heading}</h2> */}
+      {/* <h2>Hello {props.store.user.username} </h2> */}
+      <img id='profilePic' height='130px' width='130px' src={props.store.user.img_url}></img>
+            <div id='profileInfo'>
+                <h1 id="welcome">Welcome, {props.store.user.username}!</h1>
+                <button onClick={editProfile}>Edit Profile</button>
+            </div>
+            {/* <p>Your ID is: {props.store.user.id}</p> */}
+            <hr/>  
         <div id="mainDiv">
+            
+                      
+            
+            
+            
+            
+            
             <div id="userDiv">
                 <h1>{props.store.user.username}'s Decks</h1>
                 <br/>

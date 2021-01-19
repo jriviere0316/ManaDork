@@ -166,6 +166,8 @@ class EditDeck extends Component {
                 comments: this.props.reduxStore.selectedDeck.comments,
                 decklist: this.props.reduxStore.selectedDeck.decklist,
                 deckname: this.state.deckname,
+                //deckname: this.props.reduxStore.selectedDeck.deckname, //OR THIS???
+
                 description: this.state.description,
                 featured_card: this.props.reduxStore.selectedDeck.featuredCard,
                 ispublic: this.state.isPublic,
