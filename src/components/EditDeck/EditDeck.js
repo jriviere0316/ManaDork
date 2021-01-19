@@ -25,6 +25,12 @@ class EditDeck extends Component {
             type: 'GET_LIST', 
             payload: this.props.reduxStore.selectedDeck.id
         });
+
+        console.log('dispatching selected deck');
+        this.props.dispatch({
+            type: 'GET_SELECTED_DECK',
+            payload: this.props.history.location.pathname.split("/")[2]
+        })
     }
     handleFeatured=(card)=>{
         console.log('in handle featured', card.id);

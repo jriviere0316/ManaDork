@@ -29,8 +29,9 @@ function UserHub(props) {
     const createDeck = () => {
         console.log('in createDeck');
     }
-    const viewDeck = () => {
-        console.log('in viewDeck');
+    const viewDeck = (deck) => {
+        console.log('in viewDeck with:', deck);
+        props.history.push(`editdeck/${deck}`)
     }
     const editDeck = () => {
         console.log('in editDeck');
@@ -75,7 +76,7 @@ function UserHub(props) {
                 {props.store.deck.map((deck) =>  
                     <div id="deckOptions"key={deck.id}>
 
-                    <h4 id="deckName" onClick={() => viewDeck(deck)}>{deck.deckname}</h4>
+                    <h4 id="deckName" onClick={() => viewDeck(deck.id)}>{deck.deckname}</h4>
                     <h5 id="upvotes">Upvotes: {deck.upvotes}</h5>
                     <button onClick={() => editDeck(deck)}>EDIT</button>
                     <button onClick={() => deleteDeck(deck.id)}>DELETE</button>

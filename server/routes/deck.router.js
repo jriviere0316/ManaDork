@@ -26,15 +26,11 @@ router.post('/', (req, res, next) => {//LEFT OFF HERE*********** req.body.userid
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('req.user:', req.user);
     console.log( 'in shelf GET')
-
     // let queryText, queryParams;
     // if (req.user.clearance === 1){
-        
     // }
     const query = `SELECT * FROM deck WHERE "userid" = $1;`
     const queryParams = [req.user.id]
-    
-    
     pool.query(query, queryParams)
     .then(results => {
         res.send(results.rows);
@@ -81,5 +77,8 @@ router.put('/:id', (req, res) => {
       console.log('ERROR:', error);
     })
 });
+
+
+
 
 module.exports = router;
