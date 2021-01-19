@@ -77,11 +77,19 @@ function UserHub(props) {
     }
     const createDeck = () => {
         console.log('create deck clicked');
+        
+        // const {value: deckname} = Swal.fire({
+        //     title: 'Enter new deck name',
+        //     input: 'text',
+        //     inputLabel: 'Your new deck name:',
+        //     //inputValue: inputValue,
+        //     showCancelButton: true,
+        // })
+
+
+
         var txt;
         var deck = prompt("Please enter a deck name:", "My Awesome Deck");
-        
-
-        
         if (deck === null || deck === "") {
           txt = "Canceled!";
           //alert(txt)
@@ -113,7 +121,7 @@ function UserHub(props) {
             imageUrl: `https://www.greatnessatanycost.com/wp-content/uploads/2019/05/Karn-the-Great-Creator-War-of-the-Spark-Arts-cut.jpg`,
         })
         }
-        // this.props.history.push('/editdeck')   //NEED TO REFERENCE NEWLY CREATED DECK 
+        // // this.props.history.push('/editdeck')   //NEED TO REFERENCE NEWLY CREATED DECK 
     
     }
     const viewUsers = () => {
