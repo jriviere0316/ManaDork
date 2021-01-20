@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 // import {connect} from 'react-redux';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { PieChart } from 'react-minimal-pie-chart';
 
 
 
@@ -10,13 +11,14 @@ class ViewDeck extends Component {
 
     state = {
         hoverCard: 'https://i.stack.imgur.com/Vkq2a.png', 
-        updatedQty: ''
+        updatedQty: '',
+        deckQty: ''
     }
 
     componentDidMount() {
         // this.props.dispatch({ type: 'FETCH_USER' });
         // this.props.dispatch({ type: 'GET_DECK' });
-        this.props.dispatch({ 
+        this.props.dispatch({
             type: 'GET_LIST', 
             payload: this.props.reduxStore.selectedDeck.id
         });
@@ -26,6 +28,8 @@ class ViewDeck extends Component {
             type: 'GET_SELECTED_DECK',
             payload: this.props.history.location.pathname.split("/")[2]
         })
+
+        this.countQty();
     }
 
     editDeck=(deck)=>{
@@ -99,18 +103,92 @@ class ViewDeck extends Component {
     //     d.style.top = y_pos+'px';
     //   }
 
+
+    countQty=(cards)=>{
+        //const includedCards = this.props.reduxStore.cardList.filter(card => card.deckid === this.props.reduxStore.selectedDeck.id);
+        console.log('countQTY start', cards);
+        if(cards){
+            var qty = 0
+
+            cards.forEach(card => {
+
+                var qtyToAdd = card.quantity
+                console.log('qtyToAdd', qtyToAdd);
+                
+                let totalqty = qty + qtyToAdd
+                qty = totalqty
+
+                var totalCards = qty
+                //console.log('totalCards', totalCards);
+
+            });
+            console.log('total:',qty);
+            if(this.state.deckQty !== qty){
+                this.setState({
+                    deckQty: qty
+                })
+            }
+            // this.setState({
+			// 	deckQty: qty,
+			// });
+        }
+        // var i;
+        // var deckQty = 0
+        
+        // for (i = 0; i < cards; i++) {
+        //   console.log('cards', cards);
+        //     deckQty += cards.quantity[i];
+          
+        // } 
+        //console.log('deckQty', deckQty);       
+        //console.log('included countQty', includedCards);
+    }
+
     render(){
         // console.log('recentCard state:',this.state.recentCard);
         const includedCards = this.props.reduxStore.cardList.filter(card => card.deckid === this.props.reduxStore.selectedDeck.id);
-        //console.log('includedCards:', includedCards);
+        console.log('includedCards:', includedCards);
         const featuredCard = includedCards.filter(featured => featured.is_featured === true)
-        const mappedFeaturedCard = featuredCard.map(fCard => JSON.parse(fCard.api_data))
-        const featuredUri = mappedFeaturedCard.map(fUri => fUri.image_uris.normal)
+        const parsedFeaturedCard = featuredCard.map(fCard => JSON.parse(fCard.api_data))
+        console.log('parsedFeaturedCard', parsedFeaturedCard);
+        const featuredUri = parsedFeaturedCard.map(fUri => fUri.image_uris.normal)
+        
+        console.log('state is', this.state);
+
+        if (includedCards.length >= 1){
+           this.countQty(includedCards)
+        } 
+        
+        
+        //const cardSum = includedCards.quantity.reduce(this.countQty)
+        //console.log('cardSum',cardSum);
+
+        //const cardsInDeck = includedCards.quantity.reduce(countQty)
+        // var i;
+        // for (i = 0; includedCards.length; i++ ){
+        //     console.log('in sum of cards loop');
+        // }
+
+        //console.log('sumOfCards number is', sumOfCards);
         return (
                 
             <div >
 
-<h1 id="editDeckHeader">Viewing {this.props.reduxStore.selectedDeck.deckname} from {this.props.reduxStore.user.username} </h1>
+
+
+                <div>
+                    <h1>Total Cards: {this.state.deckQty}</h1>
+                    <h1>Devotion</h1>
+                    <PieChart viewBoxSize='[100,100]' radius='50'
+                    data={[
+                        { title: 'One', value: 10, color: 'Blue' },
+                        { title: 'Two', value: 15, color: 'White' },
+                        { title: 'Three', value: 20, color: 'Black' },
+                    ]}
+                />;
+                </div>
+
+                <h1 id="editDeckHeader">Viewing {this.props.reduxStore.selectedDeck.deckname} from {this.props.reduxStore.user.username} </h1>
             
                 
                 
@@ -120,7 +198,7 @@ class ViewDeck extends Component {
                         <img  id="featuredViewDeckCard" src={this.state.hoverCard} width="200px" height="280"/> 
                     </div>
 
-                <br/>  
+                    <br/>  
                     <table >
                         <thead>
                             <tr>
@@ -191,11 +269,11 @@ class ViewDeck extends Component {
                     <br/>
                 </div>
             </div>);
+     }
     }
-}
 
-const mapStateToProps = (reduxStore) => ({
-reduxStore
-})
+    const mapStateToProps = (reduxStore) => ({
+    reduxStore
+    })
 
 export default connect(mapStateToProps)(ViewDeck);
