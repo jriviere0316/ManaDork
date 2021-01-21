@@ -13,7 +13,7 @@ class ViewDeck extends Component {
         hoverCard: 'https://i.stack.imgur.com/Vkq2a.png', 
         updatedQty: '',
         deckQty: '',
-        parsedCards: []
+        parsedCards: ['']
     }
 
     componentDidMount() {
@@ -114,7 +114,7 @@ class ViewDeck extends Component {
             cards.forEach(card => {
 
                 var qtyToAdd = card.quantity
-                console.log('qtyToAdd', qtyToAdd);
+                //console.log('qtyToAdd', qtyToAdd);
                 
                 let totalqty = qty + qtyToAdd
                 qty = totalqty
@@ -151,17 +151,18 @@ class ViewDeck extends Component {
             var allParsedCards = []
             cards.forEach(card => {
                var parsedDevotion = JSON.parse(card.api_data)
-               console.log(parsedDevotion);
-
+               //console.log(parsedDevotion);
+            
                allParsedCards.push(parsedDevotion)
-               console.log('allParsedCards', allParsedCards);
+               //console.log('allParsedCards', allParsedCards);
 
                if(this.state.parsedCards.length >= 1){
-                this.setState({
-                    parsedCards: allParsedCards
+                console.log('*****',this.state);
+
+                // this.setState({
+                //     parsedCards: allParsedCards
                     
-                })
-                console.log(this.state);
+                // })
             }
             });
         }
