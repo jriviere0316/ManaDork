@@ -12,7 +12,8 @@ class ViewDeck extends Component {
     state = {
         hoverCard: 'https://i.stack.imgur.com/Vkq2a.png', 
         updatedQty: '',
-        deckQty: ''
+        deckQty: '',
+        parsedCards: []
     }
 
     componentDidMount() {
@@ -144,6 +145,28 @@ class ViewDeck extends Component {
         //console.log('included countQty', includedCards);
     }
 
+    parseCards=(cards)=>{
+        console.log('in parseCards with', cards);
+        if(cards){
+            var allParsedCards = []
+            cards.forEach(card => {
+               var parsedDevotion = JSON.parse(card.api_data)
+               console.log(parsedDevotion);
+
+               allParsedCards.push(parsedDevotion)
+               console.log('allParsedCards', allParsedCards);
+
+               if(this.state.parsedCards.length >= 1){
+                this.setState({
+                    parsedCards: allParsedCards
+                    
+                })
+                console.log(this.state);
+            }
+            });
+        }
+    }
+
     render(){
         // console.log('recentCard state:',this.state.recentCard);
         const includedCards = this.props.reduxStore.cardList.filter(card => card.deckid === this.props.reduxStore.selectedDeck.id);
@@ -157,6 +180,7 @@ class ViewDeck extends Component {
 
         if (includedCards.length >= 1){
            this.countQty(includedCards)
+           this.parseCards(includedCards)
         } 
         
         
@@ -267,11 +291,13 @@ class ViewDeck extends Component {
                     <h1>Devotion</h1>
                     <PieChart viewBoxSize='[100,100]' radius='50'
                     data={[
-                        { title: 'One', value: 20, color: 'Blue' },
-                        { title: 'Two', value: 20, color: 'White' },
-                        { title: 'Three', value: 20, color: 'Black' },
-                        { title: 'Four', value: 20, color: 'Red' },
-                        { title: 'Five', value: 20, color: 'Green' },
+                        { title: 'One', value: 16.67, color: 'Blue' },
+                        { title: 'Two', value: 16.67, color: 'White' },
+                        { title: 'Three', value: 16.67, color: 'Black' },
+                        { title: 'Four', value: 16.67, color: 'Red' },
+                        { title: 'Five', value: 16.67, color: 'Green' },
+                        { title: 'Six', value: 16.67, color: 'Gray' },
+
 
 
                     ]}
