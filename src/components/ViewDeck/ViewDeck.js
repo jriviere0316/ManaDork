@@ -176,20 +176,11 @@ class ViewDeck extends Component {
 
 
 
-                <div>
-                    <h1>Total Cards: {this.state.deckQty}</h1>
-                    <h1>Devotion</h1>
-                    <PieChart viewBoxSize='[100,100]' radius='50'
-                    data={[
-                        { title: 'One', value: 10, color: 'Blue' },
-                        { title: 'Two', value: 15, color: 'White' },
-                        { title: 'Three', value: 20, color: 'Black' },
-                    ]}
-                />;
-                </div>
+                
 
                 <h1 id="editDeckHeader">Viewing {this.props.reduxStore.selectedDeck.deckname} from {this.props.reduxStore.user.username} </h1>
-            
+                {/* <h1 id="editDeckHeader">Total Cards: {this.state.deckQty}</h1> */}
+
                 
                 
                 <div id="viewDeckEditDeckView" > 
@@ -199,6 +190,8 @@ class ViewDeck extends Component {
                     </div>
 
                     <br/>  
+                    <h4 id="editDeckHeader">Total Cards: {this.state.deckQty}</h4>
+
                     <table >
                         <thead>
                             <tr>
@@ -268,6 +261,23 @@ class ViewDeck extends Component {
                     <textarea id="descriptionInput" placeholder="Deck Description"  value={this.props.reduxStore.selectedDeck.description} ></textarea>
                     <br/>
                 </div>
+
+
+                <div>
+                    <h1>Devotion</h1>
+                    <PieChart viewBoxSize='[100,100]' radius='50'
+                    data={[
+                        { title: 'One', value: 20, color: 'Blue' },
+                        { title: 'Two', value: 20, color: 'White' },
+                        { title: 'Three', value: 20, color: 'Black' },
+                        { title: 'Four', value: 20, color: 'Red' },
+                        { title: 'Five', value: 20, color: 'Green' },
+
+
+                    ]}
+                    />;
+                </div>
+
             </div>);
      }
     }
