@@ -13,7 +13,7 @@ class ViewDeck extends Component {
         hoverCard: 'https://i.stack.imgur.com/Vkq2a.png', 
         updatedQty: '',
         deckQty: '',
-        parsedCards: ['']
+        parsedCards: []
     }
 
     componentDidMount() {
@@ -29,8 +29,6 @@ class ViewDeck extends Component {
             type: 'GET_SELECTED_DECK',
             payload: this.props.history.location.pathname.split("/")[2]
         })
-
-        this.countQty();
     }
 
     editDeck=(deck)=>{
@@ -106,66 +104,46 @@ class ViewDeck extends Component {
 
 
     countQty=(cards)=>{
-        //const includedCards = this.props.reduxStore.cardList.filter(card => card.deckid === this.props.reduxStore.selectedDeck.id);
-        console.log('countQTY start', cards);
         if(cards){
             var qty = 0
-
             cards.forEach(card => {
-
+                //for each instance of a card, qtyToAdd = card.quantity
                 var qtyToAdd = card.quantity
                 //console.log('qtyToAdd', qtyToAdd);
-                
                 let totalqty = qty + qtyToAdd
                 qty = totalqty
-
-                var totalCards = qty
+                //var totalCards = qty
                 //console.log('totalCards', totalCards);
-
             });
-            console.log('total:',qty);
+
+            console.log('new total:',qty);
+
             if(this.state.deckQty !== qty){
                 this.setState({
                     deckQty: qty
                 })
             }
-            // this.setState({
-			// 	deckQty: qty,
-			// });
         }
-        // var i;
-        // var deckQty = 0
-        
-        // for (i = 0; i < cards; i++) {
-        //   console.log('cards', cards);
-        //     deckQty += cards.quantity[i];
-          
-        // } 
-        //console.log('deckQty', deckQty);       
-        //console.log('included countQty', includedCards);
     }
 
+
     parseCards=(cards)=>{
-        console.log('in parseCards with', cards);
-        if(cards){
-            var allParsedCards = []
-            cards.forEach(card => {
-               var parsedDevotion = JSON.parse(card.api_data)
-               //console.log(parsedDevotion);
-            
-               allParsedCards.push(parsedDevotion)
-               //console.log('allParsedCards', allParsedCards);
+        var allParsedCards = []
+        cards.forEach(card => {
+            var parsedCard = JSON.parse(card.api_data)
+            allParsedCards.push(parsedCard)
+        });
+        console.log('allParsedCards', allParsedCards);
 
-               if(this.state.parsedCards.length >= 1){
-                console.log('*****',this.state);
+        // if (this.state.parsedCards === allParsedCards) {
+        //     console.log('match, bailing');
 
-                // this.setState({
-                //     parsedCards: allParsedCards
-                    
-                // })
-            }
-            });
-        }
+        // } else{
+        //     console.log('no match, setting state', this.state.parsedCards, allParsedCards);
+            this.state.parsedCards.push(allParsedCards)
+            console.log(this.state);
+        //}
+        console.log('this.state.parsedCards[5]', this.state.parsedCards[5]);
     }
 
     render(){
@@ -179,11 +157,15 @@ class ViewDeck extends Component {
         
         console.log('state is', this.state);
 
-        if (includedCards.length >= 1){
-           this.countQty(includedCards)
-           this.parseCards(includedCards)
-        } 
+        this.countQty(includedCards)
+        this.parseCards(includedCards)
         
+        // var allParsedCards = includedCards.forEach( card => {
+        //     var parsedCard = JSON.parse(card.api_data)
+        //     console.log(parsedCard);
+        // })
+        // console.log('allparsedcards', allParsedCards);
+
         
         //const cardSum = includedCards.quantity.reduce(this.countQty)
         //console.log('cardSum',cardSum);
