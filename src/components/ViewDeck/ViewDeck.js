@@ -132,6 +132,7 @@ class ViewDeck extends Component {
     devotion=(cards)=>{
         console.log(cards);
         //var allColors = []
+        var allSymbols = []
         var devotion = {
             White: 0,
             Blue: 0,
@@ -146,50 +147,42 @@ class ViewDeck extends Component {
                 console.log('colorless card with cmc of', card.cmc);
                 devotion.Gray += card.cmc
             }
-            if (card.mana_cost.includes('{U}')){
-                console.log('card contains blue', card.mana_cost);
-                
-                //if the card includes blue loop through card.mana_cost and total up each instance
-                // card.mana_cost.forEach(s =>{
-                //     console.log(s);
-                // })
-            }
-
-            // card.colors.forEach(color => {
-            //     //console.log(color);
-            //     //allColors.push(color)
-            // })
-            //console.log("🚀 ~ file: ViewDeck.js ~ line 146 ~ ViewDeck ~ allColors", allColors)
-
-            //symbol count            
-            // card.colors.forEach(color => {
-            //     if(color === 'W'){
-            //         console.log('white');
-            //         devotion.White += 1
-            //     }
-            //     if(color === 'U'){
-            //         console.log('blue');
-            //         devotion.Blue += 1
-            //     }
-            //     if(color === 'B'){
-            //         console.log('black');
-            //         devotion.Black += 1
-            //     }
-            //     if(color === 'R'){
-            //         console.log('red');
-            //         devotion.Red += 1
-            //     }
-            //     if(color === 'G'){
-            //         console.log('green');
-            //         devotion.Green += 1
-            //     }
-
-                
-            //     //NEED TO ACCOUNT FOR COLORLESS
-            //     //console.log('totaled devotion in function:', devotion);
-            // })
             
+           
+            for (let index = 0; index < card.mana_cost.length; index++) {
+                const element = card.mana_cost[index];
+                if(element.includes('{') || element.includes('}') ){
+                    //console.log('this includes a { or }');
+                }
+                else{
+                    console.log('this is', element);
+                    if(element === 'W'){
+                        //console.log('white');
+                        devotion.White += 1
+                    }
+                    if(element === 'U'){
+                        //console.log('blue');
+                        devotion.Blue += 1
+                    }
+                    if(element === 'B'){
+                        //console.log('black');
+                        devotion.Black += 1
+                    }
+                    if(element === 'R'){
+                        //console.log('red');
+                        devotion.Red += 1
+                    }
+                    if(element === 'G'){
+                        //console.log('green');
+                        devotion.Green += 1
+                    }
+
+                }
+                
+            }
         });
+        console.log('NEW devotion', devotion);
+
         return(devotion)
     }
 
