@@ -132,30 +132,26 @@ class ViewDeck extends Component {
     }
 
 
-    cmcCount=(cards)=>{
-
+    devotion=(cards)=>{
+        console.log(cards);
         var allColors = []
+        var devotion = {
+            White: 0,
+            Blue: 0,
+            Black: 0,
+            Red: 0,
+            Green: 0
+        }
 
         cards.forEach(card => {
-            //console.log(card.name, card.cmc, card.colors, card);
-
             card.colors.forEach(color => {
                 //console.log(color);
                 allColors.push(color)
             })
             console.log("🚀 ~ file: ViewDeck.js ~ line 146 ~ ViewDeck ~ allColors", allColors)
 
-
-            var devotion = {
-                White: 0,
-                Blue: 0,
-                Black: 0,
-                Red: 0,
-                Green: 0
-
-            }
-
-            allColors.forEach(color => {
+            
+            card.colors.forEach(color => {
                 if(color === 'W'){
                     console.log('white');
                     devotion.White += 1
@@ -177,12 +173,11 @@ class ViewDeck extends Component {
                     devotion.Green += 1
 
                 }
-                console.log('totaled devotion:', devotion);
+                console.log('totaled devotion in function:', devotion);
             })
-
+            
         });
-        //return(allParsedCards);
-
+        return(devotion)
     }
 
     render(){
@@ -200,7 +195,8 @@ class ViewDeck extends Component {
         const parsedCards = this.parseCards(includedCards)
         console.log("🚀 ~ file: ViewDeck.js ~ line 168 ~ ViewDeck ~ render ~ parsedCards", parsedCards)
         
-        const devotion = this.cmcCount(parsedCards)
+        const devotion = this.devotion(parsedCards)
+        console.log("🚀 ~ file: ViewDeck.js ~ line 204 ~ ViewDeck ~ render ~ devotion", devotion)
 
         return (
                 
