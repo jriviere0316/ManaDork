@@ -95,12 +95,7 @@ class ViewDeck extends Component {
         })
     }
     
-    // placeDiv(x_pos, y_pos) {
-    //     var d = document.getElementById('yourDivId');
-    //     d.style.position = "absolute";
-    //     d.style.left = x_pos+'px';
-    //     d.style.top = y_pos+'px';
-    //   }
+    
 
 
     countQty=(cards)=>{
@@ -136,6 +131,60 @@ class ViewDeck extends Component {
         return(allParsedCards);
     }
 
+
+    cmcCount=(cards)=>{
+
+        var allColors = []
+
+        cards.forEach(card => {
+            //console.log(card.name, card.cmc, card.colors, card);
+
+            card.colors.forEach(color => {
+                //console.log(color);
+                allColors.push(color)
+            })
+            console.log("🚀 ~ file: ViewDeck.js ~ line 146 ~ ViewDeck ~ allColors", allColors)
+
+
+            var devotion = {
+                White: 0,
+                Blue: 0,
+                Black: 0,
+                Red: 0,
+                Green: 0
+
+            }
+
+            allColors.forEach(color => {
+                if(color === 'W'){
+                    console.log('white');
+                    devotion.White += 1
+                }
+                if(color === 'U'){
+                    console.log('blue');
+                    devotion.Blue += 1
+                }
+                if(color === 'B'){
+                    console.log('black');
+                    devotion.Black += 1
+                }
+                if(color === 'R'){
+                    console.log('red');
+                    devotion.Red += 1
+                }
+                if(color === 'G'){
+                    console.log('green');
+                    devotion.Green += 1
+
+                }
+                console.log('totaled devotion:', devotion);
+            })
+
+        });
+        //return(allParsedCards);
+
+    }
+
     render(){
         // console.log('recentCard state:',this.state.recentCard);
         const includedCards = this.props.reduxStore.cardList.filter(card => card.deckid === this.props.reduxStore.selectedDeck.id);
@@ -145,16 +194,14 @@ class ViewDeck extends Component {
         console.log('parsedFeaturedCard', parsedFeaturedCard);
         const featuredUri = parsedFeaturedCard.map(fUri => fUri.image_uris.normal)
         
-        console.log('state is', this.state);
 
         this.countQty(includedCards)
-        //this.parseCards(includedCards)
         
-
         const parsedCards = this.parseCards(includedCards)
-
         console.log("🚀 ~ file: ViewDeck.js ~ line 168 ~ ViewDeck ~ render ~ parsedCards", parsedCards)
         
+        const devotion = this.cmcCount(parsedCards)
+
         return (
                 
             <div >
