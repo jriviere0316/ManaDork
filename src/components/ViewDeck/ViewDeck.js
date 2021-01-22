@@ -133,7 +133,7 @@ class ViewDeck extends Component {
 
 
     devotion=(cards)=>{
-        console.log(cards);
+        //console.log(cards);
         var allColors = []
         var devotion = {
             White: 0,
@@ -148,7 +148,7 @@ class ViewDeck extends Component {
                 //console.log(color);
                 allColors.push(color)
             })
-            console.log("🚀 ~ file: ViewDeck.js ~ line 146 ~ ViewDeck ~ allColors", allColors)
+            //console.log("🚀 ~ file: ViewDeck.js ~ line 146 ~ ViewDeck ~ allColors", allColors)
 
             
             card.colors.forEach(color => {
@@ -173,12 +173,33 @@ class ViewDeck extends Component {
                     devotion.Green += 1
 
                 }
-                console.log('totaled devotion in function:', devotion);
+                //console.log('totaled devotion in function:', devotion);
             })
             
         });
         return(devotion)
     }
+
+    cmc=(cards)=>{
+        //console.log("🚀 ~ file: ViewDeck.js ~ line 184 ~ ViewDeck ~ cards", cards)
+        var convertedManaCosts = []
+
+        cards.forEach(card =>{
+            console.log(card.cmc);
+            if (card.type_line.includes('land')) {
+                console.log('this is a land and shouldnt be counted');
+            }else{
+                convertedManaCosts.push(card.cmc)
+                console.log(convertedManaCosts);
+
+            }
+        })
+
+
+        return(convertedManaCosts)
+    }
+
+    
 
     render(){
         // console.log('recentCard state:',this.state.recentCard);
@@ -197,6 +218,9 @@ class ViewDeck extends Component {
         
         const devotion = this.devotion(parsedCards)
         console.log("🚀 ~ file: ViewDeck.js ~ line 204 ~ ViewDeck ~ render ~ devotion", devotion)
+
+        const cmc = this.cmc(parsedCards)
+        console.log("🚀 ~ file: ViewDeck.js ~ line 215 ~ ViewDeck ~ render ~ cmc", cmc)
 
         return (
                 
