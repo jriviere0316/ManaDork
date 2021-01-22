@@ -133,17 +133,7 @@ class ViewDeck extends Component {
             var parsedCard = JSON.parse(card.api_data)
             allParsedCards.push(parsedCard)
         });
-        console.log('allParsedCards', allParsedCards);
-
-        // if (this.state.parsedCards === allParsedCards) {
-        //     console.log('match, bailing');
-
-        // } else{
-        //     console.log('no match, setting state', this.state.parsedCards, allParsedCards);
-            this.state.parsedCards.push(allParsedCards)
-            console.log(this.state);
-        //}
-        console.log('this.state.parsedCards[5]', this.state.parsedCards[5]);
+        return(allParsedCards);
     }
 
     render(){
@@ -158,25 +148,13 @@ class ViewDeck extends Component {
         console.log('state is', this.state);
 
         this.countQty(includedCards)
-        this.parseCards(includedCards)
+        //this.parseCards(includedCards)
         
-        // var allParsedCards = includedCards.forEach( card => {
-        //     var parsedCard = JSON.parse(card.api_data)
-        //     console.log(parsedCard);
-        // })
-        // console.log('allparsedcards', allParsedCards);
 
+        const parsedCards = this.parseCards(includedCards)
+
+        console.log("🚀 ~ file: ViewDeck.js ~ line 168 ~ ViewDeck ~ render ~ parsedCards", parsedCards)
         
-        //const cardSum = includedCards.quantity.reduce(this.countQty)
-        //console.log('cardSum',cardSum);
-
-        //const cardsInDeck = includedCards.quantity.reduce(countQty)
-        // var i;
-        // for (i = 0; includedCards.length; i++ ){
-        //     console.log('in sum of cards loop');
-        // }
-
-        //console.log('sumOfCards number is', sumOfCards);
         return (
                 
             <div >
