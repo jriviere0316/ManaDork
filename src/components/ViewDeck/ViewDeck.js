@@ -95,12 +95,7 @@ class ViewDeck extends Component {
         })
     }
     
-    // placeDiv(x_pos, y_pos) {
-    //     var d = document.getElementById('yourDivId');
-    //     d.style.position = "absolute";
-    //     d.style.left = x_pos+'px';
-    //     d.style.top = y_pos+'px';
-    //   }
+    
 
 
     countQty=(cards)=>{
@@ -133,17 +128,61 @@ class ViewDeck extends Component {
             var parsedCard = JSON.parse(card.api_data)
             allParsedCards.push(parsedCard)
         });
-        console.log('allParsedCards', allParsedCards);
+        return(allParsedCards);
+    }
 
-        // if (this.state.parsedCards === allParsedCards) {
-        //     console.log('match, bailing');
 
-        // } else{
-        //     console.log('no match, setting state', this.state.parsedCards, allParsedCards);
-            this.state.parsedCards.push(allParsedCards)
-            console.log(this.state);
-        //}
-        console.log('this.state.parsedCards[5]', this.state.parsedCards[5]);
+    cmcCount=(cards)=>{
+
+        var allColors = []
+
+        cards.forEach(card => {
+            //console.log(card.name, card.cmc, card.colors, card);
+
+            card.colors.forEach(color => {
+                //console.log(color);
+                allColors.push(color)
+            })
+            console.log("🚀 ~ file: ViewDeck.js ~ line 146 ~ ViewDeck ~ allColors", allColors)
+
+
+            var devotion = {
+                White: 0,
+                Blue: 0,
+                Black: 0,
+                Red: 0,
+                Green: 0
+
+            }
+
+            allColors.forEach(color => {
+                if(color === 'W'){
+                    console.log('white');
+                    devotion.White += 1
+                }
+                if(color === 'U'){
+                    console.log('blue');
+                    devotion.Blue += 1
+                }
+                if(color === 'B'){
+                    console.log('black');
+                    devotion.Black += 1
+                }
+                if(color === 'R'){
+                    console.log('red');
+                    devotion.Red += 1
+                }
+                if(color === 'G'){
+                    console.log('green');
+                    devotion.Green += 1
+
+                }
+                console.log('totaled devotion:', devotion);
+            })
+
+        });
+        //return(allParsedCards);
+
     }
 
     render(){
@@ -155,28 +194,14 @@ class ViewDeck extends Component {
         console.log('parsedFeaturedCard', parsedFeaturedCard);
         const featuredUri = parsedFeaturedCard.map(fUri => fUri.image_uris.normal)
         
-        console.log('state is', this.state);
 
         this.countQty(includedCards)
-        this.parseCards(includedCards)
         
-        // var allParsedCards = includedCards.forEach( card => {
-        //     var parsedCard = JSON.parse(card.api_data)
-        //     console.log(parsedCard);
-        // })
-        // console.log('allparsedcards', allParsedCards);
-
+        const parsedCards = this.parseCards(includedCards)
+        console.log("🚀 ~ file: ViewDeck.js ~ line 168 ~ ViewDeck ~ render ~ parsedCards", parsedCards)
         
-        //const cardSum = includedCards.quantity.reduce(this.countQty)
-        //console.log('cardSum',cardSum);
+        const devotion = this.cmcCount(parsedCards)
 
-        //const cardsInDeck = includedCards.quantity.reduce(countQty)
-        // var i;
-        // for (i = 0; includedCards.length; i++ ){
-        //     console.log('in sum of cards loop');
-        // }
-
-        //console.log('sumOfCards number is', sumOfCards);
         return (
                 
             <div >
