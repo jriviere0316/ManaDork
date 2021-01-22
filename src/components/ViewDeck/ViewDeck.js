@@ -95,9 +95,6 @@ class ViewDeck extends Component {
         })
     }
     
-    
-
-
     countQty=(cards)=>{
         if(cards){
             var qty = 0
@@ -133,48 +130,64 @@ class ViewDeck extends Component {
 
 
     devotion=(cards)=>{
-        //console.log(cards);
-        var allColors = []
+        console.log(cards);
+        //var allColors = []
         var devotion = {
             White: 0,
             Blue: 0,
             Black: 0,
             Red: 0,
-            Green: 0
+            Green: 0,
+            Gray: 0
         }
 
         cards.forEach(card => {
-            card.colors.forEach(color => {
-                //console.log(color);
-                allColors.push(color)
-            })
+            if (card.colors.length === 0 && card.cmc > 0){
+                console.log('colorless card with cmc of', card.cmc);
+                devotion.Gray += card.cmc
+            }
+            if (card.mana_cost.includes('{U}')){
+                console.log('card contains blue', card.mana_cost);
+                
+                //if the card includes blue loop through card.mana_cost and total up each instance
+                // card.mana_cost.forEach(s =>{
+                //     console.log(s);
+                // })
+            }
+
+            // card.colors.forEach(color => {
+            //     //console.log(color);
+            //     //allColors.push(color)
+            // })
             //console.log("🚀 ~ file: ViewDeck.js ~ line 146 ~ ViewDeck ~ allColors", allColors)
 
-            
-            card.colors.forEach(color => {
-                if(color === 'W'){
-                    console.log('white');
-                    devotion.White += 1
-                }
-                if(color === 'U'){
-                    console.log('blue');
-                    devotion.Blue += 1
-                }
-                if(color === 'B'){
-                    console.log('black');
-                    devotion.Black += 1
-                }
-                if(color === 'R'){
-                    console.log('red');
-                    devotion.Red += 1
-                }
-                if(color === 'G'){
-                    console.log('green');
-                    devotion.Green += 1
+            //symbol count            
+            // card.colors.forEach(color => {
+            //     if(color === 'W'){
+            //         console.log('white');
+            //         devotion.White += 1
+            //     }
+            //     if(color === 'U'){
+            //         console.log('blue');
+            //         devotion.Blue += 1
+            //     }
+            //     if(color === 'B'){
+            //         console.log('black');
+            //         devotion.Black += 1
+            //     }
+            //     if(color === 'R'){
+            //         console.log('red');
+            //         devotion.Red += 1
+            //     }
+            //     if(color === 'G'){
+            //         console.log('green');
+            //         devotion.Green += 1
+            //     }
 
-                }
-                //console.log('totaled devotion in function:', devotion);
-            })
+                
+            //     //NEED TO ACCOUNT FOR COLORLESS
+            //     //console.log('totaled devotion in function:', devotion);
+            // })
             
         });
         return(devotion)
@@ -185,17 +198,21 @@ class ViewDeck extends Component {
         var convertedManaCosts = []
 
         cards.forEach(card =>{
-            console.log(card.cmc);
+            //console.log(card.cmc);
             if (card.type_line.includes('land')) {
-                console.log('this is a land and shouldnt be counted');
+                //console.log('this is a land and shouldnt be counted');
             }else{
                 convertedManaCosts.push(card.cmc)
-                console.log(convertedManaCosts);
-
+                //console.log(convertedManaCosts);
             }
+
+            
         })
 
-
+        convertedManaCosts.forEach(cost =>{
+            //console.log(cost);
+            
+        })
         return(convertedManaCosts)
     }
 
@@ -220,7 +237,7 @@ class ViewDeck extends Component {
         console.log("🚀 ~ file: ViewDeck.js ~ line 204 ~ ViewDeck ~ render ~ devotion", devotion)
 
         const cmc = this.cmc(parsedCards)
-        console.log("🚀 ~ file: ViewDeck.js ~ line 215 ~ ViewDeck ~ render ~ cmc", cmc)
+        console.log("🚀 ~ file: ViewDeck.js ~ line 215 ~ ViewDeck ~ render ~ cmc sans land", cmc)
 
         return (
                 
@@ -316,24 +333,23 @@ class ViewDeck extends Component {
 
 
                 <div>
+                    <h1>Total Cards: {this.state.deckQty}</h1>
                     <h1>Devotion</h1>
+                    <h3>| White Symbols: {devotion.White} | Blue Symbols: {devotion.Blue} | Black Symbols: {devotion.Black} | Red Symbols: {devotion.Red} | Green Symbols: {devotion.Green} | Colorless Symbols: {devotion.Gray} |</h3>
                     <PieChart viewBoxSize='[100,100]' radius='50'
-                    data={[
-                        { title: 'One', value: 16.67, color: 'Blue' },
-                        { title: 'Two', value: 16.67, color: 'White' },
-                        { title: 'Three', value: 16.67, color: 'Black' },
-                        { title: 'Four', value: 16.67, color: 'Red' },
-                        { title: 'Five', value: 16.67, color: 'Green' },
-                        { title: 'Six', value: 16.67, color: 'Gray' },
-
-
-
-                    ]}
+                        data={[
+                            { title: 'One', value: devotion.White, color: 'White' },
+                            { title: 'Two', value: devotion.Blue, color: 'Blue' },
+                            { title: 'Three', value: devotion.Black, color: 'Black' },
+                            { title: 'Four', value: devotion.Red, color: 'Red' },
+                            { title: 'Five', value: devotion.Green, color: 'Green' },
+                            { title: 'Six', value: devotion.Gray, color: 'Gray' },
+                        ]}
                     />;
                 </div>
 
             </div>);
-     }
+        }
     }
 
     const mapStateToProps = (reduxStore) => ({
