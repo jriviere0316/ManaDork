@@ -5,16 +5,12 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import { connect } from 'react-redux';
-
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
+import UserPage, { UserPageFuncExport } from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -25,7 +21,6 @@ import EditUser from '../EditUser/EditUser';
 import Asyncinput from '../AsyncInput/AsyncInput';
 import UserHub from '../UserHub/UserHub';
 import LifeTotal from '../LifeTotal/LifeTotal';
-// import mapStateToProps from 
 import './App.css';
 
 class App extends Component {
@@ -33,8 +28,6 @@ class App extends Component {
     this.props.dispatch({ type: 'FETCH_USER' });
     this.props.dispatch({ type: 'GET_DECK' });
     // this.props.dispatch({ type: 'GET_LIST' });
-
-    
   }
 
   render() {
@@ -75,7 +68,7 @@ class App extends Component {
               // logged in shows UserPage else shows LoginPage
               exact
               path="/user"
-              component={UserPage}
+              component={UserPageFuncExport}
             />
             <ProtectedRoute
               // logged in shows UserPage else shows LoginPage
@@ -108,7 +101,7 @@ class App extends Component {
               component={ViewDeck}
             />
 
-            
+
             <ProtectedRoute
               // logged in shows InfoPage else shows LoginPage
               exact
@@ -128,7 +121,7 @@ class App extends Component {
               component={LoginPage}
               authRedirect="/user"
             />
-            
+
             <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
@@ -157,6 +150,7 @@ class App extends Component {
     );
   }
 }
+
 const mapStateToProps = (reduxStore) => ({
   reduxStore
 })

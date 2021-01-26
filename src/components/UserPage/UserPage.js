@@ -1,10 +1,135 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+const mapStateToProps = (state, ownProps) => ({
+  dispatch: ownProps.dispatch,
+  history: ownProps.history,
+  user: state.user,
+  friends: state.friendsReducer,
+  decks: state.deck,
+})
+
+const UserPageFunc = ({
+  dispatch,
+  history,
+  user,
+  friends,
+  decks,
+}) => {
+  useEffect(() => {
+    dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: 'GET_DECK' });
+    dispatch({ type: 'GET_FRIENDS' });
+  }, [dispatch])
+
+  const createDeck = () => {
+    const deck = prompt("Please enter a deck name:", "My Awesome Deck");
+    if (deck === null || deck === "") {
+      alert("Canceled");
+    } else {
+      this.props.dispatch({
+        type: 'CREATE_DECK',
+        payload: {
+          userid: user.id,
+          deckname: deck,
+          ispublic: false,
+          description: "",
+          decklist: '',
+          featured_card: '',
+          upvotes: 0,
+          comments: '',
+        },
+      });
+    };
+  };
+
+  const deleteDeck = (deck) => {
+    const response = window.confirm(`Are you sure you want to permanenently delete this deck?`)
+    if (response){
+      this.props.dispatch({
+        type: 'DELETE_DECK',
+        payload: deck
+      })
+    }
+  };
+
+  return (
+    <div id='userMainDiv'>
+      <img id='profilePic' height='130px' width='130px' src={user.img_url} />
+      <div id='profileInfo'>
+        <h1 id='welcome'>
+          Welcome, {user.username}!
+        </h1>
+        <button onClick={() => history.push('/edituser')}>
+          Edit Profile
+        </button>
+      </div>
+      <hr />
+      <div id='mainDiv'>
+        <div id='userDiv'>
+          <h1>
+            {user.username}'s Decks
+          </h1>
+          <br/>
+          <button onClick={createDeck}>
+            Create New Deck
+          </button>
+          <hr/>
+          <div id='userDeckScroll'>
+            {decks.map((deck) =>
+              <div id='deckOptions' key={deck.id}>
+                <h4 id='deckName' onClick={() => history.push(`/viewdeck/${deck.id}`)}>
+                  {deck.deckname}
+                </h4>
+                <h5 id='upvotes'>
+                  Upvotes: {deck.upvotes}
+                </h5>
+                <button onClick={() => history.push(`/editdeck/${deck.id}`)}>
+                  EDIT
+                </button>
+                <button onClick={() => deleteDeck(deck.id)}>
+                  DELETE
+                </button>
+                <br/>
+              </div>
+            )}
+          </div>
+        </div>
+        <div id='userDiv'>
+          <h1>
+            {user.username}'s Friends
+          </h1>
+          <br/>
+          <button onClick={() => console.log('this.viewUsers?')}>
+            View/Search Users
+          </button>
+          <hr/>
+          <div id='friendsDeckScroll'>
+            {friends
+              .filter(f => f.id !== user.id)
+              .map((friend) =>
+                <div id='friendOptions' key={friend.id}>
+                  <h4 id='deckName'>
+                    {friend.username}
+                  </h4>
+                </div>
+              )
+            }
+          </div>
+        </div>
+      </div>
+      <br/>
+    </div>
+  );
+};
+
+const UserPageFuncExport = connect(mapStateToProps)(UserPageFunc);
+export { UserPageFuncExport };
+
 class UserPage extends Component {
-  
+
   state ={
     profile: {
       defaultPic: this.props.store.user.img_url
@@ -25,7 +150,7 @@ class UserPage extends Component {
       txt = "Canceled";
       alert(txt)
       return
-    } 
+    }
     else {
       txt = deck;
       console.log(txt);
@@ -45,7 +170,7 @@ class UserPage extends Component {
       });
 
     }
-    // this.props.history.push('/editdeck')   //NEED TO REFERENCE NEWLY CREATED DECK 
+    // this.props.history.push('/editdeck')   //NEED TO REFERENCE NEWLY CREATED DECK
 
   }
   editProfile=()=>{
@@ -84,9 +209,7 @@ class UserPage extends Component {
       return;
     }
   }
-    
-   
-    
+
   viewFriend=(friend)=>{
     console.log('in view friend with:', friend);
   }
@@ -114,10 +237,10 @@ class UserPage extends Component {
             <br/>
             <button onClick={this.createDeck}>Create New Deck</button>
             <hr/>
-            
-            
+
+
             <div id="userDeckScroll">
-              {this.props.store.deck.map((deck) =>  
+              {this.props.store.deck.map((deck) =>
                 <div id="deckOptions"key={deck.id}>
 
                   <h4 id="deckName" onClick={() => this.viewDeck(deck)}>{deck.deckname}</h4>
@@ -126,10 +249,10 @@ class UserPage extends Component {
                   <button onClick={() => this.deleteDeck(deck.id)}>DELETE</button>
                   <br/>
 
-                </div>  
+                </div>
               )}
-            </div>          
-            
+            </div>
+
           </div>
             {/* ////////////// FRIENDS SCROLL BOX ////////////// */}
           <div id="userDiv">
@@ -138,19 +261,19 @@ class UserPage extends Component {
             <button onClick={this.viewUsers}>View/Search Users</button>
             <hr/>
             <div id="friendsDeckScroll">
-              {friendsList.map((friend) =>  
+              {friendsList.map((friend) =>
                 <div id="friendOptions" key={friend.id}>
 
                   <h4 id="deckName" onClick={() => this.viewFriend(friend)}>{friend.username}</h4>
-                  
 
-                </div>  
+
+                </div>
               )}
-            </div>  
+            </div>
           </div>
 
 
-          
+
         </div>
         <br/>
 
