@@ -1,6 +1,4 @@
-import { card } from "mtgsdk";
 import React, { Component } from "react";
-// import {connect} from 'react-redux';
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import { PieChart } from "react-minimal-pie-chart";
@@ -14,14 +12,11 @@ class ViewDeck extends Component {
   };
 
   componentDidMount() {
-    // this.props.dispatch({ type: 'FETCH_USER' });
-    // this.props.dispatch({ type: 'GET_DECK' });
     this.props.dispatch({
       type: "GET_LIST",
       payload: this.props.reduxStore.selectedDeck.id,
     });
 
-    //console.log('dispatching selected deck');
     this.props.dispatch({
       type: "GET_SELECTED_DECK",
       payload: this.props.history.location.pathname.split("/")[2],
@@ -30,12 +25,7 @@ class ViewDeck extends Component {
 
   editDeck = (deck) => {
     console.log("in edit deck with:", deck);
-    // this.props.dispatch({
-    //   type: 'SET_SELECTEDDECK',
-    //   payload: deck
-    // })
     const id = this.props.history.location.pathname.split("/")[2];
-
     this.props.history.push(`/editdeck/${id}`);
   };
 
