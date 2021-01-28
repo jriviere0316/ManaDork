@@ -3,12 +3,8 @@ import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import Swal from "sweetalert2";
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
 function UserDecks(props) {
   const [state, setState] = React.useState({});
-
   const viewDeck = (deck) => {
     //console.log("in viewDeck with:", deck);
     props.history.push(`viewdeck/${deck}`);
@@ -104,7 +100,4 @@ function UserDecks(props) {
   );
 }
 
-const mapStateToProps = (reduxStore) => ({
-  reduxStore,
-});
 export default connect(mapStoreToProps)(UserDecks);
