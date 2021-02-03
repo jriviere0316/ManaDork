@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import Swal from "sweetalert2";
 import UserDecks from "../UserDecks/UserDecks";
-import UserFriends from "../UserFriends/UserFriends";
+import UserFriends from "../UserFriends";
 
 function UserHub(props) {
   //"STATE" STUFF
