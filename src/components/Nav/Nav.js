@@ -12,18 +12,17 @@ const Nav = (props) => {
   };
 
   if (props.store.user.id != null) {
-    loginLinkData.path = '/user';
-    loginLinkData.text = 'Home';
+    loginLinkData.path = '/userHub';
+    loginLinkData.text = 'User home';
   }
 
   return (
     <div className="nav">
 
-
-
       <Link to="/home">
         <h2 className="nav-title">ManaDork</h2>
       </Link>
+
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
@@ -32,36 +31,23 @@ const Nav = (props) => {
           {loginLinkData.text}
         </Link>
         {/* Show the link to the info page and the logout button if the user is logged in */}
-        {props.store.user.id && (
-          <>
-            {/* <Link className="nav-link" to="/edituser">
-              Edit User
-            </Link> */}
-            <Link className="nav-link" to="/userHub">
-            userHub
-            </Link>
-            <Link className="nav-link" to="/info">
-              How To Play
-            </Link>
-            <Link className="nav-link" to="/lifetotal">
-              Life Counter
-            </Link>
-            {/* <Link className="nav-link" to="/editdeck">
-              Edit Deck
-            </Link>
-            <Link className="nav-link" to="/viewdeck">
-              View Deck
-            </Link> */}
-            <Link className="nav-link" to="/about">
+        
+        
+        {/* Always show these links since they don't need to be protected */}
+        <Link className="nav-link" to="/info">
+          How To Play
+        </Link>        
+        <Link className="nav-link" to="/lifetotal">
+          Life Counter
+        </Link>
+        <Link className="nav-link" to="/about">
           About
         </Link>
+        {props.store.user.id && (
+          <>
             <LogOutButton className="nav-link" />
           </>
         )}
-        {/* Always show this link since the about page is not protected */}
-        
-
-
       </div>
     </div>
   );

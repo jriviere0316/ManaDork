@@ -129,154 +129,151 @@ const UserPageFuncExport = connect(mapStateToProps)(UserPageFunc);
 export { UserPageFuncExport };
 
 class UserPage extends Component {
-
-  state ={
+  state = {
     profile: {
-      defaultPic: this.props.store.user.img_url
-    }
-  }
+      defaultPic: this.props.store.user.img_url,
+    },
+  };
 
   componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_USER' });
-    this.props.dispatch({ type: 'GET_DECK' });
-    this.props.dispatch({ type: 'GET_FRIENDS' });
+    this.props.dispatch({ type: "FETCH_USER" });
+    this.props.dispatch({ type: "GET_DECK" });
+    this.props.dispatch({ type: "GET_FRIENDS" });
   }
 
-  createDeck=()=>{
-    console.log('click');
+  createDeck = () => {
+    console.log("click");
     var txt;
     var deck = prompt("Please enter a deck name:", "My Awesome Deck");
     if (deck === null || deck === "") {
       txt = "Canceled";
-      alert(txt)
-      return
-    }
-    else {
+      alert(txt);
+      return;
+    } else {
       txt = deck;
       console.log(txt);
       this.props.dispatch({
-        type: 'CREATE_DECK',
+        type: "CREATE_DECK",
         payload: {
           userid: this.props.store.user.id,
           deckname: txt,
           ispublic: false,
           description: "",
-          decklist: '',
-          featured_card: '',
+          decklist: "",
+          featured_card: "",
           upvotes: 0,
-          comments: ''
-
+          comments: "",
         },
       });
-
     }
     // this.props.history.push('/editdeck')   //NEED TO REFERENCE NEWLY CREATED DECK
+  };
+  editProfile = () => {
+    console.log("clicked");
+    this.props.history.push("/edituser");
+  };
 
-  }
-  editProfile=()=>{
-  console.log('clicked');
-  this.props.history.push('/edituser')
-  }
-
-  editDeck=(deck)=>{
-    console.log('in edit deck with:', deck);
+  editDeck = (deck) => {
+    console.log("in edit deck with:", deck);
     this.props.dispatch({
-      type: 'SET_SELECTEDDECK',
-      payload: deck
-    })
-    this.props.history.push('/editdeck')
-  }
+      type: "SET_SELECTEDDECK",
+      payload: deck,
+    });
+    this.props.history.push("/editdeck");
+  };
 
-  viewDeck=(deck)=>{
-    console.log('in view deck with:', deck);
+  viewDeck = (deck) => {
+    console.log("in view deck with:", deck);
     this.props.dispatch({
-      type: 'SET_SELECTEDDECK',
-      payload: deck
-    })
-    this.props.history.push('/viewdeck')
-  }
+      type: "SET_SELECTEDDECK",
+      payload: deck,
+    });
+    this.props.history.push("/viewdeck");
+  };
 
-  deleteDeck=(deck)=>{
-    console.log('in delete deck with:', deck);
-    var r = window.confirm(`Are you sure you want to permanenently delete this deck? `)
+  //BUG: IF DECK CONTAINS CARDS DELETE WILL FAIL.  NEED TO CASCADE DELETE? OR RUN 2 SQL QUERIES?
+  deleteDeck = (deck) => {
+    console.log("in delete deck with:", deck);
+    var r = window.confirm(
+      `Are you sure you want to permanenently delete this deck? `
+    );
     //https://cdn.cardsrealm.com/images/cartas/crop/m13-magic-2013/door-to-nothingness-203-min.jpeg?1578
-    if (r === true){
-        this.props.dispatch({
-        type: 'DELETE_DECK',
-        payload: deck
-        })
-      } else {
+    if (r === true) {
+      this.props.dispatch({
+        type: "DELETE_DECK",
+        payload: deck,
+      });
+    } else {
       return;
     }
-  }
+  };
 
-  viewFriend=(friend)=>{
-    console.log('in view friend with:', friend);
-  }
-
-
+  viewFriend = (friend) => {
+    console.log("in view friend with:", friend);
+  };
 
   render() {
-
-    const friendsList = this.props.store.friendsReducer.filter(user => user.id !== this.props.store.user.id);
-    console.log('friendsList:', friendsList);
-    console.log('store', this.props.store);
+    const friendsList = this.props.store.friendsReducer.filter(
+      (user) => user.id !== this.props.store.user.id
+    );
+    console.log("friendsList:", friendsList);
+    console.log("store", this.props.store);
     return (
       <div id="userMainDiv">
-        <img id='profilePic' height='130px' width='130px' src={this.state.profile.defaultPic}></img>
-          <div id='profileInfo'>
-            <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
-            <button onClick={this.editProfile}>Edit Profile</button>
-          </div>
+        <img
+          id="profilePic"
+          height="130px"
+          width="130px"
+          src={this.state.profile.defaultPic}
+        ></img>
+        <div id="profileInfo">
+          <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
+          <button onClick={this.editProfile}>Edit Profile</button>
+        </div>
         {/* <p>Your ID is: {this.props.store.user.id}</p> */}
-        <hr/>
+        <hr />
 
         <div id="mainDiv">
           <div id="userDiv">
             <h1>{this.props.store.user.username}'s Decks</h1>
-            <br/>
+            <br />
             <button onClick={this.createDeck}>Create New Deck</button>
-            <hr/>
-
+            <hr />
 
             <div id="userDeckScroll">
-              {this.props.store.deck.map((deck) =>
-                <div id="deckOptions"key={deck.id}>
-
-                  <h4 id="deckName" onClick={() => this.viewDeck(deck)}>{deck.deckname}</h4>
+              {this.props.store.deck.map((deck) => (
+                <div id="deckOptions" key={deck.id}>
+                  <h4 id="deckName" onClick={() => this.viewDeck(deck)}>
+                    {deck.deckname}
+                  </h4>
                   <h5 id="upvotes">Upvotes: {deck.upvotes}</h5>
                   <button onClick={() => this.editDeck(deck)}>EDIT</button>
-                  <button onClick={() => this.deleteDeck(deck.id)}>DELETE</button>
-                  <br/>
-
+                  <button onClick={() => this.deleteDeck(deck.id)}>
+                    DELETE
+                  </button>
+                  <br />
                 </div>
-              )}
+              ))}
             </div>
-
           </div>
-            {/* ////////////// FRIENDS SCROLL BOX ////////////// */}
+          {/* ////////////// FRIENDS SCROLL BOX ////////////// */}
           <div id="userDiv">
-          <h1>{this.props.store.user.username}'s Friends</h1>
-          <br/>
+            <h1>{this.props.store.user.username}'s Friends</h1>
+            <br />
             <button onClick={this.viewUsers}>View/Search Users</button>
-            <hr/>
+            <hr />
             <div id="friendsDeckScroll">
-              {friendsList.map((friend) =>
+              {friendsList.map((friend) => (
                 <div id="friendOptions" key={friend.id}>
-
-                  <h4 id="deckName" onClick={() => this.viewFriend(friend)}>{friend.username}</h4>
-
-
+                  <h4 id="deckName" onClick={() => this.viewFriend(friend)}>
+                    {friend.username}
+                  </h4>
                 </div>
-              )}
+              ))}
             </div>
           </div>
-
-
-
         </div>
-        <br/>
-
+        <br />
 
         {/* <LogOutButton className="log-in" /> */}
       </div>
