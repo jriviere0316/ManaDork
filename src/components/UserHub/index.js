@@ -7,12 +7,12 @@ import UserFriends from "../UserFriends/UserFriends";
 
 function UserHub(props) {
   //"STATE" STUFF
+  const [state, setState] = React.useState({});
   useEffect(() => {
     //console.log("in useEffect");
     props.dispatch({ type: "GET_FRIENDS" });
   }, [state]);
 
-  const [state, setState] = React.useState({});
 
   //FUNCTIONS
   const editProfile = (deck) => {
