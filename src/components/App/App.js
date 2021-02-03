@@ -38,7 +38,6 @@ class App extends Component {
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
-
             {/* Visiting localhost:3000/about will show the about page. */}
             <Route
               // shows AboutPage at all times (logged in or not)
@@ -59,7 +58,6 @@ class App extends Component {
               path="/asyncinput"
               component={Asyncinput}
             />
-
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -100,15 +98,12 @@ class App extends Component {
               path="/viewdeck/:id"
               component={ViewDeck}
             />
-
-
             <ProtectedRoute
               // logged in shows InfoPage else shows LoginPage
               exact
               path="/info"
               component={InfoPage}
             />
-
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
@@ -121,7 +116,6 @@ class App extends Component {
               component={LoginPage}
               authRedirect="/user"
             />
-
             <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
@@ -140,7 +134,6 @@ class App extends Component {
               component={LandingPage}
               authRedirect="/user"
             />
-
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>

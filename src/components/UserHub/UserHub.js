@@ -17,7 +17,7 @@ function UserHub(props) {
   useEffect( () => {
     console.log('in useEffect');
     props.dispatch({ type: 'GET_FRIENDS' });
-    //checkTaskMap(); 
+    //checkTaskMap();
     },[state])
 
     const [state, setState] = React.useState({
@@ -55,7 +55,7 @@ function UserHub(props) {
             cancelButtonText: 'No, keep it'
           }).then((result) => {
             if (result.value) {
-                
+
                 props.dispatch({
                     type: 'DELETE_DECK',
                     payload: deck
@@ -73,11 +73,11 @@ function UserHub(props) {
                   imageUrl: `https://media.wizards.com/2017/images/daily/c4rd4r7_HZKwaCZ0af.jpg`,
                 })
             }
-        })    
+        })
     }
     const createDeck = () => {
         console.log('create deck clicked');
-        
+
         // const {value: deckname} = Swal.fire({
         //     title: 'Enter new deck name',
         //     input: 'text',
@@ -98,7 +98,7 @@ function UserHub(props) {
             imageUrl: `https://media.magic.wizards.com/image_legacy_migration/images/magic/daily/arcana/1094_cancel_ZEN.jpg`,
           })
           return
-        } 
+        }
         else {
           txt = deck;
           //   alert(txt)
@@ -121,8 +121,8 @@ function UserHub(props) {
             imageUrl: `https://www.greatnessatanycost.com/wp-content/uploads/2019/05/Karn-the-Great-Creator-War-of-the-Spark-Arts-cut.jpg`,
         })
         }
-        // // this.props.history.push('/editdeck')   //NEED TO REFERENCE NEWLY CREATED DECK 
-    
+        // // this.props.history.push('/editdeck')   //NEED TO REFERENCE NEWLY CREATED DECK
+
     }
     const viewUsers = () => {
         console.log('in viewUsers');
@@ -145,56 +145,56 @@ function UserHub(props) {
                 <button onClick={editProfile}>Edit Profile</button>
             </div>
             {/* <p>Your ID is: {props.store.user.id}</p> */}
-            <hr/>  
+            <hr/>
         <div id="mainDiv">
-            
-                      
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
             <div id="userDiv">
                 <h1>{props.store.user.username}'s Decks</h1>
                 <br/>
                 <button onClick={createDeck}>Create New Deck</button>
                 <hr/>
-                
-                
+
+
                 <div id="userDeckScroll">
-                {props.store.deck.map((deck) =>  
+                {props.store.deck.map((deck) =>
                     <div id="deckOptions"key={deck.id}>
 
                     <h4 id="deckName" onClick={() => viewDeck(deck.id)}>{deck.deckname}</h4>
                     <h5 id="upvotes">Upvotes: {deck.upvotes}</h5>
                     <button onClick={() => editDeck(deck.id)}>EDIT</button>
                     <button onClick={() => deleteDeck(deck.id)}>DELETE</button>
-                    
+
                     <br/>
 
-                    </div>  
+                    </div>
                 )}
-                </div>          
-            
+                </div>
+
             </div>
 
 
           {/* ////////////// FRIENDS SCROLL BOX ////////////// */}
-          
+
           <div id="userDiv">
           <h1>{props.store.user.username}'s Friends</h1>
           <br/>
             <button onClick={viewUsers}>View/Search Users</button>
             <hr/>
             <div id="friendsDeckScroll">
-              {friendsList.map((friend) =>  
+              {friendsList.map((friend) =>
                 <div id="friendOptions" key={friend.id}>
 
                   <h4 id="deckName" onClick={() => viewFriend(friend)}>{friend.username}</h4>
 
-                </div>  
+                </div>
               )}
-            </div>  
+            </div>
           </div>
         </div>
     </div>

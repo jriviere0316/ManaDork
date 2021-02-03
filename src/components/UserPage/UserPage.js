@@ -4,19 +4,18 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 const mapStateToProps = (state, ownProps) => ({
-  dispatch: ownProps.dispatch,
-  history: ownProps.history,
   user: state.user,
   friends: state.friendsReducer,
   decks: state.deck,
-})
+  ...ownProps,
+});
 
 const UserPageFunc = ({
+  decks,
   dispatch,
+  friends,
   history,
   user,
-  friends,
-  decks,
 }) => {
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
@@ -46,11 +45,12 @@ const UserPageFunc = ({
   };
 
   const deleteDeck = (deck) => {
-    const response = window.confirm(`Are you sure you want to permanenently delete this deck?`)
-    if (response){
+    const response = window
+      .confirm(`Are you sure you want to permanenently delete this deck?`);
+    if (response) {
       this.props.dispatch({
         type: 'DELETE_DECK',
-        payload: deck
+        payload: deck,
       })
     }
   };
