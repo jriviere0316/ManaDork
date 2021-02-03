@@ -10,7 +10,6 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage, { UserPageFuncExport } from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -19,12 +18,10 @@ import EditDeck from '../EditDeck/EditDeck';
 import ViewDeck from '../ViewDeck/ViewDeck';
 import EditUser from '../EditUser/EditUser';
 import Asyncinput from '../AsyncInput/AsyncInput';
-import UserHub from '../UserHub/UserHub';
+import UserHub from '../UserHub';
 import LifeTotal from '../LifeTotal/LifeTotal';
 import './App.css';
 import UserDecks from '../UserDecks/UserDecks';
-//import UserPage from '../UserPage/UserPage';
-// import mapStateToProps from
 
 class App extends Component {
   componentDidMount() {
@@ -69,18 +66,9 @@ class App extends Component {
             component={InfoPage}
           />
           {/* For protected routes, the view could show one of several things on the same route.
-          Visiting localhost:3000/user will show the UserPage if the user is logged in.
+          Visiting localhost:3000/user will show the UserHub if the user is logged in.
           If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
           Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-
-          {/* NO LONGER USING THIS /user ROUTE */}
-          {/* <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/user"
-            component={UserPage}
-          /> */}
-
           <ProtectedRoute
             // logged in shows UserHub else shows LoginPage
             exact
