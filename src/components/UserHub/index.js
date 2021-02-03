@@ -9,12 +9,9 @@ function UserHub(props) {
   //"STATE" STUFF
   const [state, setState] = React.useState({});
   useEffect(() => {
-    //console.log("in useEffect");
     props.dispatch({ type: "GET_FRIENDS" });
   }, [state]);
 
-
-  //FUNCTIONS
   const editProfile = (deck) => {
     props.history.push("/edituser");
   };
