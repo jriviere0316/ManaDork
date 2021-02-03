@@ -18,12 +18,10 @@ import EditDeck from '../EditDeck/EditDeck';
 import ViewDeck from '../ViewDeck/ViewDeck';
 import EditUser from '../EditUser/EditUser';
 import Asyncinput from '../AsyncInput/AsyncInput';
-import UserHub from '../UserHub/UserHub';
+import UserHub from '../UserHub';
 import LifeTotal from '../LifeTotal/LifeTotal';
 import './App.css';
 import UserDecks from '../UserDecks/UserDecks';
-//import UserPage from '../UserPage/UserPage';
-// import mapStateToProps from 
 
 class App extends Component {
   componentDidMount() {
@@ -37,7 +35,7 @@ class App extends Component {
         <Nav />
         <Switch>
           <Redirect exact from="/" to="/home" />
-          
+
           {/* UNPROTECTED ROUTES */}
           <Route
             exact
@@ -66,20 +64,11 @@ class App extends Component {
             exact
             path="/info"
             component={InfoPage}
-          />  
+          />
           {/* For protected routes, the view could show one of several things on the same route.
-          Visiting localhost:3000/user will show the UserPage if the user is logged in.
+          Visiting localhost:3000/user will show the UserHub if the user is logged in.
           If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
           Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          
-          {/* NO LONGER USING THIS /user ROUTE */}
-          {/* <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage 
-            exact
-            path="/user"
-            component={UserPage}
-          /> */}
-
           <ProtectedRoute
             // logged in shows UserHub else shows LoginPage
             exact
@@ -105,7 +94,7 @@ class App extends Component {
           path="/asyncinput"
           component={Asyncinput}
           />
-          
+
           {/* When a value is supplied for the authRedirect prop the user will
           be redirected to the path supplied when logged in, otherwise they will
           be taken to the component and path supplied. */}
@@ -150,6 +139,7 @@ class App extends Component {
     );
   }
 }
+
 const mapStateToProps = (reduxStore) => ({
   reduxStore
 });

@@ -27,7 +27,7 @@ button{
   border-radius: 4px;
   margin-left: 5px;
   margin-right: 5px;
-  font-family: 'Ubuntu', serif; font-size: 15px; 
+  font-family: 'Ubuntu', serif; font-size: 15px;
 
 
 }
@@ -35,13 +35,13 @@ button:hover{
   background-color: chartreuse;
 }
 body {
-  font-family: 'Ubuntu', serif; font-size: 20px; 
+  font-family: 'Ubuntu', serif; font-size: 20px;
   background-color: rgb(32, 34, 34);
   /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
   margin: 0px;
 }
 input, textarea{
-  font-family: 'Ubuntu', serif; font-size: 15px; 
+  font-family: 'Ubuntu', serif; font-size: 15px;
 }
 input{
   width: 300px;
@@ -66,7 +66,7 @@ Button
 -------------------------------------------------------------------------------- */
 
 .btn {
-  
+
   display: inline-block;
   padding: 10px 20px;
   border-color: #014041;
@@ -234,9 +234,8 @@ width: 10px
   border-radius: 8px;
   width: 80%;
   height: 500px;
-  margin: auto; 
+  margin: auto;
 }
-
 
 #descriptionDiv{
   padding-top: 100px;
@@ -319,7 +318,7 @@ margin-top: 10px;
   margin-left: 60px;
   margin-top: 10px;
   display: inline-block;
-  
+
   /* margin: 1%; */
   position: relative;
   /* left: 13%; */
@@ -437,7 +436,7 @@ margin-left: 20px;}
   margin-top: 0px;
   overflow: auto;
   max-height: 200px;
-    
+
   width: 308px;
   margin-left: 21px;
   background-color: white;
@@ -457,7 +456,7 @@ margin-left: 20px;}
   margin-left: 0;
 }
 #optionLi:hover{
-  
+
   background-color: chartreuse;
 }
 
@@ -509,4 +508,3 @@ margin-left: 32.5%;
   text-align: center;
   color: white;
 }
-
