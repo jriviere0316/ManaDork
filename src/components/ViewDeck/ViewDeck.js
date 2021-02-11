@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import { PieChart } from "react-minimal-pie-chart";
+import "./ViewDeck.css";
 
 class ViewDeck extends Component {
   state = {
@@ -44,40 +45,11 @@ class ViewDeck extends Component {
       });
     }
   };
+
   removeDisplay = (card) => {
     // console.log('left:', card.name, card, card.api_data);
     this.setState({
       hoverCard: "https://i.stack.imgur.com/Vkq2a.png",
-    });
-  };
-
-  qtyDown = (card) => {
-    console.log("clicked -", card.name, card.quantity, card);
-    console.log("this cards qty is:", card.quantity);
-    let qtyLess = (card.quantity -= 1);
-    console.log(qtyLess);
-    this.props.dispatch({
-      type: "EDIT_LISTITEM",
-      payload: card,
-    });
-  };
-
-  qtyUp = (card) => {
-    console.log("clicked + on: ", card.name, card);
-    console.log("this cards qty is:", card.quantity);
-    let qtyMore = (card.quantity += 1);
-    console.log(qtyMore);
-    this.props.dispatch({
-      type: "EDIT_LISTITEM",
-      payload: card,
-    });
-  };
-
-  deleteCard = (card) => {
-    console.log("clicked delete on:", card.name);
-    this.props.dispatch({
-      type: "DELETE_LISTITEM",
-      payload: card,
     });
   };
 
@@ -188,7 +160,6 @@ class ViewDeck extends Component {
   };
 
   render() {
-    // console.log('recentCard state:',this.state.recentCard);
     const includedCards = this.props.reduxStore.cardList.filter(
       (card) => card.deckid === this.props.reduxStore.selectedDeck.id
     );
@@ -226,16 +197,16 @@ class ViewDeck extends Component {
 
     return (
       <div>
-        <h1 id="editDeckHeader">
+        <h1 className="editDeckHeader">
           Viewing {this.props.reduxStore.selectedDeck.deckname} from{" "}
           {this.props.reduxStore.user.username}{" "}
         </h1>
         {/* <h1 id="editDeckHeader">Total Cards: {this.state.deckQty}</h1> */}
 
-        <div id="viewDeckEditDeckView">
+        <div className="viewDeckEditDeckView">
           <div>
             <img
-              id="featuredViewDeckCard"
+              className="featuredViewDeckCard"
               src={this.state.hoverCard}
               width="200px"
               height="280"
@@ -243,7 +214,7 @@ class ViewDeck extends Component {
           </div>
 
           <br />
-          <h4 id="editDeckHeader">Total Cards: {this.state.deckQty}</h4>
+          <h4 className="editDeckHeader">Total Cards: {this.state.deckQty}</h4>
 
           <table>
             <thead>
@@ -251,7 +222,7 @@ class ViewDeck extends Component {
                 <th></th>
                 {/* Hovercard^ */}
                 <th>Quantity</th>
-                <th id="nameTh">Card Name</th>
+                <th className="nameTh">Card Name</th>
                 {/* <th>isCMDR?</th> */}
                 <th></th>
                 {/* isFeatured? */}
@@ -265,9 +236,9 @@ class ViewDeck extends Component {
                 <tr key={card.id}>
                   <td></td>
                   {/* //hovercard^ */}
-                  <td id="qtyTd">x {card.quantity}</td>
+                  <td className="qtyTd">x {card.quantity}</td>
                   <td
-                    id="nameTd"
+                    className="nameTd"
                     onMouseOver={() => this.cardDisplay(card)}
                     onMouseLeave={() => this.removeDisplay(card)}
                   >
@@ -283,13 +254,13 @@ class ViewDeck extends Component {
             {/* ////////////////////////////////////////////////////// */}
           </table>
         </div>
-
+                
         <br />
 
-        <div id="viewDeckFeaturedCardDiv">
+        <div className="viewDeckFeaturedCardDiv">
           <h2>Featured Card</h2>
           <br />
-          <div id="cardImg">
+          <div className="cardImg">
             <img src={featuredUri} width="50%" height="50%" />
             <br />
             <button
@@ -303,28 +274,35 @@ class ViewDeck extends Component {
         <br />
 
         {/* <h5 id="upvotes">Upvotes: {this.props.reduxStore.selectedDeck.upvotes}</h5>
-                <hr/> */}
+            <hr/> */}
 
-        <div id="descriptionDiv">
-          <h2 id="descriptionDivText">Description:</h2>
+        <div className="descriptionDiv">
+          <h2 className="descriptionDivText">Description:</h2>
           <textarea
-            id="descriptionInput"
+            className="descriptionInput"
             placeholder="Deck Description"
             value={this.props.reduxStore.selectedDeck.description}
           ></textarea>
           <br />
         </div>
 
-        <div>
+        <div className="deckStats">
           <h1>Total Cards: {this.state.deckQty}</h1>
           <h1>Devotion</h1>
           <h3>
-            | White Symbols: {devotion.White} | Blue Symbols: {devotion.Blue} |
-            Black Symbols: {devotion.Black} | Red Symbols: {devotion.Red} |
-            Green Symbols: {devotion.Green} | Colorless Symbols: {devotion.Gray}{" "}
-            |
+            White Symbols: {devotion.White} <br />
+            Blue Symbols: {devotion.Blue}
+            <br />
+            Black Symbols: {devotion.Black}
+            <br />
+            Red Symbols: {devotion.Red}
+            <br />
+            Green Symbols: {devotion.Green}
+            <br />
+            Colorless Symbols: {devotion.Gray}
           </h3>
           <PieChart
+            className="devotionPieChart"
             viewBoxSize="[100,100]"
             radius="50"
             data={[
