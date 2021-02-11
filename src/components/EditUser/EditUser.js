@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 // import {connect} from 'react-redux';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-const mtg = require('mtgsdk')
+import './EditUser.css'
 
 
 class EditUser extends Component {

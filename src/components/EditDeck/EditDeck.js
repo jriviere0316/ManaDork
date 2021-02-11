@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-// import {connect} from 'react-redux';
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import Swal from "sweetalert2";
-
-// const mtg = require('mtgsdk')
-// var scryfallSdk = require("scryfall-sdk")
+import "./EditDeck.css";
 
 class EditDeck extends Component {
   state = {
@@ -250,21 +247,24 @@ class EditDeck extends Component {
     const includedCards = this.props.reduxStore.cardList.filter(
       (card) => card.deckid === this.props.reduxStore.selectedDeck.id
     );
+
     const featuredCard = includedCards.filter(
       (featured) => featured.is_featured === true
     );
+
     const mappedFeaturedCard = featuredCard.map((fCard) =>
       JSON.parse(fCard.api_data)
     );
+
     const featuredUri = mappedFeaturedCard.map(
       (fUri) => fUri.image_uris.normal
     );
+
     // console.log('mappedFeaturedCard is:', mappedFeaturedCard);
     // console.log('mappedFeaturedCard image uri is:', mappedFeaturedCard.artist);
     // console.log('featuredUri:', featuredUri);
-
     // console.log('description:', this.state.description);
-    console.log("state is:", this.state);
+    // console.log("state is:", this.state);
 
     return (
       <div>
@@ -274,7 +274,7 @@ class EditDeck extends Component {
           </h1>
         </div>
 
-        <div id="descriptionDiv">
+        <div className="descriptionDiv">
           {/*                         DECK NAME                     */}
           <input
             id="deckName"
@@ -308,7 +308,7 @@ class EditDeck extends Component {
           {/*                         DESCRIPTION                    */}
 
           <textarea
-            id="descriptionInput"
+            className="descriptionInput"
             placeholder="Deck Description"
             onChange={(event) => this.handleChange(event, "description")}
             defaultValue={this.props.reduxStore.selectedDeck.description}
@@ -322,7 +322,7 @@ class EditDeck extends Component {
 
         <br />
 
-        <div id="editDeckView">
+        <div className="editDeckView">
           <table>
             <thead>
               <tr>
@@ -341,7 +341,7 @@ class EditDeck extends Component {
             <tbody>
               {includedCards.map((card) => (
                 <tr key={card.id}>
-                  <td id="qtyTd">x {card.quantity}</td>
+                  <td className="qtyTd">x {card.quantity}</td>
                   <td
                     onMouseOver={() => this.cardDisplay(card)}
                     onMouseLeave={() => this.removeDisplay(card)}
@@ -352,7 +352,7 @@ class EditDeck extends Component {
                   <td>
                     <input
                       type="checkbox"
-                      id="myCheck"
+                      className="myCheck"
                       defaultValue={card.is_featured}
                       defaultChecked={card.is_featured}
                       onChange={() => this.handleFeatured(card)}
@@ -360,13 +360,13 @@ class EditDeck extends Component {
                   </td>
                   <td>
                     <button
-                      id="incrementBtn"
+                      className="incrementBtn"
                       onClick={() => this.qtyDown(card)}
                     >
                       {" "}
                       -{" "}
                     </button>
-                    <button id="incrementBtn" onClick={() => this.qtyUp(card)}>
+                    <button className="incrementBtn" onClick={() => this.qtyUp(card)}>
                       +
                     </button>
                   </td>
@@ -384,7 +384,7 @@ class EditDeck extends Component {
         <br />
         <div>
           {/* <h1>{this.props.reduxStore.card}</h1> */}
-          <form id="cardInputForm">
+          <form className="cardInputForm">
             {this.state.hoverCard.length >= 1 ? (
               <>
                 <img
@@ -402,7 +402,7 @@ class EditDeck extends Component {
             )}
             <br />
             <input
-              id="cardSearchInput"
+              className="cardSearchInput"
               placeholder="Card Name"
               value={this.state.cardSearchInput}
               onChange={this.handleSearchInput}
@@ -410,13 +410,13 @@ class EditDeck extends Component {
             <br />
 
             {this.state.cardSearchInput.length >= 1 ? (
-              <div id="optionsDiv">
-                <ul id="cardOptions">
+              <div className="optionsDiv">
+                <ul className="cardOptions">
                   {this.props.reduxStore.card.map((option) => (
                     <li
                       key={option.id}
                       value={option}
-                      id="optionLi"
+                      className="optionLi"
                       onMouseOver={() => this.updateSearchImage(option)}
                       onMouseLeave={() => this.removeDisplay(option)}
                       onClick={() => this.selectOption(option)}
@@ -449,11 +449,11 @@ class EditDeck extends Component {
         <br />
 
         <br />
-        <div id="featuredCardDiv">
+        <div className="featuredCardDiv">
           <h2>Featured Card</h2>
           <br />
-          <div id="cardImg">
-             <img src={featuredUri} width="50%" height="50%" />
+          <div className="cardImg">
+            <img src={featuredUri} width="50%" height="50%" />
           </div>
         </div>
       </div>

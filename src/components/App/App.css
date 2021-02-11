@@ -4,46 +4,52 @@ body,
   height: 100%;
 }
 
-h1, h2, #aboutPtag, #howToPlayPTag{
+h1,
+h2,
+#aboutPtag,
+#howToPlayPTag {
   color: white;
 }
-#aboutPtag{
+#aboutPtag {
   text-align: center;
 }
-#loginH2{
+#loginH2 {
   color: black;
   margin-bottom: 10px;
 }
-#h4tag, #landingPtag{
+#h4tag,
+#landingPtag {
   color: white;
 }
-h2{
+h2 {
   margin-bottom: 0;
 }
-img{
+img {
   border-radius: 10px;
 }
-button{
+button {
   border-radius: 4px;
   margin-left: 5px;
   margin-right: 5px;
-  font-family: 'Ubuntu', serif; font-size: 15px;
-
-
+  font-family: "Ubuntu", serif;
+  font-size: 15px;
 }
-button:hover{
+button:hover {
   background-color: chartreuse;
 }
 body {
-  font-family: 'Ubuntu', serif; font-size: 20px;
+  font-family: "Ubuntu", serif;
+  font-size: 20px;
   background-color: rgb(32, 34, 34);
   /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
   margin: 0px;
 }
-input, textarea{
-  font-family: 'Ubuntu', serif; font-size: 15px;
+input,
+textarea {
+  font-family: "Ubuntu", serif;
+  font-size: 15px;
 }
-input{
+input {
   width: 300px;
   text-align: center;
 }
@@ -66,7 +72,6 @@ Button
 -------------------------------------------------------------------------------- */
 
 .btn {
-
   display: inline-block;
   padding: 10px 20px;
   border-color: #014041;
@@ -151,25 +156,21 @@ input {
   margin-bottom: 10px;
 }
 
-h1{
+h1 {
   margin: 0%;
 }
 
-#editDeckHeader{
-text-align: center;
-}
-textarea{
+textarea {
   width: 400px;
   height: 200px;
 }
 
-#logoutbtn{
+#logoutbtn {
   background-color: #014041;
   background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
-
 }
 
-.userDiv{
+.userDiv {
   position: relative;
   background-color: #00acb0;
   background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
@@ -185,40 +186,23 @@ textarea{
   text-align: center;
   border-radius: 10px;
 }
-#incrementBtn{
-  height: 25px;
-  width: 25px;
-}
-#qtyTd{
-  text-align: center;
-}
-#nameTh{
-  text-align: left;
-  padding-left: 40px;
-}
-#nameTd{
-  text-align: left;
-  padding-left: 30px;}
 
-#myCheck{
-width: 10px
-}
-.userDeckScroll{
+.userDeckScroll {
   background-color: white;
   border-radius: 2px;
   width: 400px;
-  height:380px;
+  height: 380px;
   overflow: auto;
 }
-.friendsDeckScroll{
+.friendsDeckScroll {
   background-color: white;
   border-radius: 2px;
   width: 400px;
-  height:380px;
+  height: 380px;
   overflow: auto;
 }
 
-#viewDeckTable{
+#viewDeckTable {
   outline: 1px solid black;
   text-align: center;
   background-color: white;
@@ -230,111 +214,26 @@ width: 10px
   overflow: auto;
 }
 
-.mainDiv{
+.mainDiv {
   border-radius: 8px;
   width: 80%;
   height: 500px;
   margin: auto;
 }
 
-#descriptionDiv{
-  padding-top: 100px;
-  background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
-
-  background-color: #00acb0;
-  /* outline: solid black 2px; */
-  box-shadow: 0 0 1pt 1pt black;
-  border-radius: 10px;
-  padding: 10px;
-  display: inline-block;
-  margin: auto;
-  text-align: center;
-  width: 89%;
-  margin-left: 60px;
-    margin-right: 60px;
-}
-#descriptionDivText{
-text-align: left;
-padding-left: 22px;
-}
-#descriptionInput{
-  width: 95%;
-}
-.deckName{
-margin-bottom: 10px;
-margin-top: 10px;
+.deckName {
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
-#editInfoTag{
+#editInfoTag {
   color: white;
   text-align: left;
   padding-left: 50px;
   margin: 0;
-
-}
-#cardInputForm{
-  box-shadow: 0 0 1pt 1pt black;
-  background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
-
-  border-radius: 10px;
-  width: 350px;
-  background-color: #00acb0;
-  /* outline: solid black 2px; */
-  padding: 10px;
-  display: inline-block;
-  left: 3.5%;
-  position: relative;
-  margin: 1%;
-  text-align: center;
 }
 
-
-
-#featuredCardDiv{
-  background-color: #00acb0;
-  background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
-
-  /* outline: solid black 2px; */
-  box-shadow: 0 0 1pt 1pt black;
-  border-radius: 10px;
-  padding-left: 40px;
-  padding-right: 40px;
-  display: inline-block;
-  margin: 1%;
-  position: relative;
-  left: 6.5%;
-  text-align: center;
-}
-
-#viewDeckFeaturedCardDiv{
-  background-color: #00acb0;
-  background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
-
-  /* outline: solid black 2px; */
-  box-shadow: 0 0 1pt 1pt black;
-  border-radius: 10px;
-  padding-left: 40px;
-  padding-right: 40px;
-  margin-left: 60px;
-  margin-top: 10px;
-  display: inline-block;
-
-  /* margin: 1%; */
-  position: relative;
-  /* left: 13%; */
-  text-align: center;
-}
-
-#cardImg{
-/* padding: 20%; */
-padding-top: 0;
-padding-bottom: 10px;
-margin-left: -150px;
-margin-right: -150px;
-/* whyyyyyyyyyyyy margin whyyyyyyyyy^^ */
-}
-
-#listDisplay{
+#listDisplay {
   background-color: #00acb0;
   outline: solid black 2px;
   padding: 10px;
@@ -347,164 +246,66 @@ margin-right: -150px;
   position: absolute;
 }
 
-#editDeckView{
-  /* outline: solid black 2px; */
-  background-color: white;
-  box-shadow: 0 0 1pt 1pt black;
-  border-radius: 10px;
-  width: 43%;
-  position: relative;  /* display: inline-block; */
-  float: right;
-  margin-right: 10%;
-  margin-top: 33px;
-  height: 500px;
-  overflow: auto;
-  margin-bottom: 40px;
-
-}
-#viewDeckEditDeckView{
-  /* outline: solid black 2px; */
-  background-color: white;
-  box-shadow: 0 0 1pt 1pt black;
-  border-radius: 10px;
-  width: 43%;
-  position: relative;  /* display: inline-block; */
-  float: right;
-  margin-right: 10%;
-  margin-top: 33px;
-  height: 500px;
-  overflow: auto;
-  margin-bottom: 40px;
-
-}
-
-
-#listDisplayTextArea{
+#listDisplayTextArea {
   height: 590px;
 }
 
-
-#deckName:hover{
+#deckName:hover {
   color: rgb(29, 174, 123);
   text-decoration: underline;
 }
-
 
 /* --------------------------------------------------------------------------------
 View Deck
 -------------------------------------------------------------------------------- */
 
-.profilePic{
-margin-left: 10px;}
-
-.profileInfo{
-display: inline-block;
-margin-left: 20px;}
-
-#editUserDiv{
-  background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
-
-  background-color: #00acb0;
-  /* outline: solid black 2px; */
-  box-shadow: 0 0 1pt 1pt black;
-  border-radius: 10px;
-  padding: 10px;
-  margin: auto;
-  width: 400px;
-  text-align: center;
+.profilePic {
+  margin-left: 10px;
 }
 
-#editViewHoverCard{
+.profileInfo {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+#editViewHoverCard {
   margin-left: 500px;
 }
 
-#optionLi{
-  width: 305px;
-  /* padding-left: 10px;
-  padding-right: 10px; */
-  outline: solid black 1px;
-  list-style-type: none;
-  background-color: #efefef;
-}
-
-#cardSearchInput{
-  width: 300px;
-  margin-bottom: 0 ;
-}
-
-#optionsDiv{
-  margin-top: 0px;
-  overflow: auto;
-  max-height: 200px;
-
-  width: 308px;
-  margin-left: 21px;
-  background-color: white;
-  }
-
-#cardOptions{
-  width: 305px;
-  margin-top: 0;
-  margin-left: auto;
-  margin-right: auto;
-  align-content: center;
-  left: 13%;
-  padding-left: 0;
-
-}
-#optionLi{
-  margin-left: 0;
-}
-#optionLi:hover{
-
-  background-color: chartreuse;
-}
-
-#howToPlayPTag{
+#howToPlayPTag {
   margin: 15%;
   margin-top: 0;
 }
-#howToHeader{
+#howToHeader {
   text-align: center;
 }
 
-#featuredViewDeckCard{
-  margin: 0;
-  right: 800px;
-  position: static;
-  padding-top: 130px;
-  border-radius: 10px;
-  position: fixed;
-  float: right;
-}
-
-.deckOptions{
+.deckOptions {
   border-bottom: 1px solid black;
   padding-bottom: 15px;
   padding-top: 0px;
 }
 
-.friendOptions{
+.friendOptions {
   height: 120px;
   border-bottom: 1px solid black;
   padding-bottom: 15px;
   padding-top: 0px;
 }
 
-
-#howToPlayVid{
-margin-left: 32.5%;
+#howToPlayVid {
+  margin-left: 32.5%;
 }
 
-#howToLink{
+#howToLink {
   color: chartreuse;
   margin-left: 466px;
 }
-#howToLink:hover{
+#howToLink:hover {
   color: rgb(61, 255, 255);
 }
 
-#lifeTotals{
+#lifeTotals {
   text-align: center;
   color: white;
 }
