@@ -285,7 +285,7 @@ class EditDeck extends Component {
 
           {/* {this.state.isPublic === false ?
                     <>
-                        <form onChange={this.handleRadio} >       
+                        <form onChange={this.handleRadio} >
                             <label htmlFor="isPublic" >Public</label>
                             <input type="radio" name='publicstatus' id="isPublic" value="true" ></input>
                             <label htmlFor="isPrivate">Private</label>
@@ -294,14 +294,14 @@ class EditDeck extends Component {
                     </>
                     :
                     <>
-                        <form onChange={this.handleRadio} >       
+                        <form onChange={this.handleRadio} >
                             <label htmlFor="isPublic" >Public</label>
                             <input type="radio" name='publicstatus' id="isPublic" value="true" defaultChecked></input>
                             <label htmlFor="isPrivate">Private</label>
                             <input type="radio" name='publicstatus' id="isPublic" value="false"></input>
                         </form>
                     </>
-                   
+
                 } */}
 
           <br />
@@ -396,7 +396,7 @@ class EditDeck extends Component {
               </>
             ) : (
               <>
-                {/* <img src={this.props.reduxStore.card[0].image_uris.normal} 
+                {/* <img src={this.props.reduxStore.card[0].image_uris.normal}
                                 alt='Card Display' width='215px' height='300px'/> */}
               </>
             )}
@@ -412,9 +412,9 @@ class EditDeck extends Component {
             {this.state.cardSearchInput.length >= 1 ? (
               <div className="optionsDiv">
                 <ul className="cardOptions">
-                  {this.props.reduxStore.card.map((option) => (
+                  {this.props.reduxStore.card.map((option, i) => (
                     <li
-                      key={option.id}
+                      key={`${i + 1}${option.id}`}
                       value={option}
                       className="optionLi"
                       onMouseOver={() => this.updateSearchImage(option)}

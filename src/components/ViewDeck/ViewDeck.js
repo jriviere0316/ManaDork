@@ -77,16 +77,23 @@ class ViewDeck extends Component {
   };
 
   parseCards = (cards) => {
-    var allParsedCards = [];
-    cards.forEach((card) => {
-      var parsedCard = JSON.parse(card.api_data);
-      allParsedCards.push(parsedCard);
-    });
-    return allParsedCards;
+    // var allParsedCards = [];
+    // cards.forEach((card) => {
+    //   var parsedCard = JSON.parse(card.api_data);
+    //   allParsedCards.push(parsedCard);
+    // });
+    // return allParsedCards;
+    return cards.map(card => {
+      const jsonData = JSON.parse(card.api_data);
+      return {
+        ...card,
+        jsonData,
+      };
+    })
   };
 
   devotion = (cards) => {
-    console.log(cards);
+    console.log('CARDS STUFFS IN DEVOTION', cards);
     //var allColors = []
     var allSymbols = [];
     var devotion = {
@@ -100,36 +107,36 @@ class ViewDeck extends Component {
     //.reduce
 
     cards.forEach((card) => {
-      if (card.colors.length === 0 && card.cmc > 0) {
-        console.log("colorless card with cmc of", card.cmc);
-        devotion.Gray += card.cmc;
+      if (card.jsonData.colors.length === 0 && card.jsonData.cmc > 0) {
+        console.log("colorless card with cmc of", card.jsonData.cmc);
+        devotion.Gray += card.jsonData.cmc;
       }
 
-      for (let index = 0; index < card.mana_cost.length; index++) {
-        const element = card.mana_cost[index];
+      for (let index = 0; index < card.jsonData.mana_cost.length; index++) {
+        const element = card.jsonData.mana_cost[index];
         if (element.includes("{") || element.includes("}")) {
           //console.log('this includes a { or }');
         } else {
           console.log("this is", element);
           if (element === "W") {
             //console.log('white');
-            devotion.White += 1;
+            devotion.White += (1 * card.quantity);
           }
           if (element === "U") {
             //console.log('blue');
-            devotion.Blue += 1;
+            devotion.Blue += (1 * card.quantity);
           }
           if (element === "B") {
             //console.log('black');
-            devotion.Black += 1;
+            devotion.Black += (1 * card.quantity);
           }
           if (element === "R") {
             //console.log('red');
-            devotion.Red += 1;
+            devotion.Red += (1 * card.quantity);
           }
           if (element === "G") {
             //console.log('green');
-            devotion.Green += 1;
+            devotion.Green += (1 * card.quantity);
           }
         }
       }
@@ -145,10 +152,10 @@ class ViewDeck extends Component {
 
     cards.forEach((card) => {
       //console.log(card.cmc);
-      if (card.type_line.includes("land")) {
+      if (card.jsonData.type_line.includes("land")) {
         //console.log('this is a land and shouldnt be counted');
       } else {
-        convertedManaCosts.push(card.cmc);
+        convertedManaCosts.push(card.jsonData.cmc);
         //console.log(convertedManaCosts);
       }
     });
@@ -163,14 +170,14 @@ class ViewDeck extends Component {
     const includedCards = this.props.reduxStore.cardList.filter(
       (card) => card.deckid === this.props.reduxStore.selectedDeck.id
     );
-    console.log("includedCards:", includedCards);
+    // console.log("includedCards:", includedCards);
     const featuredCard = includedCards.filter(
       (featured) => featured.is_featured === true
     );
     const parsedFeaturedCard = featuredCard.map((fCard) =>
       JSON.parse(fCard.api_data)
     );
-    console.log("parsedFeaturedCard", parsedFeaturedCard);
+    // console.log("parsedFeaturedCard", parsedFeaturedCard);
     const featuredUri = parsedFeaturedCard.map(
       (fUri) => fUri.image_uris.normal
     );
@@ -178,22 +185,22 @@ class ViewDeck extends Component {
     this.countQty(includedCards);
 
     const parsedCards = this.parseCards(includedCards);
-    console.log(
-      "🚀 ~ file: ViewDeck.js ~ line 168 ~ ViewDeck ~ render ~ parsedCards",
-      parsedCards
-    );
+    // console.log(
+    //   "🚀 ~ file: ViewDeck.js ~ line 168 ~ ViewDeck ~ render ~ parsedCards",
+    //   parsedCards
+    // );
 
     const devotion = this.devotion(parsedCards);
-    console.log(
-      "🚀 ~ file: ViewDeck.js ~ line 204 ~ ViewDeck ~ render ~ devotion",
-      devotion
-    );
+    // console.log(
+    //   "🚀 ~ file: ViewDeck.js ~ line 204 ~ ViewDeck ~ render ~ devotion",
+    //   devotion
+    // );
 
     const cmc = this.cmc(parsedCards);
-    console.log(
-      "🚀 ~ file: ViewDeck.js ~ line 215 ~ ViewDeck ~ render ~ cmc sans land",
-      cmc
-    );
+    // console.log(
+    //   "🚀 ~ file: ViewDeck.js ~ line 215 ~ ViewDeck ~ render ~ cmc sans land",
+    //   cmc
+    // );
 
     return (
       <div>
@@ -254,7 +261,7 @@ class ViewDeck extends Component {
             {/* ////////////////////////////////////////////////////// */}
           </table>
         </div>
-                
+
         <br />
 
         <div className="viewDeckFeaturedCardDiv">
