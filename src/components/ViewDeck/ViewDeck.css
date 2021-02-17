@@ -1,25 +1,52 @@
+.cmcdevotion {
+  width: 98%;
+  margin-left: 3%;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  display: inline-block;
+}
+
 .deckStats {
   background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
-  text-align: center;
-  color: white;
-  width: 300px;
   box-shadow: 0 0 1pt 1pt black;
   border-radius: 10px;
+  text-align: center;
+  color: white;
+  padding-left: 40px;
+  padding-right: 40px;
+  width: 300px;
+  float: left;
+  margin-right: 3%;
+}
+
+.cmcDiv {
+  background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
+  box-shadow: 0 0 1pt 1pt black;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  padding-left: 40px;
+  padding-right: 40px;
+  width: 300px;
+  height: 455px;
+  float: left;
+  margin-right: 3%;
+}
+.cmcTable{
+    padding-left: 70px;
 }
 
 .descriptionDiv {
-  padding-top: 100px;
   background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
   background-color: #00acb0;
   box-shadow: 0 0 1pt 1pt black;
   border-radius: 10px;
-  padding: 10px;
-  display: inline-block;
-  margin: auto;
   text-align: center;
-  width: 89%;
-  margin-left: 60px;
-  margin-right: 60px;
+  width: 500px;
+  height: 455px;
+  margin-left: 0px;
+  padding-top: 0px;
+  float: left;
 }
 
 .featuredCardDiv {
@@ -36,16 +63,16 @@
   text-align: center;
 }
 
-.viewDeckEditDeckView {
+.ViewDeckMainTable {
   background-color: white;
   box-shadow: 0 0 1pt 1pt black;
   border-radius: 10px;
-  width: 43%;
-  position: relative; /* display: inline-block; */
+  width: 65%;
+  position: relative;
   float: right;
-  margin-right: 30%;
+  margin-right: 5%;
   margin-top: 33px;
-  height: 500px;
+  height: 470px;
   overflow: auto;
   margin-bottom: 40px;
 }
@@ -59,35 +86,14 @@
   padding-left: 22px;
 }
 
-.descriptionDiv {
-  padding-top: 100px;
-  background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
-  background-color: #00acb0;
-  /* outline: solid black 2px; */
-  box-shadow: 0 0 1pt 1pt black;
-  border-radius: 10px;
-  padding: 10px;
-  display: inline-block;
-  margin: auto;
-  text-align: center;
-  width: 89%;
-  margin-left: 60px;
-  margin-right: 60px;
-}
-
-.descriptionDivText {
-  text-align: left;
-  padding-left: 22px;
-}
-
 .descriptionInput {
   width: 95%;
+  height: 75%;
 }
 
 .viewDeckFeaturedCardDiv {
   background-color: #00acb0;
   background-image: url(https://media.istockphoto.com/photos/green-blue-grunge-background-teal-stone-background-picture-id1209152534?k=6&m=1209152534&s=170667a&w=0&h=v-wV_GcAkEhkE4bCOhR725BuwQHYa66VC0UDEkvLuhA=);
-  /* outline: solid black 2px; */
   box-shadow: 0 0 1pt 1pt black;
   border-radius: 10px;
   padding-left: 40px;
@@ -95,35 +101,33 @@
   margin-left: 60px;
   margin-top: 10px;
   display: inline-block;
-  /* margin: 1%; */
   position: relative;
-  /* left: 13%; */
   text-align: center;
 }
 
 .viewDeckEditDeckView {
-  /* outline: solid black 2px; */
   background-color: white;
   box-shadow: 0 0 1pt 1pt black;
   border-radius: 10px;
   width: 43%;
-  position: relative; /* display: inline-block; */
+  position: relative;
   float: right;
   margin-right: 10%;
   margin-top: 33px;
-  height: 500px;
+  height: 470px;
   overflow: auto;
   margin-bottom: 40px;
 }
 
 .featuredViewDeckCard {
+  z-index: 1;
+  width: 245px;
+  height: 343px;
   margin: 0;
-  right: 800px;
-  position: static;
-  padding-top: 130px;
-  border-radius: 10px;
-  position: fixed;
-  float: right;
+  border-radius: 15px;
+  margin-left: 75px;
+  margin-top: 117px;
+  position: absolute;
 }
 
 .editDeckHeader {
@@ -131,13 +135,19 @@
 }
 
 .nameTh {
-  text-align: left;
   padding-left: 40px;
 }
 
+.typeTh{
+    padding-left: 40px;
+}
+.typeTd{
+    padding-left: 40px;
+    text-align: center;
+}
+
 .nameTd {
-  text-align: left;
-  padding-left: 30px;
+  padding-left: 50px;
 }
 
 .qtyTd {

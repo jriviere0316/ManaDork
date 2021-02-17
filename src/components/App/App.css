@@ -180,11 +180,12 @@ textarea {
   padding-left: 40px;
   padding-right: 40px;
   padding-bottom: 40px;
-  display: inline-block;
+  /* display: inline-block; */
   margin: 45px;
   /* margin-left: 335px; */
   text-align: center;
   border-radius: 10px;
+  float: left;
 }
 
 .userDeckScroll {

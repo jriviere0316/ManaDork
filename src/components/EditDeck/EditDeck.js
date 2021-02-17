@@ -1,465 +1,433 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import mapStoreToProps from "../../redux/mapStoreToProps";
+//import mapStoreToProps from "../../redux/mapStoreToProps";
 import Swal from "sweetalert2";
 import "./EditDeck.css";
 
-class EditDeck extends Component {
-  state = {
-    cardSearchInput: "",
+function EditDeck(props) {
+  const [state, setState] = React.useState({
+    //cardSearchInput: "",
     featuredCard: "",
     recentCard: "",
-    hoverCard: "https://i.stack.imgur.com/Vkq2a.png",
+    //hoverCard: "https://i.stack.imgur.com/Vkq2a.png",
     selectedCard: {},
-    qtyInput: 1,
-    isPublic: this.props.reduxStore.selectedDeck.ispublic,
-    deckname: this.props.reduxStore.selectedDeck.deckname,
-    description: this.props.reduxStore.selectedDeck.description,
+    //qtyInput: 1,
+    isPublic: props.reduxStore.selectedDeck.ispublic,
+    deckname: props.reduxStore.selectedDeck.deckname,
+    description: props.reduxStore.selectedDeck.description,
     defaultSearch: "",
-  };
-  componentDidMount() {
-    this.props.dispatch({
+  });
+
+  const [cardSearchInput, setCardSearchInput] = useState("");
+  const [selectedCard, setSelectedCard] = useState({});
+  const [selectedOption, setSelectedOption] = useState("");
+  const [qtyInput, setQtyInput] = useState(1);
+  //const [description, setDescription] = useState(props.reduxStore.selectedDeck.description)
+
+  const [hoverCard, setHoverCard] = useState(
+    "https://i.stack.imgur.com/Vkq2a.png"
+  );
+
+  useEffect(() => {
+    props.dispatch({
       type: "GET_LIST",
-      payload: this.props.reduxStore.selectedDeck.id,
+      payload: props.reduxStore.selectedDeck.id,
     });
 
-    //console.log('dispatching selected deck');
-    this.props.dispatch({
+    props.dispatch({
       type: "GET_SELECTED_DECK",
-      payload: this.props.history.location.pathname.split("/")[2],
+      payload: props.history.location.pathname.split("/")[2],
     });
+  }, [state]);
 
-    this.setState({
-      ...this.state,
-      deckname: this.props.reduxStore.selectedDeck.deckname,
-      description: this.props.reduxStore.selectedDeck.description,
-      isPublic: this.props.reduxStore.selectedDeck.ispublic,
-    });
-  }
-  handleFeatured = (card) => {
+  const handleFeatured = (card) => {
     console.log("in handle featured", card.id);
     card.is_featured = !card.is_featured;
-    console.log("updated featured status:", card.is_featured);
-    this.props.dispatch({
+    //console.log("updated featured status:", card.is_featured);
+    props.dispatch({
       type: "EDIT_LISTITEM",
       payload: card,
     });
   };
-  handleChange = (event, propertyName) => {
-    this.setState({
-      ...this.state,
+
+  const handleChange = (event, propertyName) => {
+    setState({
+      ...state,
       [propertyName]: event.target.value,
     });
+    console.log(state);
   };
 
-  cardDisplay = (card) => {
-    console.log("hovering on", card.name, card, card.api_data);
+  const cardDisplay = (card) => {
+    //console.log("hovering on", card.name, card);
     var parsedData = JSON.parse(card.api_data);
+    //console.log(parsedData);
     if (parsedData.image_uris === undefined) {
-      this.setState({
-        hoverCard: `https://s3.thingpic.com/images/Kz/uF3amfCnYFLBggjUNr1sPRKi.jpeg`,
-      });
+      setHoverCard(
+        `https://s3.thingpic.com/images/Kz/uF3amfCnYFLBggjUNr1sPRKi.jpeg`
+      );
     } else {
-      this.setState({
-        hoverCard: parsedData.image_uris.normal,
-      });
+      setHoverCard(parsedData.image_uris.normal);
     }
   };
 
-  removeDisplay = (card) => {
-    this.setState({
-      hoverCard: "https://i.stack.imgur.com/Vkq2a.png",
-    });
+  const removeDisplay = (card) => {
+    setHoverCard("https://i.stack.imgur.com/Vkq2a.png");
   };
 
-  handleSearchInput = (event) => {
+  const handleSearchInput = (event) => {
     console.log("event:", event.target.value);
-    this.setState({
-      cardSearchInput: event.target.value,
-    });
-    if (this.state.cardSearchInput.length >= 2) {
-      this.test();
+    setCardSearchInput(event.target.value);
+    console.log("cardSearchInput", cardSearchInput);
+    if (cardSearchInput.length >= 2) {
+      test();
     }
   };
 
-  handleQtyInput = (event) => {
+  const handleQtyInput = (event) => {
     console.log("qty event:", event.target.value);
-    this.setState({
-      qtyInput: event.target.value,
-    });
+    setQtyInput(event.target.value);
   };
 
-  test = () => {
-    console.log("in test:", this.state.cardSearchInput);
-    this.props.dispatch({
+  const test = () => {
+    console.log("in test:", cardSearchInput);
+    props.dispatch({
       type: "FETCH_CARD",
-      payload: this.state.cardSearchInput,
+      payload: cardSearchInput,
     });
   };
 
-  addToDeck = () => {
+  
+
+  const viewDeck = () => {
+    const id = props.history.location.pathname.split("/")[2];
+    props.history.push(`/viewdeck/${id}`);
+  };
+
+  const updateDeck = () => {
+    props.dispatch({
+      type: "UPDATE_DECK",
+      payload: {
+        comments: props.reduxStore.selectedDeck.comments,
+        decklist: props.reduxStore.selectedDeck.decklist,
+        deckname: state.deckname,
+        //deckname: props.reduxStore.selectedDeck.deckname, //OR THIS???
+        description: state.description,
+        featured_card: props.reduxStore.selectedDeck.featuredCard,
+        ispublic: state.isPublic,
+        // upvotes: props.reduxStore.selectedDeck.upvotes,
+        userid: props.reduxStore.selectedDeck.userid,
+        id: props.reduxStore.selectedDeck.id,
+      },
+    });
+    //alert(`${state.deckname} has been updated!`)
+    Swal.fire(`${state.deckname} has been updated!`);
+  };
+
+  const updateDeckAndNav = () => {
+    console.log("in updateDeckAndNav");
+    props.dispatch({
+      type: "UPDATE_DECK",
+      payload: {
+        comments: props.reduxStore.selectedDeck.comments,
+        decklist: props.reduxStore.selectedDeck.decklist,
+        deckname: state.deckname,
+        description: state.description,
+        featured_card: props.reduxStore.selectedDeck.featuredCard,
+        ispublic: state.isPublic,
+        // upvotes: props.reduxStore.selectedDeck.upvotes,
+        userid: props.reduxStore.selectedDeck.userid,
+        id: props.reduxStore.selectedDeck.id,
+      },
+    });
+    props.history.push(`/viewdeck/${props.reduxStore.selectedDeck.id}`);
+  };
+
+  const addToDeck = () => {
     console.log("in add to deck");
-    this.props.dispatch({
+    props.dispatch({
       type: "ADD_LISTITEM",
       payload: {
-        name: this.state.selectedCard.name,
-        quantity: this.state.qtyInput,
+        name: selectedCard.name,
+        quantity: qtyInput,
         is_cmdr: "false",
         is_featured: "false",
-        api_data: this.state.selectedCard,
-        deckid: this.props.reduxStore.selectedDeck.id,
+        api_data: selectedCard,
+        deckid: props.reduxStore.selectedDeck.id,
         comboid: "",
       },
     });
-    this.setState({
-      ...this.state,
-      cardSearchInput: [],
-      featuredCard: "",
-      recentCard: "",
-      hoverCard: "https://i.stack.imgur.com/Vkq2a.png",
-      selectedCard: "",
-      qtyInput: 1,
-      defaultSearch: "",
+
+    setCardSearchInput("");
+    setQtyInput(1);
+    setSelectedOption({});
+    setHoverCard("https://i.stack.imgur.com/Vkq2a.png");
+    // setState({
+    //   ...state,
+    //   cardSearchInput: [],
+    //   featuredCard: "",
+    //   recentCard: "",
+    //   hoverCard: ,
+    //   selectedCard: "",
+    //   qtyInput: 1,
+    //   defaultSearch: "",
+    // });
+    props.dispatch({
+      type: "UNSET_CARD",
     });
-    // this.props.dispatch({
-    //     type: 'UNSET_CARD'
-    // })
   };
 
-  updateDeckAndNav = () => {
-    console.log("in updateDeckAndNav");
-    this.props.dispatch({
-      type: "UPDATE_DECK",
-      payload: {
-        comments: this.props.reduxStore.selectedDeck.comments,
-        decklist: this.props.reduxStore.selectedDeck.decklist,
-        deckname: this.state.deckname,
-        description: this.state.description,
-        featured_card: this.props.reduxStore.selectedDeck.featuredCard,
-        ispublic: this.state.isPublic,
-        // upvotes: this.props.reduxStore.selectedDeck.upvotes,
-        userid: this.props.reduxStore.selectedDeck.userid,
-        id: this.props.reduxStore.selectedDeck.id,
-      },
-    });
-    this.props.history.push(
-      `/viewdeck/${this.props.reduxStore.selectedDeck.id}`
-    );
-  };
-
-  viewDeck = () => {
-    const id = this.props.history.location.pathname.split("/")[2];
-    this.props.history.push(`/viewdeck/${id}`);
-  };
-
-  updateDeck = () => {
-    this.props.dispatch({
-      type: "UPDATE_DECK",
-      payload: {
-        comments: this.props.reduxStore.selectedDeck.comments,
-        decklist: this.props.reduxStore.selectedDeck.decklist,
-        deckname: this.state.deckname,
-        //deckname: this.props.reduxStore.selectedDeck.deckname, //OR THIS???
-
-        description: this.state.description,
-        featured_card: this.props.reduxStore.selectedDeck.featuredCard,
-        ispublic: this.state.isPublic,
-        // upvotes: this.props.reduxStore.selectedDeck.upvotes,
-        userid: this.props.reduxStore.selectedDeck.userid,
-        id: this.props.reduxStore.selectedDeck.id,
-      },
-    });
-    //alert(`${this.state.deckname} has been updated!`)
-    Swal.fire(`${this.state.deckname} has been updated!`);
-  };
-
-  selectOption = (option) => {
+  const selectOption = (option) => {
     console.log("selectOption SELECTED:", option.name, option);
-    this.setState({
-      selectedCard: option,
-      cardSearchInput: option.name,
-    });
+    setSelectedCard(option);
+    setCardSearchInput(option.name);
   };
 
-  updateSearchImage = (option) => {
+  const updateSearchImage = (option) => {
     console.log("in updateSearchImage with:", option.name);
     if (option.image_uris === undefined) {
-      this.setState({
-        hoverCard: `https://s3.thingpic.com/images/Kz/uF3amfCnYFLBggjUNr1sPRKi.jpeg`,
-      });
+      setHoverCard(
+        `https://s3.thingpic.com/images/Kz/uF3amfCnYFLBggjUNr1sPRKi.jpeg`
+      );
     } else {
-      this.setState({
-        hoverCard: option.image_uris.normal,
-      });
+      setHoverCard(option.image_uris.normal);
     }
   };
-  removeDisplay = (option) => {
-    // console.log('left:', card.name, card, card.api_data);
-    this.setState({
-      hoverCard: "https://i.stack.imgur.com/Vkq2a.png",
-    });
-  };
 
-  qtyDown = (card) => {
+  const qtyDown = (card) => {
     console.log("clicked -", card.name, card.quantity, card);
     console.log("this cards qty is:", card.quantity);
     let qtyLess = (card.quantity -= 1);
     console.log(qtyLess);
-    this.props.dispatch({
+    props.dispatch({
       type: "EDIT_LISTITEM",
       payload: card,
     });
   };
 
-  qtyUp = (card) => {
+  const qtyUp = (card) => {
     console.log("clicked + on: ", card.name, card);
     console.log("this cards qty is:", card.quantity);
     let qtyMore = (card.quantity += 1);
     console.log(qtyMore);
-    this.props.dispatch({
+    props.dispatch({
       type: "EDIT_LISTITEM",
       payload: card,
     });
   };
 
-  deleteCard = (card) => {
+  const deleteCard = (card) => {
     console.log("clicked delete on:", card.name);
-    this.props.dispatch({
+    props.dispatch({
       type: "DELETE_LISTITEM",
       payload: card,
     });
   };
 
-  handleRadio() {
+  const handleRadio = () => {
     console.log("in handle radio");
-  }
+  };
 
-  render() {
-    console.log("recentCard state:", this.state.recentCard);
-    console.log("redux state of cards:", this.props.reduxStore.card);
-    console.log("state of cards at [0]", this.props.reduxStore.card[0]);
-    console.log("selected deck:", this.props.reduxStore.selectedDeck);
-    // console.log('hoverCard:', this.state.hoverCard);
-    // console.log('selectedCard:', this.state.selectedCard.name, this.state.selectedCard);
-    // console.log(this.state.isPublic);
-    // console.log('qtyInput:', this.state.qtyInput);
+  // console.log("recentCard state:", state.recentCard);
+  // console.log("redux state of cards:", props.reduxStore.card);
+  // console.log("state of cards at [0]", props.reduxStore.card[0]);
+  // console.log("selected deck:", props.reduxStore.selectedDeck);
+  // console.log('hoverCard:', state.hoverCard);
+  // console.log('selectedCard:', state.selectedCard.name, state.selectedCard);
+  // console.log(state.isPublic);
+  // console.log('qtyInput:', state.qtyInput);
 
-    const includedCards = this.props.reduxStore.cardList.filter(
-      (card) => card.deckid === this.props.reduxStore.selectedDeck.id
-    );
+  const includedCards = props.reduxStore.cardList.filter(
+    (card) => card.deckid === props.reduxStore.selectedDeck.id
+  );
 
-    const featuredCard = includedCards.filter(
-      (featured) => featured.is_featured === true
-    );
+  const featuredCard = includedCards.filter(
+    (featured) => featured.is_featured === true
+  );
 
-    const mappedFeaturedCard = featuredCard.map((fCard) =>
-      JSON.parse(fCard.api_data)
-    );
+  const mappedFeaturedCard = featuredCard.map((fCard) =>
+    JSON.parse(fCard.api_data)
+  );
 
-    const featuredUri = mappedFeaturedCard.map(
-      (fUri) => fUri.image_uris.normal
-    );
+  const featuredUri = mappedFeaturedCard.map((fUri) => fUri.image_uris.normal);
 
-    // console.log('mappedFeaturedCard is:', mappedFeaturedCard);
-    // console.log('mappedFeaturedCard image uri is:', mappedFeaturedCard.artist);
-    // console.log('featuredUri:', featuredUri);
-    // console.log('description:', this.state.description);
-    // console.log("state is:", this.state);
+  // console.log('mappedFeaturedCard is:', mappedFeaturedCard);
+  // console.log('mappedFeaturedCard image uri is:', mappedFeaturedCard.artist);
+  // console.log('featuredUri:', featuredUri);
+  // console.log('description:', state.description);
+  // console.log("state is:", state);
 
-    return (
+  return (
+    <div>
       <div>
-        <div>
-          <h1 id="editDeckHeader">
-            Editing: {this.props.reduxStore.selectedDeck.deckname}{" "}
-          </h1>
-        </div>
+        <h1 id="editDeckHeader">
+          Editing: {props.reduxStore.selectedDeck.deckname}{" "}
+        </h1>
+      </div>
 
-        <div className="descriptionDiv">
-          {/*                         DECK NAME                     */}
-          <input
-            id="deckName"
-            placeholder="Deck Name"
-            defaultValue={this.props.reduxStore.selectedDeck.deckname}
-            onChange={(event) => this.handleChange(event, "deckname")}
-          ></input>
-
-          {/* {this.state.isPublic === false ?
-                    <>
-                        <form onChange={this.handleRadio} >       
-                            <label htmlFor="isPublic" >Public</label>
-                            <input type="radio" name='publicstatus' id="isPublic" value="true" ></input>
-                            <label htmlFor="isPrivate">Private</label>
-                            <input type="radio" name='publicstatus' id="isPublic" value="false" defaultChecked  ></input>
-                        </form>
-                    </>
-                    :
-                    <>
-                        <form onChange={this.handleRadio} >       
-                            <label htmlFor="isPublic" >Public</label>
-                            <input type="radio" name='publicstatus' id="isPublic" value="true" defaultChecked></input>
-                            <label htmlFor="isPrivate">Private</label>
-                            <input type="radio" name='publicstatus' id="isPublic" value="false"></input>
-                        </form>
-                    </>
-                   
-                } */}
-
-          <br />
-          {/*                         DESCRIPTION                    */}
-
-          <textarea
-            className="descriptionInput"
-            placeholder="Deck Description"
-            onChange={(event) => this.handleChange(event, "description")}
-            defaultValue={this.props.reduxStore.selectedDeck.description}
-          ></textarea>
-          <br />
-
-          {/* <button onClick={this.saveAndNav}>Save</button> */}
-          <button onClick={this.updateDeckAndNav}>Save & View</button>
-          <button onClick={this.updateDeck}>Save</button>
-        </div>
+      <div className="EditDeckdescriptionDiv">
+        {/*                         DECK NAME                     */}
+        <input
+          id="deckName"
+          placeholder="Deck Name"
+          defaultValue={props.reduxStore.selectedDeck.deckname}
+          onChange={(event) => handleChange(event, "deckname")}
+        ></input>
 
         <br />
+        {/*                         DESCRIPTION                    */}
 
-        <div className="editDeckView">
-          <table>
-            <thead>
-              <tr>
-                <th>Quantity</th>
-                <th>Card Name</th>
-                {/* <th>isCMDR?</th> */}
-                <th>Featured?</th>
+        <textarea
+          className="EditDeckdescriptionInput"
+          placeholder="Deck Description"
+          onChange={(event) => handleChange(event, "description")}
+          defaultValue={props.reduxStore.selectedDeck.description}
+        ></textarea>
+        <br />
 
-                <th>Edit</th>
-                {/* Type */}
-                <th>DELETE</th>
-              </tr>
-            </thead>
+        {/* <button onClick={saveAndNav}>Save</button> */}
+        <button onClick={updateDeckAndNav}>Save & View</button>
+        <button onClick={updateDeck}>Save</button>
+      </div>
 
-            {/* <div id="optionsScrollDiv"> */}
-            <tbody>
-              {includedCards.map((card) => (
-                <tr key={card.id}>
-                  <td className="qtyTd">x {card.quantity}</td>
-                  <td
-                    onMouseOver={() => this.cardDisplay(card)}
-                    onMouseLeave={() => this.removeDisplay(card)}
+      <br />
+
+      <div className="editDeckView">
+        <table>
+          <thead>
+            <tr>
+              <th>Quantity</th>
+              <th>Card Name</th>
+              {/* <th>isCMDR?</th> */}
+              <th>Featured?</th>
+
+              <th>Edit</th>
+              {/* Type */}
+              <th>DELETE</th>
+            </tr>
+          </thead>
+
+          {/* <div id="optionsScrollDiv"> */}
+          <tbody>
+            {includedCards.map((card) => (
+              <tr key={card.id}>
+                <td className="qtyTd">x {card.quantity}</td>
+                <td
+                  onMouseOver={() => cardDisplay(card)}
+                  onMouseLeave={() => removeDisplay(card)}
+                >
+                  {card.name}
+                </td>
+                {/* <td>{card.is_cmdr}</td> */}
+                <td>
+                  <input
+                    type="checkbox"
+                    className="myCheck"
+                    defaultValue={card.is_featured}
+                    defaultChecked={card.is_featured}
+                    onChange={() => handleFeatured(card)}
+                  />{" "}
+                </td>
+                <td>
+                  <button
+                    className="incrementBtn"
+                    onClick={() => qtyDown(card)}
                   >
-                    {card.name}
-                  </td>
-                  {/* <td>{card.is_cmdr}</td> */}
-                  <td>
-                    <input
-                      type="checkbox"
-                      className="myCheck"
-                      defaultValue={card.is_featured}
-                      defaultChecked={card.is_featured}
-                      onChange={() => this.handleFeatured(card)}
-                    />{" "}
-                  </td>
-                  <td>
-                    <button
-                      className="incrementBtn"
-                      onClick={() => this.qtyDown(card)}
-                    >
-                      {" "}
-                      -{" "}
-                    </button>
-                    <button className="incrementBtn" onClick={() => this.qtyUp(card)}>
-                      +
-                    </button>
-                  </td>
-                  <td>
-                    <button onClick={() => this.deleteCard(card)}>
-                      DELETE
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-            {/* </div> */}
-          </table>
-        </div>
-        <br />
-        <div>
-          {/* <h1>{this.props.reduxStore.card}</h1> */}
-          <form className="cardInputForm">
-            {this.state.hoverCard.length >= 1 ? (
-              <>
-                <img
-                  src={this.state.hoverCard}
-                  alt="Card Display"
-                  width="215px"
-                  height="300px"
-                />
-              </>
-            ) : (
-              <>
-                {/* <img src={this.props.reduxStore.card[0].image_uris.normal} 
+                    {" "}
+                    -{" "}
+                  </button>
+                  <button className="incrementBtn" onClick={() => qtyUp(card)}>
+                    +
+                  </button>
+                </td>
+                <td>
+                  <button onClick={() => deleteCard(card)}>DELETE</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+          {/* </div> */}
+        </table>
+      </div>
+      <br />
+      <div>
+        {/* <h1>{props.reduxStore.card}</h1> */}
+        <form className="cardInputForm">
+          {hoverCard.length >= 1 ? (
+            <>
+              <img
+                src={hoverCard}
+                alt="Card Display"
+                width="215px"
+                height="300px"
+              />
+            </>
+          ) : (
+            <>
+              {/* <img src={props.reduxStore.card[0].image_uris.normal}
                                 alt='Card Display' width='215px' height='300px'/> */}
-              </>
-            )}
-            <br />
-            <input
-              className="cardSearchInput"
-              placeholder="Card Name"
-              value={this.state.cardSearchInput}
-              onChange={this.handleSearchInput}
-            ></input>
-            <br />
-
-            {this.state.cardSearchInput.length >= 1 ? (
-              <div className="optionsDiv">
-                <ul className="cardOptions">
-                  {this.props.reduxStore.card.map((option) => (
-                    <li
-                      key={option.id}
-                      value={option}
-                      className="optionLi"
-                      onMouseOver={() => this.updateSearchImage(option)}
-                      onMouseLeave={() => this.removeDisplay(option)}
-                      onClick={() => this.selectOption(option)}
-                    >
-                      {option.name}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <></>
-            )}
-
-            <input
-              type="number"
-              placeholder="Quantity"
-              defaultValue={this.state.qtyInput}
-              onChange={this.handleQtyInput}
-            ></input>
-            <br />
-            <button onClick={this.addToDeck}> Add To Deck → </button>
-            <br />
-            {/* <label htmlFor="isCmdrinput">Is this your commander?</label><br/>
-                        <input type="checkbox" id="isCmdrinput" value="Commander"></input><br/> */}
-            <button onClick={this.viewDeck}>View Deck</button>
-            {/* <button onClick={this.saveAndStay}>Save and Continue Editing</button><br/> */}
-          </form>
-        </div>
-
-        <br />
-
-        <br />
-        <div className="featuredCardDiv">
-          <h2>Featured Card</h2>
+            </>
+          )}
           <br />
-          <div className="cardImg">
-            <img src={featuredUri} width="50%" height="50%" />
-          </div>
+          <input
+            className="cardSearchInput"
+            placeholder="Card Name"
+            value={cardSearchInput}
+            onChange={handleSearchInput}
+          ></input>
+          <br />
+
+          {cardSearchInput.length >= 1 ? (
+            <div className="optionsDiv">
+              <ul className="cardOptions">
+                {props.reduxStore.card.map((option, i) => (
+                  <li
+                    key={`${i + 1}${option.id}`}
+                    value={option}
+                    className="optionLi"
+                    onMouseOver={() => updateSearchImage(option)}
+                    onMouseLeave={() => removeDisplay(option)}
+                    onClick={() => selectOption(option)}
+                  >
+                    {option.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <></>
+          )}
+
+          <input
+            type="number"
+            placeholder="Quantity"
+            value={qtyInput}
+            onChange={handleQtyInput}
+          ></input>
+          <br />
+          <button onClick={addToDeck}> Add To Deck → </button>
+          <br />
+          {/* <label htmlFor="isCmdrinput">Is this your commander?</label><br/>
+                        <input type="checkbox" id="isCmdrinput" value="Commander"></input><br/> */}
+          <button onClick={viewDeck}>View Deck</button>
+          {/* <button onClick={saveAndStay}>Save and Continue Editing</button><br/> */}
+        </form>
+      </div>
+
+      <br />
+
+      <br />
+      <div className="featuredCardDiv">
+        <h2>Featured Card</h2>
+        <br />
+        <div className="cardImg">
+          <img src={featuredUri} width="50%" height="50%" />
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
+//}
 
 const mapStateToProps = (reduxStore) => ({
   reduxStore,

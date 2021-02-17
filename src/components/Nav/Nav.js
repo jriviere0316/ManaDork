@@ -13,7 +13,7 @@ const Nav = (props) => {
 
   if (props.store.user.id != null) {
     loginLinkData.path = '/userHub';
-    loginLinkData.text = 'User home';
+    loginLinkData.text = 'User Home';
   }
 
   return (
