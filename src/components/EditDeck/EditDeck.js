@@ -265,7 +265,7 @@ function EditDeck(props) {
         </h1>
       </div>
 
-      <div className="descriptionDiv">
+      <div className="EditDeckdescriptionDiv">
         {/*                         DECK NAME                     */}
         <input
           id="deckName"
@@ -278,7 +278,7 @@ function EditDeck(props) {
         {/*                         DESCRIPTION                    */}
 
         <textarea
-          className="descriptionInput"
+          className="EditDeckdescriptionInput"
           placeholder="Deck Description"
           onChange={(event) => handleChange(event, "description")}
           defaultValue={props.reduxStore.selectedDeck.description}

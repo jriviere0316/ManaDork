@@ -62,10 +62,11 @@ function ViewDeck({ selectedDeck, user, history, dispatch, cardList }) {
   };
 
   const getManaCalculations = (cards) => {
-    setIncludedCards(cards);
+    // setIncludedCards(cards);
     const qtyToSet = cards.reduce((qty, card) => qty + card.quantity, 0);
     setQuantity(qtyToSet);
     const parsedCards = parseCards(cards);
+    setIncludedCards(parsedCards);
     const devotion = getDevotion(parsedCards);
     setDevotion(devotion);
     const featuredCard = cards.filter(
@@ -160,6 +161,8 @@ function ViewDeck({ selectedDeck, user, history, dispatch, cardList }) {
     setAverageCmc(avg.toFixed(2));
   };
 
+//   console.log(includedCards);
+
   return (
     <div>
       <h1 className="editDeckHeader">
@@ -175,15 +178,17 @@ function ViewDeck({ selectedDeck, user, history, dispatch, cardList }) {
         />
       </div>
 
-      <div className="viewDeckEditDeckView">
+      <div className="ViewDeckMainTable">
         <br />
         <h4 className="editDeckHeader">Total Cards: {quantity}</h4>
 
         <table>
           <thead>
             <tr>
-              <th>Quantity</th>
-              <th className="nameTh">Card Name</th>
+              <th className="nameTh">Quantity</th>
+              <th className="nameTh">Name</th>
+              <th className="typeTh">Type</th>
+              <th>Cost ($)</th>
             </tr>
           </thead>
           <tbody>
@@ -197,6 +202,9 @@ function ViewDeck({ selectedDeck, user, history, dispatch, cardList }) {
                 >
                   {card.name}
                 </td>
+                {/* .split("/")[2] */}
+                <td className="typeTd">{card.jsonData.type_line.split("—")[0]}</td>
+                <td className="qtyTd">{card.jsonData.prices.usd}</td>
               </tr>
             ))}
           </tbody>
@@ -253,7 +261,7 @@ function ViewDeck({ selectedDeck, user, history, dispatch, cardList }) {
         <div className="cmcDiv">
           <h1>Average CMC: </h1>
           <h1>{averageCmc}</h1>
-          <table>
+          <table className="cmcTable">
             <thead>
               <tr>
                 <th>CMC</th>
@@ -270,15 +278,16 @@ function ViewDeck({ selectedDeck, user, history, dispatch, cardList }) {
             </tbody>
           </table>
         </div>
-      </div>
-      <div className="descriptionDiv">
-        <h2 className="descriptionDivText">Description:</h2>
-        <textarea
-          className="descriptionInput"
-          placeholder="Deck Description"
-          defaultValue={selectedDeck.description}
-        ></textarea>
-        <br />
+
+        <div className="descriptionDiv">
+          <h1>Description:</h1>
+          <textarea
+            className="descriptionInput"
+            placeholder="Deck Description"
+            defaultValue={selectedDeck.description}
+          ></textarea>
+          <br />
+        </div>
       </div>
     </div>
   );
