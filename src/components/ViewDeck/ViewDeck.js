@@ -141,7 +141,7 @@ function ViewDeck({ selectedDeck, user, history, dispatch, cardList }) {
         convertedManaCosts.push(cmc);
       }
     });
-    average(convertedManaCosts);
+    getAverage(convertedManaCosts);
     var map = convertedManaCosts.reduce(function (previous, current) {
       {
         previous[current] = (previous[current] || 0) + 1;
@@ -151,7 +151,7 @@ function ViewDeck({ selectedDeck, user, history, dispatch, cardList }) {
     return map;
   };
 
-  const average = (costs) => {
+  const getAverage = (costs) => {
     var total = 0;
     for (var i = 0; i < costs.length; i++) {
       total += costs[i];
