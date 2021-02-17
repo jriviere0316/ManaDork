@@ -1,6 +1,6 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import mapStoreToProps from "../../redux/mapStoreToProps";
+//import mapStoreToProps from "../../redux/mapStoreToProps";
 import Swal from "sweetalert2";
 import "./EditDeck.css";
 
@@ -22,6 +22,7 @@ function EditDeck(props) {
   const [selectedCard, setSelectedCard] = useState({});
   const [selectedOption, setSelectedOption] = useState("");
   const [qtyInput, setQtyInput] = useState(1);
+  //const [description, setDescription] = useState(props.reduxStore.selectedDeck.description)
 
   const [hoverCard, setHoverCard] = useState(
     "https://i.stack.imgur.com/Vkq2a.png"
@@ -38,42 +39,29 @@ function EditDeck(props) {
       payload: props.history.location.pathname.split("/")[2],
     });
   }, [state]);
-  // componentDidMount() {
-  //   props.dispatch({
-  //     type: "GET_LIST",
-  //     payload: props.reduxStore.selectedDeck.id,
-  //   });
-
-  //console.log('dispatching selected deck');
-
-  //NOT SURE IF I NEED THIS ANYMORE?  BECAUSE I'M GETTING THE DECK FROM THE ID WHICH IS IN PROPS.HISTORY?
-  // setState({
-  //   ...state,
-  //   deckname: props.reduxStore.selectedDeck.deckname,
-  //   description: props.reduxStore.selectedDeck.description,
-  //   isPublic: props.reduxStore.selectedDeck.ispublic,
-  // });
 
   const handleFeatured = (card) => {
     console.log("in handle featured", card.id);
     card.is_featured = !card.is_featured;
-    console.log("updated featured status:", card.is_featured);
+    //console.log("updated featured status:", card.is_featured);
     props.dispatch({
       type: "EDIT_LISTITEM",
       payload: card,
     });
   };
+
   const handleChange = (event, propertyName) => {
     setState({
       ...state,
       [propertyName]: event.target.value,
     });
+    console.log(state);
   };
 
   const cardDisplay = (card) => {
-    console.log("hovering on", card.name, card);
+    //console.log("hovering on", card.name, card);
     var parsedData = JSON.parse(card.api_data);
-    console.log(parsedData);
+    //console.log(parsedData);
     if (parsedData.image_uris === undefined) {
       setHoverCard(
         `https://s3.thingpic.com/images/Kz/uF3amfCnYFLBggjUNr1sPRKi.jpeg`
@@ -109,24 +97,7 @@ function EditDeck(props) {
     });
   };
 
-  const updateDeckAndNav = () => {
-    console.log("in updateDeckAndNav");
-    props.dispatch({
-      type: "UPDATE_DECK",
-      payload: {
-        comments: props.reduxStore.selectedDeck.comments,
-        decklist: props.reduxStore.selectedDeck.decklist,
-        deckname: state.deckname,
-        description: state.description,
-        featured_card: props.reduxStore.selectedDeck.featuredCard,
-        ispublic: state.isPublic,
-        // upvotes: props.reduxStore.selectedDeck.upvotes,
-        userid: props.reduxStore.selectedDeck.userid,
-        id: props.reduxStore.selectedDeck.id,
-      },
-    });
-    props.history.push(`/viewdeck/${props.reduxStore.selectedDeck.id}`);
-  };
+  
 
   const viewDeck = () => {
     const id = props.history.location.pathname.split("/")[2];
@@ -151,6 +122,25 @@ function EditDeck(props) {
     });
     //alert(`${state.deckname} has been updated!`)
     Swal.fire(`${state.deckname} has been updated!`);
+  };
+
+  const updateDeckAndNav = () => {
+    console.log("in updateDeckAndNav");
+    props.dispatch({
+      type: "UPDATE_DECK",
+      payload: {
+        comments: props.reduxStore.selectedDeck.comments,
+        decklist: props.reduxStore.selectedDeck.decklist,
+        deckname: state.deckname,
+        description: state.description,
+        featured_card: props.reduxStore.selectedDeck.featuredCard,
+        ispublic: state.isPublic,
+        // upvotes: props.reduxStore.selectedDeck.upvotes,
+        userid: props.reduxStore.selectedDeck.userid,
+        id: props.reduxStore.selectedDeck.id,
+      },
+    });
+    props.history.push(`/viewdeck/${props.reduxStore.selectedDeck.id}`);
   };
 
   const addToDeck = () => {
