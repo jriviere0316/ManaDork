@@ -29,7 +29,7 @@ function* getList(action) {
         url: `/api/list/`,
         data: action.payload
 })
-    console.log('back from GET with:', response.data);
+    //console.log('back from GET with:', response.data);
     yield put({
         type: 'SET_LIST',
         payload: response.data

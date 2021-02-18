@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import Swal from "sweetalert2";
